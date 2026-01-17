@@ -1,5 +1,5 @@
 ---
-theme: default
+theme: unicorn
 title: Architectures Back-end & Front-end
 subtitle: Web, Mobile et IA
 date: 2026-01-17
@@ -9,14 +9,6 @@ layout: cover
 # Architectures Back-end & Front-end
 
 Web, Mobile et IA
-
-Durée: 6 heures
-
-Public cible: Développeurs, Architectes, Chefs de projet
-
-Approche: Théorie + Études de cas (assurance/santé)
-
-Formation continue - 2026
 
 ---
 
@@ -29,15 +21,16 @@ Formation continue - 2026
 ## 🔧 Backend
 
 - **Patterns d'Architecture**
+  - Monolithe, Microservices
   - MVC, MVVM
   - CQRS, Event-Driven
   - Hexagonal, DI
   - Repository, Strategy
 
-- **Architecture Serveur**
-  - Microservices
-  - Scalabilité
-  - Performance
+- **Clean Code, Clean Architecture**
+
+- **Ecosystèmes technologiques**
+  - Java, .Net, Python...
 
 </div>
 
@@ -54,9 +47,9 @@ Formation continue - 2026
   - React, Vue, Angular
   - Frameworks modernes
 
-- **UX & Performance**
-  - Responsive Design
-  - Optimisation
+## 🤖 IA
+
+- **MCP, A2A**
 
 </div>
 
@@ -70,7 +63,16 @@ Formation continue - 2026
 
 ---
 
+
+# 📚 Introduction
+
+*Fondamentaux de l'architecture logicielle*
+
+---
+
 ## Pourquoi l'architecture logicielle est cruciale ?
+
+> "When you model using only the semantics that the business expert cares about, you get a model that the business expert understands." — **Eric Evans**, Domain-Driven Design
 
 ### Impact direct sur:
 
@@ -104,15 +106,12 @@ graph LR
 ## Définitions clés
 
 #### Back-end
-
-#### Front-end
-
-#### API (Application Programming Interface)
-
 Logique métier, bases de données, APIs, serveurs. Invisible à l'utilisateur final.
 
+#### Front-end
 Interface utilisateur, expérience client, interactions. Ce que l'utilisateur voit et utilise.
 
+#### API (Application Programming Interface)
 Pont de communication entre back-end et front-end. Contrats et protocoles d'échange de données.
 
 ```mermaid
@@ -217,9 +216,20 @@ Infrastructure (Serveurs, BD)
 
 ---
 
+layout: center
+class: 'text-center'
+
+# 🏗️ Patterns d'Architecture
+
+*Solutions éprouvées pour structurer vos applications*
+
+---
+
 ## Pourquoi utiliser des patterns ?
 
 ### Les patterns résolvents des problèmes récurrents
+
+> "The purpose of design patterns is to give a name and a context to design problems and their solutions." — **Gang of Four**, Design Patterns
 
 - Réutilisabilité: Solutions éprouvées et documentées
 - Standardisation: Équipes alignées sur une même approche
@@ -486,7 +496,23 @@ ContractService {
 
 ---
 
+layout: center
+class: 'text-center'
+
+# 🏗️ Patterns d'Architecture
+
+*Solutions éprouvées pour structurer vos applications*
+
+---
+
+layout: center
+class: 'text-center'
+
 # 🔧 Écosystèmes Backend
+
+*Découvrez les principaux frameworks et technologies*
+
+---
 
 ## Vue d'ensemble
 
@@ -648,9 +674,20 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 
 ---
 
+layout: center
+class: 'text-center'
+
+# ✨ Clean Code & Architecture
+
+*Écrire du code maintenable et évolutif*
+
+---
+
 ## Clean Code: Introduction
 
 ### Pourquoi le Clean Code ?
+
+> "Any fool can write code that a computer can understand. Good programmers write code that humans can understand." — **Robert C. Martin**, Clean Code
 
 - Réduction des bugs: Code clair = moins d'erreurs
 - Maintenabilité: Facile à modifier et à déboguer
@@ -933,6 +970,8 @@ public void testCalculatePremiumForYoungDriver() {
 ---
 
 ## Clean Architecture: Introduction
+
+> "A software architect is a programmer who has stopped programming and has started thinking about programs." — **Robert C. Martin**, Clean Architecture
 
 Structure logicielle indépendante des frameworks, testable et maintenable.
 
@@ -5371,41 +5410,60 @@ L'industrie change tous les 2-3 ans
 
 ## Ressources & Références
 
+#### � Ouvrages de Référence
+
+**Clean Code** - Robert C. Martin
+> "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+
+**Clean Architecture** - Robert C. Martin
+> "A software architect is a programmer who has stopped programming and has started thinking about programs."
+
+**Design Patterns** - Gang of Four (Gamma, Helm, Johnson, Vlissides)
+> "The purpose of design patterns is to give a name and a context to design problems and their solutions."
+
+**Building Microservices** - Sam Newman
+> "Microservices are small, autonomous services that work together. The microservice architectural style is an approach to developing a single application as a suite of small services."
+
+**Domain-Driven Design** - Eric Evans
+> "When you model using only the semantics that the business expert cares about, you get a model that the business expert understands."
+
+**The Pragmatic Programmer** - Hunt & Thomas
+> "Leave the campground cleaner than you found it. Leave the code better than you found it."
+
+**Refactoring: Improving the Design of Existing Code** - Martin Fowler
+> "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+
+---
+
 #### 🔧 Documentation officielle
 
-#### 📖 Livres classiques
+- Spring Boot: https://spring.io/projects/spring-boot
+- NestJS: https://nestjs.com
+- React: https://react.dev
+- Vue.js: https://vuejs.org
+- Angular: https://angular.io
+- Python/FastAPI: https://fastapi.tiangolo.com
+- .NET: https://dotnet.microsoft.com
 
-#### 🎓 Plateformes apprentissage
+#### 🎓 Plateformes d'apprentissage
+
+- Coursera (Spécialisations complètes)
+- Frontend Masters (Spécialistes reconnus)
+- Udemy (Cours pratiques)
+- LeetCode (Algorithmes & entretiens)
+- Educative (Tutoriels interactifs)
+- YouTube (Chaînes techniques)
 
 #### 🌐 Communautés & Forums
 
-Liens et documentation pour approfondir
-
-- Spring Boot
-- NestJS
-- React
-- Vue.js
-- Angular
-- Flutter
-- PostgreSQL
-
-- Clean Code - Robert Martin
-- Design Patterns - Gang of Four
-- Microservices Patterns - Chris Richardson
-- System Design Interview - Alex Xu
-- Designing Data-Intensive - Martin Kleppmann
-- The Pragmatic Programmer
-- DevOps Handbook
-
-- Coursera
-- Udemy
-- Frontend Masters
-- LeetCode (Algo)
-- Educative
-- AlgoExpert
-- YouTube Channels
-
 - Stack Overflow
+- Dev.to
+- Medium (Articles techniques)
+- Reddit (r/programming, r/webdev, r/learnprogramming)
+- GitHub (Projets open-source)
+- Hacker News
+
+---- Stack Overflow
 - Dev.to
 - Hacker News
 - GitHub (Open source)
