@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architectures Back-end & Front-end : Web, Mobile et IA</title>
+    
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/white.css">
+    
+    <!-- Highlight.js pour la coloration syntaxique -->
+    <link rel="stylesheet" href="node_modules/highlight.js/styles/atom-one-dark.css">
+    
+    <!-- Thème personnalisé minimaliste -->
+    <link rel="stylesheet" href="assets/css/theme.css">
+    
+    <!-- Mermaid pour les diagrammes -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'default' });</script>
+    
+    <style>
+        .mermaid {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            
+            <!-- ====== INTRODUCTION (10 slides) ====== -->
+            
+            <!-- Slide 1: Titre et objectifs -->
+            <section>
+                <h1>Architectures Back-end & Front-end</h1>
+                <p class="subtitle" style="font-size: 1.8em; margin-top: 30px;">Web, Mobile et IA</p>
+                
+                <div style="margin-top: 60px; text-align: left;">
+                    <p><strong>Durée:</strong> 6 heures</p>
+                    <p><strong>Public cible:</strong> Développeurs, Architectes, Chefs de projet</p>
+                    <p><strong>Approche:</strong> Théorie + Études de cas (assurance/santé)</p>
+                </div>
+                
+                <p style="margin-top: 80px; color: #666; font-size: 0.9em;">Formation continue - 2026</p>
+            </section>
+            
+            <!-- Slide 2: Pourquoi l'architecture logicielle est cruciale ? -->
+            <section>
+                <h2>Pourquoi l'architecture logicielle est cruciale ?</h2>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.4em; margin-top: 25px;">Impact direct sur:</h3>
+                    <ul style="font-size: 1.1em; line-height: 2;">
+                        <li><span class="highlight">Maintenabilité et évolutivité</span> du code</li>
+                        <li><span class="highlight">Performance et sécurité</span> des applications</li>
+                        <li><span class="highlight">Adaptation aux besoins métiers</span> (ex: assurance, santé)</li>
+                        <li><span class="highlight">Réduction des coûts</span> de développement à long terme</li>
+                    </ul>
+                </div>
+                
+                <div class="box box-info" style="margin-top: 40px;">
+                    <strong>💡 Fait clé:</strong> Une mauvaise architecture peut coûter jusqu'à 5x plus cher à corriger après déploiement.
+                </div>
+            </section>
+            
+            <!-- Slide 3: Évolution des architectures -->
+            <section>
+                <h2>Évolution des architectures</h2>
+                
+                <div class="diagram" style="margin-top: 40px;">
+                    <div class="mermaid">
+                        graph LR
+                            A["<b>Monolithique</b><br/>(2000s)"] -->|Complexité croissante| B["<b>Microservices</b><br/>(2010s)"]
+                            B -->|Optimisation| C["<b>Serverless</b><br/>(2020s)"]
+                            
+                            style A fill:#e8f4f8
+                            style B fill:#fff4e8
+                            style C fill:#e8f8e8
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <table style="width: 100%;">
+                        <tr>
+                            <th>Architecture</th>
+                            <th>Avantages</th>
+                            <th>Inconvénients</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Monolithe</strong></td>
+                            <td>Simple, facile à déployer</td>
+                            <td>Diffcile à scaler, couplage fort</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Microservices</strong></td>
+                            <td>Scalable, indépendant</td>
+                            <td>Complexité opérationnelle</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Serverless</strong></td>
+                            <td>Pas de gestion infra</td>
+                            <td>Coûts imprévisibles, latence</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Slide 4: Définitions clés -->
+            <section>
+                <h2>Définitions clés</h2>
+                
+                <div style="margin-top: 40px;">
+                    <div class="box box-info">
+                        <h4>Back-end</h4>
+                        <p>Logique métier, bases de données, APIs, serveurs. Invisible à l'utilisateur final.</p>
+                    </div>
+                    
+                    <div class="box box-info">
+                        <h4>Front-end</h4>
+                        <p>Interface utilisateur, expérience client, interactions. Ce que l'utilisateur voit et utilise.</p>
+                    </div>
+                    
+                    <div class="box box-info">
+                        <h4>API (Application Programming Interface)</h4>
+                        <p>Pont de communication entre back-end et front-end. Contrats et protocoles d'échange de données.</p>
+                    </div>
+                </div>
+                
+                <div class="diagram" style="margin-top: 40px;">
+                    <div class="mermaid">
+                        graph LR
+                            A["<b>Front-end</b><br/>React, Vue, Angular"] -->|HTTP/REST<br/>GraphQL| B["<b>API</b><br/>REST / GraphQL"]
+                            B -->|Logique métier| C["<b>Back-end</b><br/>Node.js, Java, Python"]
+                            C -->|Requêtes SQL| D["<b>Base de données</b><br/>PostgreSQL, MongoDB"]
+                            
+                            style A fill:#e8f4ff
+                            style B fill:#fff9e8
+                            style C fill:#ffe8f4
+                            style D fill:#e8ffe8
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Slide 5: Panorama des technologies -->
+            <section>
+                <h2>Panorama des technologies</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+                    <div class="box box-info">
+                        <h4>🔧 Back-end</h4>
+                        <ul style="font-size: 0.95em;">
+                            <li><strong>Java:</strong> Spring Boot, Spring Cloud</li>
+                            <li><strong>Node.js:</strong> Express, NestJS</li>
+                            <li><strong>Python:</strong> Django, FastAPI</li>
+                            <li><strong>Go:</strong> Gin, Echo</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="box box-success">
+                        <h4>🎨 Front-end</h4>
+                        <ul style="font-size: 0.95em;">
+                            <li><strong>React:</strong> Composants, Hooks</li>
+                            <li><strong>Vue.js:</strong> Réactif, simple</li>
+                            <li><strong>Angular:</strong> Complet, TypeScript</li>
+                            <li><strong>Next.js:</strong> SSR, SSG, SSG</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+                    <div class="box box-warning">
+                        <h4>📱 Mobile</h4>
+                        <ul style="font-size: 0.95em;">
+                            <li><strong>React Native:</strong> Code réutilisable</li>
+                            <li><strong>Flutter:</strong> Widgets natifs</li>
+                            <li><strong>Swift/Kotlin:</strong> Natif</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="box box-danger">
+                        <h4>🧠 Infrastructure & BD</h4>
+                        <ul style="font-size: 0.95em;">
+                            <li><strong>Docker:</strong> Conteneurisation</li>
+                            <li><strong>Kubernetes:</strong> Orchestration</li>
+                            <li><strong>PostgreSQL, MongoDB</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Slide 6: Principes fondamentaux - Partie 1 -->
+            <section>
+                <h2>Principes fondamentaux</h2>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.4em;">Séparation des préoccupations</h3>
+                    <p style="margin: 20px 0; font-size: 1.05em;">Chaque couche a une responsabilité unique et bien définie.</p>
+                    
+                    <pre style="margin-top: 30px;"><code class="language-plaintext">
+Présentation (UI)
+      ↓
+Logique métier (Règles de gestion)
+      ↓
+Accès aux données (Persistance)
+      ↓
+Infrastructure (Serveurs, BD)
+                    </code></pre>
+                </div>
+                
+                <div class="box box-info" style="margin-top: 30px;">
+                    <strong>Bénéfice:</strong> Testabilité et maintenabilité améliorées
+                </div>
+            </section>
+            
+            <!-- Slide 7: Principes fondamentaux - Partie 2 -->
+            <section>
+                <h2>SOLID & Bonnes pratiques</h2>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.3em;">Principes SOLID</h3>
+                    <ul style="font-size: 1.05em; line-height: 2.2;">
+                        <li><strong>S</strong>ingle Responsibility Principle: Une classe = une responsabilité</li>
+                        <li><strong>O</strong>pen/Closed Principle: Ouvert à l'extension, fermé à la modification</li>
+                        <li><strong>L</strong>iskov Substitution: Les sous-types peuvent remplacer le type parent</li>
+                        <li><strong>I</strong>nterface Segregation: Plusieurs interfaces spécifiques > une grosse interface</li>
+                        <li><strong>D</strong>ependency Inversion: Dépendre des abstractions, pas des implémentations</li>
+                    </ul>
+                </div>
+                
+                <div class="note" style="margin-top: 40px;">
+                    💡 Ces principes rendent le code plus flexible et facile à tester
+                </div>
+            </section>
+            
+            <!-- Slide 8: Défis de l'architecture moderne -->
+            <section>
+                <h2>Défis de l'architecture moderne</h2>
+                
+                <div style="margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div class="box box-warning">
+                        <h4>🚀 Performance</h4>
+                        <ul style="font-size: 0.95em;">
+                            <li>Latence réduite</li>
+                            <li>Caching efficace</li>
+                            <li>Scalabilité</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="box box-danger">
+                        <h4>🔒 Sécurité</h4>
+                        <ul style="font-size: 0.95em;">
+                            <li>OAuth2, JWT</li>
+                            <li>HTTPS, TLS</li>
+                            <li>Validation des données</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="box box-info">
+                        <h4>📊 Scalabilité</h4>
+                        <ul style="font-size: 0.95em;">
+                            <li>Horizontal scaling</li>
+                            <li>Load balancing</li>
+                            <li>Caching distribué</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="box box-success">
+                        <h4>🔄 Maintenabilité</h4>
+                        <ul style="font-size: 0.95em;">
+                            <li>Documentation</li>
+                            <li>Tests automatisés</li>
+                            <li>CI/CD pipeline</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Slide 9: Cas d'usage - Secteur assurance -->
+            <section>
+                <h2>Cas d'usage: Assurance</h2>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.4em;">Plateforme de gestion de contrats</h3>
+                    
+                    <div class="diagram" style="margin-top: 30px;">
+                        <div class="mermaid">
+                            graph TB
+                                A["Client (Web/Mobile)"] -->|Création contrat| B["API REST"]
+                                B -->|Logique de pricing| C["Service Contrats"]
+                                C -->|Calcul prime| D["Service Calcul"]
+                                D -->|Requête| E["Base de données"]
+                                C -->|Email confirmation| F["Service Notifications"]
+                                
+                                style A fill:#e8f4ff
+                                style B fill:#fff9e8
+                                style C fill:#ffe8f4
+                                style D fill:#f4e8ff
+                                style E fill:#e8ffe8
+                                style F fill:#ffe8e8
+                        </div>
+                    </div>
+                    
+                    <div class="box box-info" style="margin-top: 30px;">
+                        <strong>Défi:</strong> Gérer des milliers de contrats simultanément avec calculs complexes et conformité légale
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Slide 10: Cas d'usage - Secteur santé -->
+            <section>
+                <h2>Cas d'usage: Santé</h2>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.4em;">Plateforme de téléconsultation</h3>
+                    
+                    <div class="diagram" style="margin-top: 30px;">
+                        <div class="mermaid">
+                            graph LR
+                                A["Patient (Mobile)"] -->|Real-time| B["API WebSocket"]
+                                B -->|Streaming vidéo| C["Service Consultation"]
+                                C -->|Enregistrement données| D["BD Sécurisée<br/>(RGPD)"]
+                                E["Médecin (Web)"] -->|Real-time| B
+                                C -->|Notifications| F["Service Alertes"]
+                                
+                                style A fill:#e8f4ff
+                                style B fill:#fff9e8
+                                style C fill:#ffe8f4
+                                style D fill:#e8ffe8
+                                style E fill:#f4e8ff
+                                style F fill:#ffe8e8
+                        </div>
+                    </div>
+                    
+                    <div class="box box-danger" style="margin-top: 30px;">
+                        <strong>Défi:</strong> Garantir la sécurité des données sensibles, la conformité RGPD et la disponibilité 24/7
+                    </div>
+                </div>
+            </section>
+            
+            <!-- ====== PARTIE 1: PATTERNS D'ARCHITECTURES (20 slides) ====== -->
+            
+            <!-- Slide 11: Pourquoi utiliser des patterns ? -->
+            <section>
+                <h2>Pourquoi utiliser des patterns ?</h2>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.4em;">Les patterns résolvents des problèmes récurrents</h3>
+                    
+                    <ul style="font-size: 1.05em; line-height: 2.2; margin-top: 30px;">
+                        <li><strong>Réutilisabilité:</strong> Solutions éprouvées et documentées</li>
+                        <li><strong>Standardisation:</strong> Équipes alignées sur une même approche</li>
+                        <li><strong>Collaboration:</strong> Facilite la communication entre développeurs</li>
+                        <li><strong>Réduction des risques:</strong> Évite les pièges courants</li>
+                        <li><strong>Maintenabilité:</strong> Code plus prévisible et compréhensible</li>
+                    </ul>
+                </div>
+                
+                <div class="note" style="margin-top: 40px;">
+                    💡 <strong>Analogie:</strong> Un pattern est comme une recette éprouvée en cuisine. Plutôt que d'inventer chaque fois, on utilise les meilleures pratiques.
+                </div>
+            </section>
+            
+            <!-- Slide 12: Pattern MVC -->
+            <section>
+                <h2>Pattern MVC (Model-View-Controller)</h2>
+                
+                <div class="diagram" style="margin-top: 30px;">
+                    <div class="mermaid">
+                        graph TB
+                            User["👤 Utilisateur"] -->|Interaction| View["🎨 View<br/>(Présentation)"]
+                            View -->|Événement| Controller["⚙️ Controller<br/>(Logique)"]
+                            Controller -->|Update| Model["📊 Model<br/>(Données)"]
+                            Model -->|Notify| View
+                            
+                            style User fill:#e8f4ff
+                            style View fill:#fff9e8
+                            style Controller fill:#ffe8f4
+                            style Model fill:#f4e8ff
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.2em;">Séparation des responsabilités:</h3>
+                    <ul style="font-size: 0.95em;">
+                        <li><strong>Model:</strong> Données et logique métier</li>
+                        <li><strong>View:</strong> Présentation et interface utilisateur</li>
+                        <li><strong>Controller:</strong> Coordination et gestion des événements</li>
+                    </ul>
+                </div>
+                
+                <div class="box box-success" style="margin-top: 30px;">
+                    <strong>Cas d'usage:</strong> Gestion de contrats d'assurance - formulaires, validation, calculs
+                </div>
+            </section>
+            
+            <!-- Slide 13: Pattern MVVM -->
+            <section>
+                <h2>Pattern MVVM (Model-View-ViewModel)</h2>
+                
+                <div class="diagram" style="margin-top: 30px;">
+                    <div class="mermaid">
+                        graph TB
+                            View["🎨 View<br/>(UI)"]
+                            ViewModel["🔗 ViewModel<br/>(Binding)"]
+                            Model["📊 Model<br/>(Données)"]
+                            
+                            View -->|Two-way Binding| ViewModel
+                            ViewModel -->|Data Binding| View
+                            ViewModel -->|Update| Model
+                            Model -->|Notify| ViewModel
+                            
+                            style View fill:#fff9e8
+                            style ViewModel fill:#ffe8f4
+                            style Model fill:#f4e8ff
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.2em;">Caractéristiques:</h3>
+                    <ul style="font-size: 0.95em;">
+                        <li><strong>Binding bidirectionnel:</strong> Sync automatique View ↔ ViewModel</li>
+                        <li><strong>Testabilité:</strong> ViewModel indépendant de la Vue</li>
+                        <li><strong>Réactivité:</strong> Mises à jour temps réel</li>
+                    </ul>
+                </div>
+                
+                <div class="box box-info" style="margin-top: 30px;">
+                    <strong>Popularité:</strong> Angular, WPF, Xamarin. Idéal pour interfaces complexes et réactives
+                </div>
+            </section>
+            
+            <!-- Slide 14: Pattern CQRS -->
+            <section>
+                <h2>Pattern CQRS (Command Query Responsibility Segregation)</h2>
+                
+                <p style="margin-top: 30px; font-size: 1.05em;">Séparer les modèles de lecture et écriture.</p>
+                
+                <div class="diagram" style="margin-top: 30px;">
+                    <div class="mermaid">
+                        graph LR
+                            Client["👤 Client"]
+                            
+                            Client -->|Commande<br/>(Écriture)| Command["📝 Command<br/>Handler"]
+                            Client -->|Requête<br/>(Lecture)| Query["🔍 Query<br/>Handler"]
+                            
+                            Command -->|Persiste| Write["💾 Write<br/>Database"]
+                            Query -->|Lit| Read["📖 Read<br/>Database<br/>(Optimisée)"]
+                            Write -->|Synchronise| Read
+                            
+                            style Client fill:#e8f4ff
+                            style Command fill:#ffe8f4
+                            style Query fill:#fff9e8
+                            style Write fill:#f4e8ff
+                            style Read fill:#e8ffe8
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.2em;">Avantages:</h3>
+                    <ul style="font-size: 0.95em;">
+                        <li>Optimisation indépendante des lectures et écritures</li>
+                        <li>Scalabilité: Lecture et écriture peuvent être déployées séparément</li>
+                        <li>Performance: Chaque modèle optimisé pour son usage</li>
+                    </ul>
+                </div>
+                
+                <div class="box box-warning" style="margin-top: 20px;">
+                    <strong>Défi:</strong> Synchronisation entre les bases de lecture/écriture (eventual consistency)
+                </div>
+            </section>
+            
+            <!-- Slide 15: Pattern Event-Driven Architecture -->
+            <section>
+                <h2>Pattern Event-Driven Architecture</h2>
+                
+                <p style="margin-top: 30px; font-size: 1.05em;">Services réactifs aux événements métiers asynchrones.</p>
+                
+                <div class="diagram" style="margin-top: 30px;">
+                    <div class="mermaid">
+                        graph LR
+                            A["Producteur<br/>(Service)"] -->|Publie| Broker["🔔 Event Broker<br/>(Kafka, RabbitMQ)"]
+                            Broker -->|Consomme| B["Consommateur 1<br/>(Service)"]
+                            Broker -->|Consomme| C["Consommateur 2<br/>(Service)"]
+                            Broker -->|Consomme| D["Consommateur N<br/>(Service)"]
+                            
+                            style A fill:#e8f4ff
+                            style Broker fill:#ffe8f4
+                            style B fill:#fff9e8
+                            style C fill:#e8ffe8
+                            style D fill:#f4e8ff
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.2em;">Cas d'usage assurance:</h3>
+                    <ul style="font-size: 0.95em;">
+                        <li><strong>Événement:</strong> "ContractCreated" - Un nouveau contrat est créé</li>
+                        <li><strong>Consommateurs:</strong> Service email (notification), Service CRM (update), Service audit (logging)</li>
+                        <li><strong>Avantage:</strong> Découplage complet entre services</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Slide 16: Pattern Hexagonal (Ports & Adapters) -->
+            <section>
+                <h2>Pattern Hexagonal (Ports & Adapters)</h2>
+                
+                <p style="margin-top: 30px; font-size: 1.05em;">Isoler le cœur métier des détails techniques.</p>
+                
+                <div class="diagram" style="margin-top: 30px;">
+                    <div class="mermaid">
+                        graph TB
+                            UI["UI / API"]
+                            DB["Base de données"]
+                            MAIL["Service email"]
+                            API3["API tierce"]
+                            
+                            UI -->|Port| Core["🔷 Cœur Métier<br/>(Logique pure)"]
+                            Core -->|Port| DB
+                            Core -->|Port| MAIL
+                            Core -->|Port| API3
+                            
+                            UAda["Web Adapter"]
+                            DBAda["PostgreSQL Adapter"]
+                            MAILAda["SMTP Adapter"]
+                            APIAda["HTTP Adapter"]
+                            
+                            UAda -.->|Implémente| UI
+                            DBAda -.->|Implémente| DB
+                            MAILAda -.->|Implémente| MAIL
+                            APIAda -.->|Implémente| API3
+                            
+                            style Core fill:#fff9e8,stroke:#ffc107,stroke-width:3px
+                            style UI fill:#e8f4ff
+                            style DB fill:#f4e8ff
+                            style MAIL fill:#e8ffe8
+                            style API3 fill:#ffe8f4
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <h3 style="font-size: 1.2em;">Bénéfices:</h3>
+                    <ul style="font-size: 0.95em;">
+                        <li>Cœur métier indépendant des frameworks</li>
+                        <li>Adaptation facile aux changements technologiques</li>
+                        <li>Tests unitaires sans dépendances externes</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Slide 17: Pattern Dependency Injection -->
+            <section>
+                <h2>Pattern Dependency Injection (DI)</h2>
+                
+                <p style="margin-top: 30px; font-size: 1.05em;">Injecter les dépendances plutôt que les créer soi-même.</p>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.2em;">Sans Dependency Injection (couplage fort):</h3>
+                    <pre style="font-size: 0.85em;"><code class="language-java">
+public class ContractService {
+    private DatabaseService db = new DatabaseService(); // Couplage fort
+    
+    public void createContract(Contract c) {
+        db.save(c);
+    }
+}
+                    </code></pre>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.2em;">Avec Dependency Injection (découplage):</h3>
+                    <pre style="font-size: 0.85em;"><code class="language-java">
+public class ContractService {
+    private DatabaseService db; // Interface
+    
+    @Inject // Spring/Guice injecte la dépendance
+    public ContractService(DatabaseService db) {
+        this.db = db;
+    }
+}
+                    </code></pre>
+                </div>
+                
+                <div class="box box-success" style="margin-top: 30px;">
+                    <strong>Outils:</strong> Spring (Java), Nest.js (Node), Guice, Dagger
+                </div>
+            </section>
+            
+            <!-- Slide 18: Pattern Repository -->
+            <section>
+                <h2>Pattern Repository</h2>
+                
+                <p style="margin-top: 30px; font-size: 1.05em;">Abstraction de la couche d'accès aux données.</p>
+                
+                <div class="diagram" style="margin-top: 30px;">
+                    <div class="mermaid">
+                        graph TB
+                            Service["Service métier<br/>(ContractService)"]
+                            Repo["Repository Interface<br/>(IContractRepository)"]
+                            Impl1["Implémentation DB<br/>(PostgresContractRepository)"]
+                            Impl2["Implémentation Cache<br/>(CachedContractRepository)"]
+                            Impl3["Implémentation Mock<br/>(MockContractRepository)"]
+                            
+                            Service -->|Utilise| Repo
+                            Repo -->|Implémenté par| Impl1
+                            Repo -->|Implémenté par| Impl2
+                            Repo -->|Implémenté par| Impl3
+                            
+                            style Service fill:#e8f4ff
+                            style Repo fill:#fff9e8
+                            style Impl1 fill:#f4e8ff
+                            style Impl2 fill:#e8ffe8
+                            style Impl3 fill:#ffe8f4
+                    </div>
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.2em;">Avantages:</h3>
+                    <ul style="font-size: 0.95em;">
+                        <li>Logique métier indépendante du mécanisme de persistance</li>
+                        <li>Facile de basculer de PostgreSQL à MongoDB</li>
+                        <li>Tests unitaires avec implémentation mock</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Slide 19: Pattern Strategy -->
+            <section>
+                <h2>Pattern Strategy</h2>
+                
+                <p style="margin-top: 30px; font-size: 1.05em;">Encapsuler une famille d'algorithmes interchangeables.</p>
+                
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1.2em;">Exemple: Calcul de prime d'assurance</h3>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                        <div class="box box-info">
+                            <h4>Strategy: BasePricingStrategy</h4>
+                            <pre style="font-size: 0.8em;"><code class="language-java">
+interface PricingStrategy {
+  calculatePremium(contract);
+}
+
+class Standard 
+  implements PricingStrategy { ... }
+
+class Premium 
+  implements PricingStrategy { ... }
+                            </code></pre>
+                        </div>
+                        
+                        <div class="box box-success">
+                            <h4>Utilisation</h4>
+                            <pre style="font-size: 0.8em;"><code class="language-java">
+ContractService {
+  strategy: PricingStrategy;
+  
+  calculate() {
+    return this.strategy
+      .calculatePremium(contract)
+  }
+}
+                            </code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="note" style="margin-top: 30px;">
+                    💡 Avantage: Ajouter une nouvelle stratégie sans modifier le code existant (Open/Closed Principle)
+                </div>
+            </section>
+            
+            <!-- Slide 20: Récapitulatif des patterns et quand les utiliser -->
+            <section>
+                <h2>Récapitulatif: Quand utiliser quel pattern ?</h2>
+                
+                <table style="width: 100%; margin-top: 30px; font-size: 0.95em;">
+                    <tr>
+                        <th>Pattern</th>
+                        <th>Problème</th>
+                        <th>Quand l'utiliser</th>
+                    </tr>
+                    <tr>
+                        <td><strong>MVC</strong></td>
+                        <td>Séparation UI/logique</td>
+                        <td>Web traditionnel, applications simples</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MVVM</strong></td>
+                        <td>Binding bidirectionnel</td>
+                        <td>Interfaces réactives, desktop/mobile</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CQRS</strong></td>
+                        <td>Scalabilité lecture/écriture</td>
+                        <td>Hauts volumes, complex queries</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Event-Driven</strong></td>
+                        <td>Découplage asynchrone</td>
+                        <td>Microservices, systèmes réactifs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hexagonal</strong></td>
+                        <td>Isolation cœur métier</td>
+                        <td>Logique métier complexe, DDD</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DI</strong></td>
+                        <td>Gestion dépendances</td>
+                        <td>Tous les projets modernes</td>
+                    </tr>
+                </table>
+                
+                <div class="box box-warning" style="margin-top: 30px;">
+                    ⚠️ <strong>Conseil:</strong> Choisir le pattern en fonction des besoins réels, pas par habitude. Les patterns ajoutent de la complexité!
+                </div>
+            </section>
+            
+        </div>
+    </div>
+    
+    <!-- Reveal.js script -->
+    <script src="node_modules/reveal.js/dist/reveal.js"></script>
+    <script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+    
+    <script>
+        Reveal.initialize({
+            hash: true,
+            margin: 0.1,
+            center: false,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            slideNumber: true,
+            overview: true,
+            keyboard: true,
+            touch: true,
+            help: true,
+            
+            plugins: [
+                RevealHighlight
+            ],
+            
+            // Options de présentation
+            width: 1400,
+            height: 900,
+            margin: 0.05,
+            minScale: 0.2,
+            maxScale: 2.0
+        });
+        
+        // Support Mermaid
+        document.addEventListener('DOMContentLoaded', function() {
+            mermaid.contentLoaded();
+        });
+    </script>
+</body>
+</html>
