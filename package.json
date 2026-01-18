@@ -19,7 +19,8 @@
   ],
   "devDependencies": {
     "@slidev/cli": "^0.47.0",
-    "@slidev/theme-default": "latest"
+    "@slidev/theme-default": "latest",
+    "playwright-chromium": "^1.57.0"
   },
   "dependencies": {
     "slidev-theme-unicorn": "^1.1.2"
