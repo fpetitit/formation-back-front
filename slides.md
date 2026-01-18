@@ -256,7 +256,7 @@ Infrastructure (Serveurs, BD)
 - Controller: Coordination et gestion des événements
 
 ```mermaid
-graph TB
+graph LR
                             User["👤 Utilisateur"] -->|Interaction| View["🎨 View<br/>(Présentation)"]
                             View -->|Événement| Controller["⚙️ Controller<br/>(Logique)"]
                             Controller -->|Update| Model["📊 Model<br/>(Données)"]
@@ -279,7 +279,7 @@ graph TB
 - Réactivité: Mises à jour temps réel
 
 ```mermaid
-graph TB
+graph LR
                             View["🎨 View<br/>(UI)"]
                             ViewModel["🔗 ViewModel<br/>(Binding)"]
                             Model["📊 Model<br/>(Données)"]
@@ -298,31 +298,49 @@ graph TB
 
 ## Pattern CQRS (Command Query Responsibility Segregation)
 
-### Avantages:
+### Concept clé
 
-Séparer les modèles de lecture et écriture.
-
-- Optimisation indépendante des lectures et écritures
-- Scalabilité: Lecture et écriture peuvent être déployées séparément
-- Performance: Chaque modèle optimisé pour son usage
+Séparer les modèles de lecture et écriture pour optimiser chacun indépendamment.
 
 ```mermaid
 graph LR
-                            Client["👤 Client"]
-                            
-                            Client -->|Commande<br/>(Écriture)| Command["📝 Command<br/>Handler"]
-                            Client -->|Requête<br/>(Lecture)| Query["🔍 Query<br/>Handler"]
-                            
-                            Command -->|Persiste| Write["💾 Write<br/>Database"]
-                            Query -->|Lit| Read["📖 Read<br/>Database<br/>(Optimisée)"]
-                            Write -->|Synchronise| Read
-                            
-                            style Client fill:#e8f4ff
-                            style Command fill:#ffe8f4
-                            style Query fill:#fff9e8
-                            style Write fill:#f4e8ff
-                            style Read fill:#e8ffe8
+    subgraph Commands["📝 CÔTÉ ÉCRITURE (Commands)"]
+        UI1["🧑 Utilisateur<br/>Modifie"]
+        Handler1["⚡ Command<br/>Handler"]
+        Domain["🎯 Domain<br/>Model"]
+        WriteDB["💾 Write DB<br/>Optimisée"]
+        EventBus["📢 Event<br/>Bus"]
+    end
+    
+    subgraph Queries["🔍 CÔTÉ LECTURE (Queries)"]
+        UI2["🧑 Utilisateur<br/>Consulte"]
+        Handler2["⚡ Query<br/>Handler"]
+        ReadDB["📖 Read DB<br/>Dénormalisée"]
+    end
+    
+    UI1 -->|Créer<br/>Modifier| Handler1
+    Handler1 -->|Logique métier| Domain
+    Domain -->|Persist| WriteDB
+    Domain -->|Publie| EventBus
+    
+    UI2 -->|Chercher<br/>Afficher| Handler2
+    Handler2 -->|Accès rapide| ReadDB
+    
+    EventBus -->|Synchronise| ReadDB
+    
+    style Commands fill:#ffe8f4
+    style Queries fill:#fff9e8
+    style WriteDB fill:#ffe8e8
+    style ReadDB fill:#e8ffe8
+    style EventBus fill:#f4e8ff
 ```
+
+### Avantages
+
+- ✅ **Optimisation indépendante**: Chaque modèle optimisé pour son usage
+- ✅ **Scalabilité**: Lectures et écritures peuvent être déployées séparément
+- ✅ **Performance**: Read DB peut être dénormalisée (cache, index spécifiques)
+- ✅ **Clarté**: Séparation claire des responsabilités
 
 ---
 
@@ -629,11 +647,6 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 - Vous avez besoin de performance extrême
 - Vous développez pour Windows et le web
 
-### Rails 👉
-- Vous êtes une startup avec peu de ressources
-- Vous cherchez à valider rapidement une idée (MVP)
-- Vous êtes seul ou en très petit équipe
-
 ---
 
 # 💾 Transactions en Backend
@@ -645,6 +658,8 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 Une transaction est une **séquence d'opérations** qui doit s'exécuter en totalité ou pas du tout.
 
 > "Un paiement est soit accepté complètement, soit rejeté en totalité - jamais partiellement."
+
+---
 
 ### Propriétés ACID (fondamentales)
 
@@ -687,19 +702,15 @@ Scénario: Achat d'assurance avec paiement
 - Violation de contrainte: Somme = 0, mais montants = -50 et 100
 - Crash pendant mise à jour: État inconsistant
 
-### Conséquences en assurance
-
-- 💰 Pertes financières directes
-- ⚖️ Non-conformité réglementaire (Solvabilité II)
-- 📋 Audit et recalculs manuels
-- 😢 Perte de confiance client
-
 ---
 
 ## 2-Phase Commit (2PC)
 
-### Fonctionnement schématique
-
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
+Fonctionnement schématique :
+</div>
+<div>
 ```mermaid
 sequenceDiagram
     participant Client as 🧑 Client
@@ -739,6 +750,8 @@ sequenceDiagram
         end
     end
 ```
+</div>
+</div>
 
 ### Phases détaillées
 
@@ -771,20 +784,6 @@ sequenceDiagram
 - **Lecture Dirty**: Lire une donnée non commitée (peut être annulée)
 - **Non-Répétable**: Deux lectures différentes de la même donnée
 - **Fantôme**: Lignes qui apparaissent/disparaissent entre lectures
-
-### Recommandation Assurance
-
-```
-🎯 Utiliser REPEATABLE READ ou SERIALIZABLE
-
-Raison: Les données financières doivent être
-        constantes pendant un calcul de prime.
-
-Exemple critique:
-  - Lecture: Risque = 100 sinistres
-  - Calcul prime: 100 * 500€
-  - Avant update: Risque = 95 sinistres ❌ Incohérence!
-```
 
 ---
 
@@ -866,9 +865,6 @@ export class ContractService {
 | **Rollback** | Compréhendre les états d'erreur |
 
 ---
-
-layout: center
-class: 'text-center'
 
 # ✨ Clean Code & Architecture
 
