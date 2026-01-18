@@ -130,35 +130,44 @@ graph LR
 
 ## Panorama des technologies
 
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+
+<div>
+
 #### 🔧 Back-end
-
-#### 🎨 Front-end
-
-#### 📱 Mobile
-
-#### 🧠 Infrastructure & BD
 
 - Java: Spring Boot, Spring Cloud
 - Node.js: Express, NestJS
 - Python: Django, FastAPI
 - Go: Gin, Echo
+#### 🎨 Front-end
 
 - React: Composants, Hooks
 - Vue.js: Réactif, simple
 - Angular: Complet, TypeScript
 - Next.js: SSR, SSG, SSG
 
+</div>
+<div>
+
+#### 📱 Mobile
+
 - React Native: Code réutilisable
 - Flutter: Widgets natifs
 - Swift/Kotlin: Natif
 
+#### 🧠 Infrastructure & BD
 - Docker: Conteneurisation
 - Kubernetes: Orchestration
 - PostgreSQL, MongoDB
-
+</div>
+</div>
 ---
 
-## Principes fondamentaux
+## Principes d'architecture applicative
+
+---
 
 ### Séparation des préoccupations
 
@@ -176,9 +185,7 @@ Infrastructure (Serveurs, BD)
 
 ---
 
-## SOLID & Bonnes pratiques
-
-### Principes SOLID
+## Principes SOLID
 
 - Single Responsibility Principle: Une classe = une responsabilité
 - Open/Closed Principle: Ouvert à l'extension, fermé à la modification
@@ -192,23 +199,26 @@ Infrastructure (Serveurs, BD)
 
 #### 🚀 Performance
 
-#### 🔒 Sécurité
-
-#### 📊 Scalabilité
-
-#### 🔄 Maintenabilité
 
 - Latence réduite
 - Caching efficace
 - Scalabilité
 
+#### 🔒 Sécurité
+
+
 - OAuth2, JWT
 - HTTPS, TLS
 - Validation des données
 
+#### 📊 Scalabilité
+
+
 - Horizontal scaling
 - Load balancing
 - Caching distribué
+
+#### 🔄 Maintenabilité
 
 - Documentation
 - Tests automatisés
@@ -216,8 +226,6 @@ Infrastructure (Serveurs, BD)
 
 ---
 
-layout: center
-class: 'text-center'
 
 # 🏗️ Patterns d'Architecture
 
@@ -355,7 +363,7 @@ Isoler le cœur métier des détails techniques.
 - Tests unitaires sans dépendances externes
 
 ```mermaid
-graph TB
+graph LR
                             UI["UI / API"]
                             DB["Base de données"]
                             MAIL["Service email"]
@@ -386,12 +394,10 @@ graph TB
 ---
 
 ## Pattern Dependency Injection (DI)
+Injecter les dépendances plutôt que les créer soi-même.
 
 ### Sans Dependency Injection (couplage fort):
 
-### Avec Dependency Injection (découplage):
-
-Injecter les dépendances plutôt que les créer soi-même.
 
 ```plaintext
 public class ContractService {
@@ -402,6 +408,9 @@ public class ContractService {
     }
 }
 ```
+
+### Avec Dependency Injection (découplage):
+
 
 ```plaintext
 public class ContractService {
@@ -427,7 +436,7 @@ Abstraction de la couche d'accès aux données.
 - Tests unitaires avec implémentation mock
 
 ```mermaid
-graph TB
+graph LR
                             Service["Service métier<br/>(ContractService)"]
                             Repo["Repository Interface<br/>(IContractRepository)"]
                             Impl1["Implémentation DB<br/>(PostgresContractRepository)"]
@@ -448,41 +457,6 @@ graph TB
 
 ---
 
-## Pattern Strategy
-
-### Exemple: Calcul de prime d'assurance
-
-#### Strategy: BasePricingStrategy
-
-#### Utilisation
-
-Encapsuler une famille d'algorithmes interchangeables.
-
-```plaintext
-interface PricingStrategy {
-  calculatePremium(contract);
-}
-
-class Standard 
-  implements PricingStrategy { ... }
-
-class Premium 
-  implements PricingStrategy { ... }
-```
-
-```plaintext
-ContractService {
-  strategy: PricingStrategy;
-  
-  calculate() {
-    return this.strategy
-      .calculatePremium(contract)
-  }
-}
-```
-
----
-
 ## Récapitulatif: Quand utiliser quel pattern ?
 
 | Pattern | Problème | Quand l'utiliser |
@@ -495,18 +469,6 @@ ContractService {
 | DI | Gestion dépendances | Tous les projets modernes |
 
 ---
-
-layout: center
-class: 'text-center'
-
-# 🏗️ Patterns d'Architecture
-
-*Solutions éprouvées pour structurer vos applications*
-
----
-
-layout: center
-class: 'text-center'
 
 # 🔧 Écosystèmes Backend
 
@@ -701,7 +663,6 @@ class: 'text-center'
 
 #### ❌ Code sale (mauvais)
 
-#### ✅ Code propre (bon)
 
 ```plaintext
 function calc(c) {
@@ -718,6 +679,8 @@ function calc(c) {
     return p;
 }
 ```
+
+#### ✅ Code propre (bon)
 
 ```plaintext
 double calculateInsurancePremium(
