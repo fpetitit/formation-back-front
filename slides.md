@@ -4,6 +4,7 @@ title: Architectures Back-end & Front-end
 subtitle: Web, Mobile et IA
 date: 2026-01-17
 layout: cover
+download: true
 ---
 
 # Architectures Back-end & Front-end
