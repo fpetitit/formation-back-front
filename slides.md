@@ -128,6 +128,8 @@ Back-ends et API pour le Web, le Mobile et l'IA
 
 > "When you model using only the semantics that the business expert cares about, you get a model that the business expert understands." — **Eric Evans**, Domain-Driven Design
 
+![Domain-Driven Design](https://covers.openlibrary.org/b/isbn/0321125215-L.jpg)
+
 ### Impact direct sur:
 
 - Maintenabilité et évolutivité du code
@@ -306,6 +308,8 @@ Infrastructure (Serveurs, BD)
 ### Les patterns résolvents des problèmes récurrents
 
 > "The purpose of design patterns is to give a name and a context to design problems and their solutions." — **Gang of Four**, Design Patterns
+
+![Design Patterns](https://covers.openlibrary.org/b/isbn/0201633612-L.jpg)
 
 - Réutilisabilité: Solutions éprouvées et documentées
 - Standardisation: Équipes alignées sur une même approche
@@ -1773,6 +1777,8 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 
 > "Any fool can write code that a computer can understand. Good programmers write code that humans can understand." — **Robert C. Martin**, Clean Code
 
+![Clean Code](https://covers.openlibrary.org/b/isbn/0132350882-L.jpg)
+
 - Réduction des bugs: Code clair = moins d'erreurs
 - Maintenabilité: Facile à modifier et à déboguer
 - Collaboration: Équipes comprennent rapidement le code
@@ -2057,6 +2063,8 @@ public void testCalculatePremiumForYoungDriver() {
 ## Clean Architecture: Introduction
 
 > "A software architect is a programmer who has stopped programming and has started thinking about programs." — **Robert C. Martin**, Clean Architecture
+
+![Clean Architecture](https://covers.openlibrary.org/b/isbn/0134494164-L.jpg)
 
 Structure logicielle indépendante des frameworks, testable et maintenable.
 
