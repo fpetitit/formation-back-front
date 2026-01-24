@@ -22,7 +22,7 @@ Back-ends et API pour le Web, le Mobile et l'IA
 ## 🔧 Fondamentaux du développement back-end
 
 - **Patterns d'Architecture**
-  - Monolithe, Microservices
+  - Monolithe, Microservices, Serverless
 
   **Patterns de développement**
   - MVC, MVVM
@@ -31,6 +31,8 @@ Back-ends et API pour le Web, le Mobile et l'IA
   - Repository, Strategy
 
 - **Clean Code, Clean Architecture**
+- **Transactions et ACID**
+- **SOLID Principles**
 
 </div>
 
@@ -39,16 +41,21 @@ Back-ends et API pour le Web, le Mobile et l'IA
 ## 🎨 Ecosystèmes technologies
 
 - **Ecosystèmes technologiques**
-  - Java, .Net, Python...
+  - Java (Spring Boot), .Net, Python (FastAPI, Django), Node.js (Express, NestJS), Ruby on Rails
 
 ## Stratégies pour les API
 
 - **REST vs GraphQL**
-- Sécurité
+- Sécurité (OAuth2, JWT)
+- Documentation (Swagger/OpenAPI)
+- Versioning
 
 ## 🤖 En route vers l'IA
 
 - **MCP, A2A**
+- Intégration IA dans les backends
+- Agents autonomes
+- Sécurité et gouvernance IA
 
 </div>
 
