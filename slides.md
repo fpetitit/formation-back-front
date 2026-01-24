@@ -33,6 +33,8 @@ Back-ends et API pour le Web, le Mobile et l'IA
 - **Clean Code, Clean Architecture**
 - **Transactions et ACID**
 - **SOLID Principles**
+- **Event-Sourcing**
+- **Serverless Avancée**
 
 </div>
 
@@ -56,6 +58,14 @@ Back-ends et API pour le Web, le Mobile et l'IA
 - Intégration IA dans les backends
 - Agents autonomes
 - Sécurité et gouvernance IA
+
+## Architecture Avancée
+
+- **Microservices Choreography vs Orchestration**
+- **Sécurité Avancée**
+- **Caching Avancé**
+- **Database Sharding**
+- **Domain-Driven Design Approfondi**
 
 </div>
 
@@ -317,23 +327,23 @@ graph LR
         WriteDB["💾 Write DB<br/>Optimisée"]
         EventBus["📢 Event<br/>Bus"]
     end
-    
+
     subgraph Queries["🔍 CÔTÉ LECTURE (Queries)"]
         UI2["🧑 Utilisateur<br/>Consulte"]
         Handler2["⚡ Query<br/>Handler"]
         ReadDB["📖 Read DB<br/>Dénormalisée"]
     end
-    
+
     UI1 -->|Créer<br/>Modifier| Handler1
     Handler1 -->|Logique métier| Domain
     Domain -->|Persist| WriteDB
     Domain -->|Publie| EventBus
-    
+
     UI2 -->|Chercher<br/>Afficher| Handler2
     Handler2 -->|Accès rapide| ReadDB
-    
+
     EventBus -->|Synchronise| ReadDB
-    
+
     style Commands fill:#ffe8f4
     style Queries fill:#fff9e8
     style WriteDB fill:#ffe8e8
@@ -347,6 +357,620 @@ graph LR
 - ✅ **Scalabilité**: Lectures et écritures peuvent être déployées séparément
 - ✅ **Performance**: Read DB peut être dénormalisée (cache, index spécifiques)
 - ✅ **Clarté**: Séparation claire des responsabilités
+
+---
+
+## Architecture Event-Sourcing
+
+### Principes fondamentaux
+
+```mermaid
+graph LR
+    A["📝 Événements"] --> B["🗄️ Event Store"]
+    B --> C["🔄 Replay"]
+    C --> D["📊 État actuel"]
+    B --> E["📈 Projections"]
+    E --> F["🖥️ Vues optimisées"]
+
+    style A fill:#e8f4ff
+    style B fill:#fff9e8
+    style C fill:#ffe8f4
+    style D fill:#e8ffe8
+    style E fill:#f4e8ff
+    style F fill:#ffebe8
+```
+
+### Concepts clés
+
+- **Événements immutables**: Tous les changements sont stockés comme événements
+- **Reconstruction d'état**: L'état actuel est reconstruit en replayant les événements
+- **Projections**: Vues optimisées pour différents cas d'usage
+- **Audit trail**: Historique complet de toutes les modifications
+
+### Cas d'usage
+
+- **Finance**: Traçabilité complète des transactions
+- **Assurance**: Historique des contrats et sinistres
+- **Santé**: Dossiers patients avec historique complet
+
+### Outils populaires
+
+- **EventStoreDB**: Base de données dédiée
+- **Kafka**: Pour le streaming d'événements
+- **Axoni**: Plateforme complète
+
+---
+
+## Comparaison Event-Sourcing vs CRUD
+
+| Aspect | Event-Sourcing | CRUD Traditionnel |
+|---|---|---|
+| **Historique** | ✅ Complet | ❌ Partiel |
+| **Audit** | ✅ Natif | ❌ Requiert logs |  |
+| **Performance lecture** | ❌ Replay nécessaire | ✅ Direct |
+| **Complexité** | ⚠️ Élevée | ✅ Simple |
+| **Évolutivité** | ✅ Excellente | ⚠️ Limitée |
+
+---
+
+# 🏗️ Architecture Serverless Avancée
+
+---
+
+## Principes du Serverless
+
+### Caractéristiques clés
+
+```mermaid
+graph TD
+    A["📦 Code"] --> B["🚀 Déploiement"]
+    B --> C["🌐 Exécution"]
+    C --> D["⏱️ Facturation"]
+    D --> E["💰 Par exécution"]
+
+    style A fill:#e8f4ff
+    style B fill:#fff9e8
+    style C fill:#ffe8f4
+    style D fill:#e8ffe8
+    style E fill:#ffebe8
+```
+
+### Avantages
+
+- **Pas de gestion serveur**: Focus sur le code métier
+- **Scalabilité automatique**: Gestion transparente de la charge
+- **Facturation précise**: Pay-as-you-go
+- **Déploiement rapide**: Mise en production instantanée
+
+### Défis
+
+- **Cold starts**: Latence initiale
+- **Timeouts**: Limites d'exécution
+- **Vendor lock-in**: Dépendance au fournisseur cloud
+
+---
+
+## Patterns Serverless Avancés
+
+### 1. Cold Start Optimization
+
+```mermaid
+graph LR
+    A["🔥 Maintenir chaud"] --> B["⏰ Minimiser latence"]
+    C["📦 Package léger"] --> B
+    D["🚀 Initialisation rapide"] --> B
+
+    style A fill:#ffe8f4
+    style B fill:#fff9e8
+    style C fill:#e8ffe8
+    style D fill:#f4e8ff
+```
+
+### 2. Composition de Fonctions
+
+```mermaid
+graph TD
+    A["Fonction A"] --> B["File d'attente"]
+    B --> C["Fonction B"]
+    C --> D["Base de données"]
+    D --> E["Fonction C"]
+
+    style A fill:#e8f4ff
+    style B fill:#fff9e8
+    style C fill:#ffe8f4
+    style D fill:#e8ffe8
+    style E fill:#f4e8ff
+```
+
+---
+
+## Comparaison des Fournisseurs Cloud
+
+| Fournisseur | Service | Langages | Timeout Max | Points forts |
+|---|---|---|---|---|
+| **AWS** | Lambda | Node, Python, Java, Go | 15 min | Écosystème complet |
+| **Azure** | Functions | C#, JavaScript, Python | 10 min | Intégration Microsoft |
+| **Google** | Cloud Functions | Node, Python, Go | 9 min | Scalabilité rapide |
+| **Cloudflare** | Workers | JavaScript | 30 sec | Edge computing |
+
+---
+
+# 🏗️ Microservices: Choreography vs Orchestration
+
+---
+
+## Définitions et Comparaison
+
+### Choreography
+
+```mermaid
+graph LR
+    A["Service A"] -->|Événement| B["Broker"]
+    B -->|Événement| C["Service B"]
+    B -->|Événement| D["Service C"]
+    C -->|Événement| B
+    D -->|Événement| B
+
+    style A fill:#e8f4ff
+    style B fill:#ffe8f4
+    style C fill:#fff9e8
+    style D fill:#e8ffe8
+```
+
+### Orchestration
+
+```mermaid
+graph TD
+    A["Orchestrateur"] --> B["Service A"]
+    A --> C["Service B"]
+    A --> D["Service C"]
+    B --> A
+    C --> A
+    D --> A
+
+    style A fill:#ffd700
+    style B fill:#e8f4ff
+    style C fill:#fff9e8
+    style D fill:#e8ffe8
+```
+
+---
+
+## Critères de Choix
+
+| Critère | Choreography | Orchestration |
+|---|---|---|
+| **Couplage** | ✅ Faible | ❌ Fort |
+| **Complexité** | ⚠️ Élevée | ✅ Modérée |
+| **Flexibilité** | ✅ Élevée | ⚠️ Limitée |
+| **Visibilité** | ❌ Difficile | ✅ Claire |
+| **Maintenance** | ❌ Complexe | ✅ Simple |
+
+### Outils Populaires
+
+- **Choreography**: Kafka, RabbitMQ, AWS EventBridge
+- **Orchestration**: Zeebe, Cadence, AWS Step Functions
+
+---
+
+## Implémentation Pratique
+
+### Choreography avec Kafka
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant ServiceA
+    participant Kafka
+    participant ServiceB
+
+    Client->>ServiceA: Requête initiale
+    ServiceA->>Kafka: Publie événement
+    Kafka->>ServiceB: Consomme événement
+    ServiceB->>Kafka: Publie résultat
+    Kafka->>ServiceA: Consomme résultat
+    ServiceA->>Client: Réponse finale
+```
+
+### Orchestration avec Zeebe
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Orchestrateur
+    participant ServiceA
+    participant ServiceB
+
+    Client->>Orchestrateur: Requête
+    Orchestrateur->>ServiceA: Appel
+    ServiceA->>Orchestrateur: Réponse
+    Orchestrateur->>ServiceB: Appel
+    ServiceB->>Orchestrateur: Réponse
+    Orchestrateur->>Client: Résultat final
+```
+
+---
+
+# 🔒 Sécurité Avancée
+
+---
+
+## Zero Trust Architecture
+
+### Principes Fondamentaux
+
+```mermaid
+graph TD
+    A["🛡️ Never Trust"] --> B["🔍 Always Verify"]
+    B --> C["🔒 Least Privilege"]
+    C --> D["📡 Micro-Segmentation"]
+
+    style A fill:#ff6b6b
+    style B fill:#ffe8f4
+    style C fill:#fff9e8
+    style D fill:#e8ffe8
+```
+
+### Piliers du Zero Trust
+
+1. **Identité**: Vérification continue
+2. **Appareil**: Posture de sécurité
+3. **Réseau**: Micro-segmentation
+4. **Application**: Accès granulaire
+5. **Données**: Chiffrement et classification
+
+---
+
+## Service-to-Service Authentication
+
+### Mutual TLS (mTLS)
+
+```mermaid
+graph LR
+    A["Service A"] -->|🔐 Certificat| B["Service B"]
+    B -->|🔐 Certificat| A
+    A -->|🔒 Communication| B
+    B -->|🔒 Communication| A
+
+    style A fill:#e8f4ff
+    style B fill:#fff9e8
+```
+
+### OAuth2 pour les Services
+
+```mermaid
+sequenceDiagram
+    participant ServiceA
+    participant AuthServer
+    participant ServiceB
+
+    ServiceA->>AuthServer: Demande token
+    AuthServer->>ServiceA: Token JWT
+    ServiceA->>ServiceB: Requête + Token
+    ServiceB->>AuthServer: Valide token
+    AuthServer->>ServiceB: Validation
+    ServiceB->>ServiceA: Réponse
+```
+
+---
+
+## Secret Management
+
+### HashiCorp Vault
+
+```mermaid
+graph TD
+    A["🔑 Applications"] --> B["🗄️ Vault"]
+    B --> C["🔐 Secrets"]
+    B --> D["📝 Certificats"]
+    B --> E["🔑 Clés API"]
+
+    style A fill:#e8f4ff
+    style B fill:#ffd700
+    style C fill:#fff9e8
+    style D fill:#ffe8f4
+    style E fill:#e8ffe8
+```
+
+### Best Practices
+
+- **Rotation automatique**: Changement régulier des secrets
+- **Accès temporaire**: Tokens à durée limitée
+- **Audit complet**: Logging de tous les accès
+- **Chiffrement**: Secrets toujours chiffrés
+
+---
+
+# 🚀 Caching Avancé
+
+---
+
+## Patterns de Cache
+
+### Cache-Aside (Lazy Loading)
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Cache
+    participant Database
+
+    Client->>Cache: Demande donnée
+    alt Cache hit
+        Cache->>Client: Retourne donnée
+    else Cache miss
+        Cache->>Database: Récupère donnée
+        Database->>Cache: Stocke donnée
+        Cache->>Client: Retourne donnée
+    end
+```
+
+### Write-Through
+
+```mermaid
+sequenceDiagram
+    participant Client
+    participant Cache
+    participant Database
+
+    Client->>Cache: Écrit donnée
+    Cache->>Database: Écrit donnée
+    Database->>Cache: Confirmation
+    Cache->>Client: Confirmation
+```
+
+---
+
+## Comparaison Redis vs Memcached
+
+| Critère | Redis | Memcached |
+|---|---|---|
+| **Persistance** | ✅ Oui | ❌ Non |
+| **Structures** | ✅ Riches | ❌ Clé-valeur |
+| **Réplication** | ✅ Master-Slave | ❌ Basique |
+| **Performance** | ⚠️ Très élevée | ✅ Extrême |
+| **Utilisation** | Cache + BD | Cache pur |
+
+### Cas d'usage
+
+- **Redis**: Sessions, leaderboards, pub/sub
+- **Memcached**: Cache simple, performances pures
+
+---
+
+## Stratégies d'Invalidation
+
+### 1. Time-based (TTL)
+
+```mermaid
+graph LR
+    A["🕒 Donnée mise en cache"] --> B["⏳ TTL expire"]
+    B --> C["🗑️ Invalidation automatique"]
+
+    style A fill:#e8f4ff
+    style B fill:#fff9e8
+    style C fill:#ffe8f4
+```
+
+### 2. Event-based
+
+```mermaid
+graph LR
+    A["📝 Mise à jour BD"] --> B["🔔 Événement"]
+    B --> C["🗑️ Invalidation cache"]
+
+    style A fill:#e8f4ff
+    style B fill:#ffd700
+    style C fill:#ffe8f4
+```
+
+---
+
+# 🗃️ Database Sharding et Partitioning
+
+---
+
+## Définitions
+
+### Sharding Horizontal
+
+```mermaid
+graph TD
+    A["📊 Données"] --> B["🔪 Partitionnement"]
+    B --> C["Shard 1"]
+    B --> D["Shard 2"]
+    B --> E["Shard N"]
+
+    style A fill:#e8f4ff
+    style B fill:#ff6b6b
+    style C fill:#fff9e8
+    style D fill:#ffe8f4
+    style E fill:#e8ffe8
+```
+
+### Partitioning Vertical
+
+```mermaid
+graph TD
+    A["📊 Table"] --> B["🔪 Séparation"]
+    B --> C["Colonnes A-B"]
+    B --> D["Colonnes C-D"]
+    B --> E["Colonnes E-F"]
+
+    style A fill:#e8f4ff
+    style B fill:#ff6b6b
+    style C fill:#fff9e8
+    style D fill:#ffe8f4
+    style E fill:#e8ffe8
+```
+
+---
+
+## Stratégies de Sharding
+
+### 1. Key-Based Sharding
+
+```mermaid
+graph LR
+    A["🔑 Clé"] -->|Hash| B["📊 Shard"]
+    B --> C["🗄️ Stockage"]
+
+    style A fill:#e8f4ff
+    style B fill:#fff9e8
+    style C fill:#ffe8f4
+```
+
+### 2. Range-Based Sharding
+
+```mermaid
+graph LR
+    A["📏 Plage de valeurs"] --> B["📊 Shard 1"]
+    C["📏 Plage suivante"] --> D["📊 Shard 2"]
+
+    style A fill:#e8f4ff
+    style B fill:#fff9e8
+    style C fill:#ffe8f4
+    style D fill:#e8ffe8
+```
+
+---
+
+## Implémentation Pratique
+
+### PostgreSQL avec Citus
+
+```mermaid
+graph TD
+    A["📱 Application"] --> B["🔄 Coordinateur"]
+    B --> C["🗄️ Worker 1"]
+    B --> D["🗄️ Worker 2"]
+    B --> E["🗄️ Worker N"]
+
+    style A fill:#e8f4ff
+    style B fill:#ffd700
+    style C fill:#fff9e8
+    style D fill:#ffe8f4
+    style E fill:#e8ffe8
+```
+
+### MongoDB Sharding
+
+```mermaid
+graph TD
+    A["📱 Client"] --> B["🎯 Mongos"]
+    B --> C["🗄️ Config Servers"]
+    B --> D["📊 Shard 1"]
+    B --> E["📊 Shard 2"]
+
+    style A fill:#e8f4ff
+    style B fill:#ffd700
+    style C fill:#fff9e8
+    style D fill:#ffe8f4
+    style E fill:#e8ffe8
+```
+
+---
+
+# 🎯 Domain-Driven Design Approfondi
+
+---
+
+## Strategic vs Tactical DDD
+
+### Niveaux de DDD
+
+```mermaid
+graph TD
+    A["🎯 Strategic DDD"] --> B["🔧 Tactical DDD"]
+    B --> C["📦 Implementation"]
+
+    style A fill:#ffd700
+    style B fill:#ffe8f4
+    style C fill:#fff9e8
+```
+
+### Strategic DDD
+
+- **Bounded Contexts**: Frontières claires
+- **Context Mapping**: Relations entre contextes
+- **Ubiquitous Language**: Langage commun
+
+### Tactical DDD
+
+- **Aggregates**: Cohérence transactionnelle
+- **Domain Events**: Communication asynchrone
+- **Entities vs Value Objects**: Modélisation fine
+
+---
+
+## Bounded Contexts et Context Mapping
+
+### Exemple d'Architecture
+
+```mermaid
+graph LR
+    A["🛒 Commandes"] -->|🔄| B["📦 Livraisons"]
+    A -->|📝| C["💰 Paiements"]
+    B -->|📦| D["📍 Logistique"]
+
+    style A fill:#e8f4ff
+    style B fill:#fff9e8
+    style C fill:#ffe8f4
+    style D fill:#e8ffe8
+```
+
+### Types de Relations
+
+| Relation | Description | Exemple |
+|---|---|---|
+| **Partnership** | Collaboration étroite | Commandes ↔ Livraisons |
+| **Customer-Supplier** | Client-fournisseur | Commandes → Paiements |
+| **Conformist** | Adaptation | Livraisons → Logistique |
+| **Anti-Corruption Layer** | Isolation | Legacy → Nouveau |
+
+---
+
+## Event Storming
+
+### Processus Collaboratif
+
+```mermaid
+graph TD
+    A["🤝 Atelier"] --> B["📝 Événements"]
+    B --> C["🔷 Commandes"]
+    C --> D["📦 Aggregates"]
+    D --> E["🎯 Bounded Contexts"]
+
+    style A fill:#ffd700
+    style B fill:#e8f4ff
+    style C fill:#fff9e8
+    style D fill:#ffe8f4
+    style E fill:#e8ffe8
+```
+
+### Étapes Clés
+
+1. **Événements métiers**: "CommandePayée", "LivraisonPlanifiée"
+2. **Commandes**: Actions déclenchantes
+3. **Aggregates**: Groupes cohérents
+4. **Bounded Contexts**: Frontières logiques
+
+---
+
+## Récapitulatif DDD
+
+### Avantages
+
+- **Alignement métier**: Langage commun
+- **Modularité**: Contextes indépendants
+- **Maintenabilité**: Modèle clair
+- **Évolutivité**: Adaptation facile
+
+### Anti-Patterns à Éviter
+
+- **Big Ball of Mud**: Tout dans un contexte
+- **Anemic Domain Model**: Logique dans les services
+- **Over-Engineering**: Complexité inutile
 
 ---
 
