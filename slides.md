@@ -19,53 +19,77 @@ Back-ends et API pour le Web, le Mobile et l'IA
 
 <div>
 
-## 🔧 Fondamentaux du développement back-end
+## 🔧 Fondamentaux & Introduction
 
-- **Patterns d'Architecture**
-  - Monolithe, Microservices, Serverless
+- Introduction à l'architecture logicielle
+- Définitions clés
+- Principes d'architecture applicative
+- Principes SOLID
+- Défis de l'architecture moderne
 
-  **Patterns de développement**
-  - MVC, MVVM
-  - CQRS, Event-Driven
-  - Hexagonal, DI
-  - Repository, Strategy
+## 🏗️ Patterns d'Architecture
 
-- **Clean Code, Clean Architecture**
-- **Transactions et ACID**
-- **SOLID Principles**
-- **Event-Sourcing**
-- **Serverless Avancée**
+- MVC, MVVM
+- CQRS
+- Event-Sourcing
+- Event-Driven Architecture
+- Hexagonal Architecture
+- Dependency Injection
+- Repository Pattern
+
+## 🚀 Architectures Avancées
+
+- Monolithe vs Microservices vs Serverless
+- Architecture Serverless
+- Microservices Patterns
+- Domain-Driven Design
+- Saga Pattern
+- Sécurité avancée
+- Caching avancé
+- Database Sharding
 
 </div>
 
 <div>
 
-## 🎨 Ecosystèmes technologies
+## 🎨 Écosystèmes Technologiques
 
-- **Ecosystèmes technologiques**
-  - Java (Spring Boot), .Net, Python (FastAPI, Django), Node.js (Express, NestJS), Ruby on Rails
+- Spring Boot (Java)
+- NestJS (Node.js/TypeScript)
+- Python (FastAPI & Django)
+- .NET / ASP.NET Core
+- Ruby on Rails
+- Comparaison des frameworks
 
-## Stratégies pour les API
+## ✨ Développement Propre
 
-- **REST vs GraphQL**
-- Sécurité (OAuth2, JWT)
-- Documentation (Swagger/OpenAPI)
+- Clean Code principles
+- Clean Architecture
+- Best practices
+- Testing strategies
+
+## 🌐 APIs & Communication
+
+- REST vs GraphQL
+- Bonnes pratiques REST
+- GraphQL implementation
+- Sécurité des APIs
+- Documentation API
 - Versioning
 
-## 🤖 En route vers l'IA
+## 🤖 Intégration IA & Futur
 
-- **MCP, A2A**
-- Intégration IA dans les backends
+- MCP & Intégration IA
+- Cas d'usage assurance/santé
+- Sécurité & gouvernance IA
 - Agents autonomes
-- Sécurité et gouvernance IA
 
-## Architecture Avancée
+## 🛠️ Outils & Déploiement
 
-- **Microservices Choreography vs Orchestration**
-- **Sécurité Avancée**
-- **Caching Avancé**
-- **Database Sharding**
-- **Domain-Driven Design Approfondi**
+- Implémentation Spring Boot
+- Implémentation Node.js/NestJS
+- Sécurité, monitoring & déploiement
+- Outils DevOps (Docker, PM2)
 
 </div>
 
@@ -73,7 +97,7 @@ Back-ends et API pour le Web, le Mobile et l'IA
 
 <div style="margin-top: 30px; padding: 20px; background: #f0f0f0; border-radius: 8px;">
 
-**Fondamentaux** - Principes transversaux (Introduction, Clean Code, Sécurité, Synthèse)
+**Organisation thématique** - Regroupement logique des concepts pour une progression pédagogique optimale
 
 </div>
 
@@ -441,6 +465,150 @@ graph LR
 
 ---
 
+## Pattern Event-Driven Architecture
+
+### Cas d'usage assurance:
+
+Services réactifs aux événements métiers asynchrones.
+
+- Événement: "ContractCreated" - Un nouveau contrat est créé
+- Consommateurs: Service email (notification), Service CRM (update), Service audit (logging)
+- Avantage: Découplage complet entre services
+
+```mermaid
+graph LR
+                            A["Producteur<br/>(Service)"] -->|Publie| Broker["🔔 Event Broker<br/>(Kafka, RabbitMQ)"]
+                            Broker -->|Consomme| B["Consommateur 1<br/>(Service)"]
+                            Broker -->|Consomme| C["Consommateur 2<br/>(Service)"]
+                            Broker -->|Consomme| D["Consommateur N<br/>(Service)"]
+                            
+                            style A fill:#e8f4ff
+                            style Broker fill:#ffe8f4
+                            style B fill:#fff9e8
+                            style C fill:#e8ffe8
+                            style D fill:#f4e8ff
+```
+
+---
+
+## Pattern Hexagonal (Ports & Adapters)
+
+### Bénéfices:
+
+Isoler le cœur métier des détails techniques.
+
+- Cœur métier indépendant des frameworks
+- Adaptation facile aux changements technologiques
+- Tests unitaires sans dépendances externes
+
+```mermaid
+graph LR
+                            UI["UI / API"]
+                            DB["Base de données"]
+                            MAIL["Service email"]
+                            API3["API tierce"]
+                            
+                            UI -->|Port| Core["🔷 Cœur Métier<br/>(Logique pure)"]
+                            Core -->|Port| DB
+                            Core -->|Port| MAIL
+                            Core -->|Port| API3
+                            
+                            UAda["Web Adapter"]
+                            DBAda["PostgreSQL Adapter"]
+                            MAILAda["SMTP Adapter"]
+                            APIAda["HTTP Adapter"]
+                            
+                            UAda -.->|Implémente| UI
+                            DBAda -.->|Implémente| DB
+                            MAILAda -.->|Implémente| MAIL
+                            APIAda -.->|Implémente| API3
+                            
+                            style Core fill:#fff9e8,stroke:#ffc107,stroke-width:3px
+                            style UI fill:#e8f4ff
+                            style DB fill:#f4e8ff
+                            style MAIL fill:#e8ffe8
+                            style API3 fill:#ffe8f4
+```
+
+---
+
+## Pattern Dependency Injection (DI)
+Injecter les dépendances plutôt que les créer soi-même.
+
+### Sans Dependency Injection (couplage fort):
+
+
+```plaintext
+public class ContractService {
+    private DatabaseService db = new DatabaseService(); // Couplage fort
+    
+    public void createContract(Contract c) {
+        db.save(c);
+    }
+}
+```
+
+### Avec Dependency Injection (découplage):
+
+
+```plaintext
+public class ContractService {
+    private DatabaseService db; // Interface
+    
+    @Inject // Spring/Guice injecte la dépendance
+    public ContractService(DatabaseService db) {
+        this.db = db;
+    }
+}
+```
+
+---
+
+## Pattern Repository
+
+### Avantages:
+
+Abstraction de la couche d'accès aux données.
+
+- Logique métier indépendante du mécanisme de persistance
+- Facile de basculer de PostgreSQL à MongoDB
+- Tests unitaires avec implémentation mock
+
+```mermaid
+graph LR
+                            Service["Service métier<br/>(ContractService)"]
+                            Repo["Repository Interface<br/>(IContractRepository)"]
+                            Impl1["Implémentation DB<br/>(PostgresContractRepository)"]
+                            Impl2["Implémentation Cache<br/>(CachedContractRepository)"]
+                            Impl3["Implémentation Mock<br/>(MockContractRepository)"]
+                            
+                            Service -->|Utilise| Repo
+                            Repo -->|Implémenté par| Impl1
+                            Repo -->|Implémenté par| Impl2
+                            Repo -->|Implémenté par| Impl3
+                            
+                            style Service fill:#e8f4ff
+                            style Repo fill:#fff9e8
+                            style Impl1 fill:#f4e8ff
+                            style Impl2 fill:#e8ffe8
+                            style Impl3 fill:#ffe8f4
+```
+
+---
+
+## Récapitulatif: Quand utiliser quel pattern ?
+
+| Pattern | Problème | Quand l'utiliser |
+| --- | --- | --- |
+| MVC | Séparation UI/logique | Web traditionnel, applications simples |
+| MVVM | Binding bidirectionnel | Interfaces réactives, desktop/mobile |
+| CQRS | Scalabilité lecture/écriture | Hauts volumes, complex queries |
+| Event-Driven | Découplage asynchrone | Microservices, systèmes réactifs |
+| Hexagonal | Isolation cœur métier | Logique métier complexe, DDD |
+| DI | Gestion dépendances | Tous les projets modernes |
+
+---
+
 ---
 
 ## 🎯 Prochaine Section: Architecture Serverless
@@ -537,6 +705,205 @@ graph TD
 
 ---
 
+## Microservices: Introduction
+
+Architectures distribuées basées sur des services indépendants.
+
+```mermaid
+graph TB
+                            Client["Client<br/>(Web/Mobile)"]
+                            Gateway["API Gateway"]
+                            
+                            ServiceContract["Service Contrats<br/>(Port 3001)"]
+                            ServiceClaim["Service Sinistres<br/>(Port 3002)"]
+                            ServiceCustomer["Service Clients<br/>(Port 3003)"]
+                            ServiceNotif["Service Notifications<br/>(Port 3004)"]
+                            
+                            DBContract["Base Contrats"]
+                            DBClaim["Base Sinistres"]
+                            DBCustomer["Base Clients"]
+                            
+                            Client -->|HTTP| Gateway
+                            Gateway -->|Route| ServiceContract
+                            Gateway -->|Route| ServiceClaim
+                            Gateway -->|Route| ServiceCustomer
+                            
+                            ServiceContract --> DBContract
+                            ServiceClaim --> DBClaim
+                            ServiceCustomer --> DBCustomer
+                            
+                            ServiceContract -.->|Event| ServiceNotif
+                            ServiceClaim -.->|Event| ServiceNotif
+                            
+                            style Client fill:#e8f4ff
+                            style Gateway fill:#fff9e8
+                            style ServiceContract fill:#ffe8f4
+                            style ServiceClaim fill:#e8ffe8
+                            style ServiceCustomer fill:#f4e8ff
+                            style ServiceNotif fill:#ffebe8
+```
+
+---
+
+## Caractéristiques des Microservices
+
+### Propriétés clés:
+
+#### 🎯 Autonomie
+
+#### 📡 Communication
+
+#### 🔄 Résilience
+
+#### 📊 Observabilité
+
+- Services indépendants
+- Déploiement indépendant
+- BD dédiée
+- Équipes autonomes
+
+- API REST / gRPC
+- Message brokers (Kafka)
+- Events asynchrones
+- Découverte de services
+
+- Circuit breaker
+- Timeout
+- Retry policy
+- Health checks
+
+- Logging distribué
+- Tracing
+- Monitoring
+- Alerting
+
+---
+
+## API Gateway et Service Discovery
+
+### API Gateway (point d'entrée unique):
+
+- Routage: Diriger requêtes aux services corrects
+- Authentification: JWT validation
+- Rate limiting: Protection DOS
+- Caching: Réduire latence
+- Load balancing: Distribuer charge
+
+```mermaid
+graph LR
+                            Client["Client"]
+                            Gateway["API Gateway<br/>(Kong, AWS API Gateway)"]
+                            
+                            Eureka["Service Discovery<br/>(Eureka, Consul)"]
+                            
+                            Serv1["Service 1<br/>Port 3001"]
+                            Serv2["Service 2<br/>Port 3002"]
+                            Serv3["Service 3<br/>Port 3003"]
+                            
+                            Client -->|Request| Gateway
+                            Gateway -->|Query services| Eureka
+                            Eureka -->|Retourne addresses| Gateway
+                            Gateway -->|Route| Serv1
+                            Gateway -->|Route| Serv2
+                            Gateway -->|Route| Serv3
+                            
+                            Serv1 -->|Register| Eureka
+                            Serv2 -->|Register| Eureka
+                            Serv3 -->|Register| Eureka
+                            
+                            style Client fill:#e8f4ff
+                            style Gateway fill:#fff9e8
+                            style Eureka fill:#ffe8f4
+                            style Serv1 fill:#e8ffe8
+                            style Serv2 fill:#e8ffe8
+                            style Serv3 fill:#e8ffe8
+```
+
+---
+
+## Communication inter-services
+
+### Approches de communication:
+
+#### 🔵 Synchrone (REST/gRPC)
+
+#### 🟣 Asynchrone (Events)
+
+```plaintext
+Service A
+   ↓ (HTTP/gRPC)
+Service B
+   ↓ (attend réponse)
+Service C
+   ↓
+Réponse retourne
+
+Avantages:
+✅ Cohérence immédiate
+✅ Facile à déboguer
+
+Inconvénients:
+❌ Couplage fort
+❌ Service lent = tout lent
+```
+
+```plaintext
+Service A
+   ↓ (Publie event)
+Kafka/RabbitMQ
+   ↓ (Message broker)
+Service B (reçoit)
+Service C (reçoit)
+
+Avantages:
+✅ Découplage complet
+✅ Haute disponibilité
+✅ Scalabilité
+
+Inconvénients:
+❌ Eventual consistency
+❌ Plus complexe
+```
+
+---
+
+## Saga Pattern: Transactions distribuées
+
+#### Deux approches:
+
+Maintenir la cohérence des données sur plusieurs services
+
+- Choreography: Services écoutent les events et réagissent (loose coupling)
+- Orchestration: Service central coordonne les étapes (plus simple mais couplage)
+
+```mermaid
+graph LR
+                            User["Client crée contrat"]
+                            
+                            Saga1["Saga Step 1<br/>Service Contrats:<br/>Créer contrat"]
+                            Saga2["Saga Step 2<br/>Service Client:<br/>Vérifier client"]
+                            Saga3["Saga Step 3<br/>Service Paiement:<br/>Débiter prime"]
+                            Saga4["Saga Step 4<br/>Service Notif:<br/>Envoyer email"]
+                            
+                            Success["✅ Contrat créé"]
+                            Rollback["❌ Rollback si erreur"]
+                            
+                            User -->|Initiate| Saga1
+                            Saga1 -->|OK| Saga2
+                            Saga2 -->|OK| Saga3
+                            Saga3 -->|OK| Saga4
+                            Saga4 -->|OK| Success
+                            
+                            Saga2 -->|ERREUR| Rollback
+                            Rollback -->|Undo Saga1| Saga1
+                            
+                            style User fill:#e8f4ff
+                            style Success fill:#e8ffe8
+                            style Rollback fill:#ffe8f4
+```
+
+---
+
 # 🏗️ Microservices: Choreography vs Orchestration
 
 ---
@@ -630,6 +997,223 @@ sequenceDiagram
     ServiceB->>Orchestrateur: Réponse
     Orchestrateur->>Client: Résultat final
 ```
+
+---
+
+# 💾 Transactions en Backend
+
+## Introduction aux Transactions
+
+### Qu'est-ce qu'une transaction?
+
+Une transaction est une **séquence d'opérations** qui doit s'exécuter en totalité ou pas du tout.
+
+> "Un paiement est soit accepté complètement, soit rejeté en totalité - jamais partiellement."
+
+---
+
+### Propriétés ACID (fondamentales)
+
+| Propriété | Signification | Assurance |
+|-----------|---------------|-----------|
+| **A**tomicité | Tout ou rien | Pas de paiement partiel |
+| **C**ohérence | État valide avant/après | Soldes corrects toujours |
+| **I**solation | Transactions indépendantes | Pas de lecture sale |
+| **D**urabilité | Persistance garantie | Pas de perte de données |
+
+### Cas d'usage assurance
+
+- ✅ Création de contrat + enregistrement prime
+- ✅ Sinistre + déblocage indemnisation
+- ✅ Transfert de fonds entre comptes
+- ✅ Mise à jour risque + calcul cotisation
+
+---
+
+## Problèmes sans Transactions
+
+### Scénarios catastrophiques
+
+```
+Scénario: Achat d'assurance avec paiement
+
+1. ✅ Prime débitée du compte client (-500€)
+2. ❌ ERREUR BASE DE DONNÉES
+3. ❌ Contrat NON créé
+4. ❌ Prime perdue (ou non enregistrée)
+
+→ Client a payé mais pas de contrat!
+→ Risque juridique et financier énorme
+```
+
+### Sans ACID (base de données simple)
+
+- Lecture sale: Lire une donnée non validée
+- Modification perdue: Deux écritures simultanées
+- Violation de contrainte: Somme = 0, mais montants = -50 et 100
+- Crash pendant mise à jour: État inconsistant
+
+---
+
+## 2-Phase Commit (2PC)
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
+Fonctionnement schématique :
+</div>
+<div>
+```mermaid
+sequenceDiagram
+    participant Client as 🧑 Client
+    participant App as 📱 Application
+    participant DB1 as 🗄️ DB Contrats
+    participant DB2 as 🗄️ DB Paiements
+    participant TM as 🎯 Transaction Manager
+
+    Client->>App: Créer contrat + payer
+    
+    App->>TM: Début transaction
+    
+    rect rgb(200, 150, 255)
+        Note over TM: PHASE 1: Preparation
+        TM->>DB1: Préparer: Insérer contrat
+        DB1-->>TM: ✅ Prêt (lock)
+        TM->>DB2: Préparer: Débiter paiement
+        DB2-->>TM: ✅ Prêt (lock)
+    end
+    
+    rect rgb(150, 200, 255)
+        Note over TM: PHASE 2: Validation
+        alt Tout prêt
+            TM->>DB1: COMMIT
+            DB1-->>TM: ✅ Validé
+            TM->>DB2: COMMIT
+            DB2-->>TM: ✅ Validé
+            TM-->>App: Succès
+            App-->>Client: ✅ Contrat créé
+        else Erreur
+            TM->>DB1: ROLLBACK
+            DB1-->>TM: ✅ Annulé
+            TM->>DB2: ROLLBACK
+            DB2-->>TM: ✅ Annulé
+            TM-->>App: Erreur
+            App-->>Client: ❌ Échoué
+        end
+    end
+```
+</div>
+</div>
+
+### Phases détaillées
+
+**Phase 1: Prepare**
+- Chaque ressource (BD) vérifie si elle PEUT valider
+- Acquiert les locks nécessaires
+- Réserve les ressources
+- **Pas de commit encore**
+
+**Phase 2: Commit**
+- Coordinateur dit "commit" si tout est prêt
+- Sinon "rollback"
+- Les ressources appliquent définitivement
+
+---
+
+## Niveaux d'Isolation
+
+### Lecture avec problèmes potentiels
+
+| Niveau | Lecture Dirty | Non-Répétable | Fantôme |
+|--------|---------------|---------------|---------|
+| **READ UNCOMMITTED** | ❌ Oui | ❌ Oui | ❌ Oui |
+| **READ COMMITTED** | ✅ Non | ❌ Oui | ❌ Oui |
+| **REPEATABLE READ** | ✅ Non | ✅ Non | ❌ Oui |
+| **SERIALIZABLE** | ✅ Non | ✅ Non | ✅ Non |
+
+### Définitions
+
+- **Lecture Dirty**: Lire une donnée non commitée (peut être annulée)
+- **Non-Répétable**: Deux lectures différentes de la même donnée
+- **Fantôme**: Lignes qui apparaissent/disparaissent entre lectures
+
+---
+
+## Implémentation dans les frameworks
+
+### Spring Boot (Java)
+
+```java
+@Service
+@Transactional  // ← Gère les transactions automatiquement
+public class ContractService {
+    
+    @Transactional(propagation = Propagation.REQUIRED,
+                   isolation = Isolation.REPEATABLE_READ)
+    public void createContractWithPayment(Contract c, Payment p) {
+        contractRepository.save(c);        // Insert contrat
+        paymentRepository.save(p);         // Débiter paiement
+        // ✅ COMMIT automatique si pas d'exception
+        // ❌ ROLLBACK automatique si exception
+    }
+}
+
+// Gestion d'erreur
+@Transactional
+public void transfer(Account from, Account to, double amount) {
+    try {
+        from.withdraw(amount);   // -500
+        to.deposit(amount);      // +500
+        accountRepo.save(from);
+        accountRepo.save(to);
+    } catch (Exception e) {
+        // Rollback automatique, soldes intacts
+        throw new TransactionException("Transfert échoué");
+    }
+}
+```
+
+### NestJS (Node.js/TypeScript)
+
+```typescript
+// Avec TypeORM
+@Injectable()
+export class ContractService {
+  constructor(
+    private dataSource: DataSource,
+    private contractRepo: Repository<Contract>
+  ) {}
+
+  async createContractWithPayment(
+    contract: Contract,
+    payment: Payment
+  ) {
+    const queryRunner = this.dataSource.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      await queryRunner.manager.save(contract);
+      await queryRunner.manager.save(payment);
+      await queryRunner.commitTransaction();
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+      throw new Error('Transaction failed');
+    } finally {
+      await queryRunner.release();
+    }
+  }
+}
+```
+
+### Considérations importantes
+
+| Aspect | Détail |
+|--------|--------|
+| **Timeout** | Transactions longues = locks prolongés = deadlock |
+| **Deadlock** | 2 transactions attendent mutuellement |
+| **Performance** | SERIALIZABLE = plus sûr mais plus lent |
+| **Monitoring** | Suivre les transactions longues |
+| **Rollback** | Compréhendre les états d'erreur |
 
 ---
 
@@ -1016,150 +1600,6 @@ graph TD
 
 ---
 
-## Pattern Event-Driven Architecture
-
-### Cas d'usage assurance:
-
-Services réactifs aux événements métiers asynchrones.
-
-- Événement: "ContractCreated" - Un nouveau contrat est créé
-- Consommateurs: Service email (notification), Service CRM (update), Service audit (logging)
-- Avantage: Découplage complet entre services
-
-```mermaid
-graph LR
-                            A["Producteur<br/>(Service)"] -->|Publie| Broker["🔔 Event Broker<br/>(Kafka, RabbitMQ)"]
-                            Broker -->|Consomme| B["Consommateur 1<br/>(Service)"]
-                            Broker -->|Consomme| C["Consommateur 2<br/>(Service)"]
-                            Broker -->|Consomme| D["Consommateur N<br/>(Service)"]
-                            
-                            style A fill:#e8f4ff
-                            style Broker fill:#ffe8f4
-                            style B fill:#fff9e8
-                            style C fill:#e8ffe8
-                            style D fill:#f4e8ff
-```
-
----
-
-## Pattern Hexagonal (Ports & Adapters)
-
-### Bénéfices:
-
-Isoler le cœur métier des détails techniques.
-
-- Cœur métier indépendant des frameworks
-- Adaptation facile aux changements technologiques
-- Tests unitaires sans dépendances externes
-
-```mermaid
-graph LR
-                            UI["UI / API"]
-                            DB["Base de données"]
-                            MAIL["Service email"]
-                            API3["API tierce"]
-                            
-                            UI -->|Port| Core["🔷 Cœur Métier<br/>(Logique pure)"]
-                            Core -->|Port| DB
-                            Core -->|Port| MAIL
-                            Core -->|Port| API3
-                            
-                            UAda["Web Adapter"]
-                            DBAda["PostgreSQL Adapter"]
-                            MAILAda["SMTP Adapter"]
-                            APIAda["HTTP Adapter"]
-                            
-                            UAda -.->|Implémente| UI
-                            DBAda -.->|Implémente| DB
-                            MAILAda -.->|Implémente| MAIL
-                            APIAda -.->|Implémente| API3
-                            
-                            style Core fill:#fff9e8,stroke:#ffc107,stroke-width:3px
-                            style UI fill:#e8f4ff
-                            style DB fill:#f4e8ff
-                            style MAIL fill:#e8ffe8
-                            style API3 fill:#ffe8f4
-```
-
----
-
-## Pattern Dependency Injection (DI)
-Injecter les dépendances plutôt que les créer soi-même.
-
-### Sans Dependency Injection (couplage fort):
-
-
-```plaintext
-public class ContractService {
-    private DatabaseService db = new DatabaseService(); // Couplage fort
-    
-    public void createContract(Contract c) {
-        db.save(c);
-    }
-}
-```
-
-### Avec Dependency Injection (découplage):
-
-
-```plaintext
-public class ContractService {
-    private DatabaseService db; // Interface
-    
-    @Inject // Spring/Guice injecte la dépendance
-    public ContractService(DatabaseService db) {
-        this.db = db;
-    }
-}
-```
-
----
-
-## Pattern Repository
-
-### Avantages:
-
-Abstraction de la couche d'accès aux données.
-
-- Logique métier indépendante du mécanisme de persistance
-- Facile de basculer de PostgreSQL à MongoDB
-- Tests unitaires avec implémentation mock
-
-```mermaid
-graph LR
-                            Service["Service métier<br/>(ContractService)"]
-                            Repo["Repository Interface<br/>(IContractRepository)"]
-                            Impl1["Implémentation DB<br/>(PostgresContractRepository)"]
-                            Impl2["Implémentation Cache<br/>(CachedContractRepository)"]
-                            Impl3["Implémentation Mock<br/>(MockContractRepository)"]
-                            
-                            Service -->|Utilise| Repo
-                            Repo -->|Implémenté par| Impl1
-                            Repo -->|Implémenté par| Impl2
-                            Repo -->|Implémenté par| Impl3
-                            
-                            style Service fill:#e8f4ff
-                            style Repo fill:#fff9e8
-                            style Impl1 fill:#f4e8ff
-                            style Impl2 fill:#e8ffe8
-                            style Impl3 fill:#ffe8f4
-```
-
----
-
-## Récapitulatif: Quand utiliser quel pattern ?
-
-| Pattern | Problème | Quand l'utiliser |
-| --- | --- | --- |
-| MVC | Séparation UI/logique | Web traditionnel, applications simples |
-| MVVM | Binding bidirectionnel | Interfaces réactives, desktop/mobile |
-| CQRS | Scalabilité lecture/écriture | Hauts volumes, complex queries |
-| Event-Driven | Découplage asynchrone | Microservices, systèmes réactifs |
-| Hexagonal | Isolation cœur métier | Logique métier complexe, DDD |
-| DI | Gestion dépendances | Tous les projets modernes |
-
----
-
 # 🔧 Écosystèmes Backend
 
 *Découvrez les principaux frameworks et technologies*
@@ -1318,223 +1758,6 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 - Vous êtes dans un environnement Microsoft/Azure
 - Vous avez besoin de performance extrême
 - Vous développez pour Windows et le web
-
----
-
-# 💾 Transactions en Backend
-
-## Introduction aux Transactions
-
-### Qu'est-ce qu'une transaction?
-
-Une transaction est une **séquence d'opérations** qui doit s'exécuter en totalité ou pas du tout.
-
-> "Un paiement est soit accepté complètement, soit rejeté en totalité - jamais partiellement."
-
----
-
-### Propriétés ACID (fondamentales)
-
-| Propriété | Signification | Assurance |
-|-----------|---------------|-----------|
-| **A**tomicité | Tout ou rien | Pas de paiement partiel |
-| **C**ohérence | État valide avant/après | Soldes corrects toujours |
-| **I**solation | Transactions indépendantes | Pas de lecture sale |
-| **D**urabilité | Persistance garantie | Pas de perte de données |
-
-### Cas d'usage assurance
-
-- ✅ Création de contrat + enregistrement prime
-- ✅ Sinistre + déblocage indemnisation
-- ✅ Transfert de fonds entre comptes
-- ✅ Mise à jour risque + calcul cotisation
-
----
-
-## Problèmes sans Transactions
-
-### Scénarios catastrophiques
-
-```
-Scénario: Achat d'assurance avec paiement
-
-1. ✅ Prime débitée du compte client (-500€)
-2. ❌ ERREUR BASE DE DONNÉES
-3. ❌ Contrat NON créé
-4. ❌ Prime perdue (ou non enregistrée)
-
-→ Client a payé mais pas de contrat!
-→ Risque juridique et financier énorme
-```
-
-### Sans ACID (base de données simple)
-
-- Lecture sale: Lire une donnée non validée
-- Modification perdue: Deux écritures simultanées
-- Violation de contrainte: Somme = 0, mais montants = -50 et 100
-- Crash pendant mise à jour: État inconsistant
-
----
-
-## 2-Phase Commit (2PC)
-
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
-<div>
-Fonctionnement schématique :
-</div>
-<div>
-```mermaid
-sequenceDiagram
-    participant Client as 🧑 Client
-    participant App as 📱 Application
-    participant DB1 as 🗄️ DB Contrats
-    participant DB2 as 🗄️ DB Paiements
-    participant TM as 🎯 Transaction Manager
-
-    Client->>App: Créer contrat + payer
-    
-    App->>TM: Début transaction
-    
-    rect rgb(200, 150, 255)
-        Note over TM: PHASE 1: Preparation
-        TM->>DB1: Préparer: Insérer contrat
-        DB1-->>TM: ✅ Prêt (lock)
-        TM->>DB2: Préparer: Débiter paiement
-        DB2-->>TM: ✅ Prêt (lock)
-    end
-    
-    rect rgb(150, 200, 255)
-        Note over TM: PHASE 2: Validation
-        alt Tout prêt
-            TM->>DB1: COMMIT
-            DB1-->>TM: ✅ Validé
-            TM->>DB2: COMMIT
-            DB2-->>TM: ✅ Validé
-            TM-->>App: Succès
-            App-->>Client: ✅ Contrat créé
-        else Erreur
-            TM->>DB1: ROLLBACK
-            DB1-->>TM: ✅ Annulé
-            TM->>DB2: ROLLBACK
-            DB2-->>TM: ✅ Annulé
-            TM-->>App: Erreur
-            App-->>Client: ❌ Échoué
-        end
-    end
-```
-</div>
-</div>
-
-### Phases détaillées
-
-**Phase 1: Prepare**
-- Chaque ressource (BD) vérifie si elle PEUT valider
-- Acquiert les locks nécessaires
-- Réserve les ressources
-- **Pas de commit encore**
-
-**Phase 2: Commit**
-- Coordinateur dit "commit" si tout est prêt
-- Sinon "rollback"
-- Les ressources appliquent définitivement
-
----
-
-## Niveaux d'Isolation
-
-### Lecture avec problèmes potentiels
-
-| Niveau | Lecture Dirty | Non-Répétable | Fantôme |
-|--------|---------------|---------------|---------|
-| **READ UNCOMMITTED** | ❌ Oui | ❌ Oui | ❌ Oui |
-| **READ COMMITTED** | ✅ Non | ❌ Oui | ❌ Oui |
-| **REPEATABLE READ** | ✅ Non | ✅ Non | ❌ Oui |
-| **SERIALIZABLE** | ✅ Non | ✅ Non | ✅ Non |
-
-### Définitions
-
-- **Lecture Dirty**: Lire une donnée non commitée (peut être annulée)
-- **Non-Répétable**: Deux lectures différentes de la même donnée
-- **Fantôme**: Lignes qui apparaissent/disparaissent entre lectures
-
----
-
-## Implémentation dans les frameworks
-
-### Spring Boot (Java)
-
-```java
-@Service
-@Transactional  // ← Gère les transactions automatiquement
-public class ContractService {
-    
-    @Transactional(propagation = Propagation.REQUIRED,
-                   isolation = Isolation.REPEATABLE_READ)
-    public void createContractWithPayment(Contract c, Payment p) {
-        contractRepository.save(c);        // Insert contrat
-        paymentRepository.save(p);         // Débiter paiement
-        // ✅ COMMIT automatique si pas d'exception
-        // ❌ ROLLBACK automatique si exception
-    }
-}
-
-// Gestion d'erreur
-@Transactional
-public void transfer(Account from, Account to, double amount) {
-    try {
-        from.withdraw(amount);   // -500
-        to.deposit(amount);      // +500
-        accountRepo.save(from);
-        accountRepo.save(to);
-    } catch (Exception e) {
-        // Rollback automatique, soldes intacts
-        throw new TransactionException("Transfert échoué");
-    }
-}
-```
-
-### NestJS (Node.js/TypeScript)
-
-```typescript
-// Avec TypeORM
-@Injectable()
-export class ContractService {
-  constructor(
-    private dataSource: DataSource,
-    private contractRepo: Repository<Contract>
-  ) {}
-
-  async createContractWithPayment(
-    contract: Contract,
-    payment: Payment
-  ) {
-    const queryRunner = this.dataSource.createQueryRunner();
-    await queryRunner.connect();
-    await queryRunner.startTransaction();
-
-    try {
-      await queryRunner.manager.save(contract);
-      await queryRunner.manager.save(payment);
-      await queryRunner.commitTransaction();
-    } catch (err) {
-      await queryRunner.rollbackTransaction();
-      throw new Error('Transaction failed');
-    } finally {
-      await queryRunner.release();
-    }
-  }
-}
-```
-
-### Considérations importantes
-
-| Aspect | Détail |
-|--------|--------|
-| **Timeout** | Transactions longues = locks prolongés = deadlock |
-| **Deadlock** | 2 transactions attendent mutuellement |
-| **Performance** | SERIALIZABLE = plus sûr mais plus lent |
-| **Monitoring** | Suivre les transactions longues |
-| **Rollback** | Compréhendre les états d'erreur |
 
 ---
 
@@ -2816,202 +3039,403 @@ Inconvénients:
 
 ---
 
-## Microservices: Introduction
+## 🎯 Prochaine Section: MCP & Intégration IA
 
-Architectures distribuées basées sur des services indépendants.
+<div style="text-align: center; padding: 40px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.8em;">🤖 MCP & Intégration IA</h3>
+  <p style="color: #34495e; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
+    Explorez comment connecter vos backends avec les modèles d'IA et les agents autonomes pour créer des systèmes intelligents.
+  </p>
+  <div style="margin-top: 20px; height: 4px; background: linear-gradient(90deg, #3498db, #9b59b6); width: 100px; margin: 20px auto; border-radius: 2px;"></div>
+</div>
+
+---
+
+## MCP & Intégration IA: Nouvelle ère
+
+#### Cas d'usage:
+
+Connecter les backends avec les modèles d'IA
+
+- 📋 Assurance: Analyse automatique des sinistres avec Claude
+- 🏥 Santé: Diagnostic assistance basé sur données patients
+- 📝 Génération contenu: Documents, email, rapports automatisés
+- 🔍 Recherche: Sémantique sur base de données
+
+```mermaid
+graph LR
+                            LLM["LLM (ChatGPT, Claude)"]
+                            MCP["MCP Server<br/>(Votre API)"]
+                            Backend["Backend<br/>(Node.js, Spring)"]
+                            DB["Database<br/>(PostgreSQL)"]
+                            
+                            LLM -->|Appel fonction| MCP
+                            MCP -->|Récupère données| Backend
+                            Backend -->|Query| DB
+                            DB -->|Résultat| Backend
+                            Backend -->|JSON| MCP
+                            MCP -->|Réponse structurée| LLM
+                            
+                            style LLM fill:#10a37f
+                            style MCP fill:#ffd700
+                            style Backend fill:#4c6ef5
+                            style DB fill:#868e96
+```
+
+---
+
+## MCP: Model Context Protocol
+
+### Architecture MCP:
+
+#### MCP Server (côté backend):
+
+Standard ouvert pour connecter LLMs aux tools/APIs
+
+```plaintext
+// Node.js/Express avec MCP SDK
+const mcp = require('@anthropic-sdk/mcp');
+const express = require('express');
+
+const server = new mcp.MCPServer({
+  name: 'insurance-api',
+  version: '1.0.0'
+});
+
+// Enregistrer des ressources/outils
+server.resource('contract', async (id) => {
+  const contract = await db.contracts.findOne(id);
+  return {
+    type: 'contract',
+    id,
+    data: contract
+  };
+});
+
+server.tool('create_claim', {
+  description: 'Créer un sinistre',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      contractId: { type: 'string' },
+      description: { type: 'string' },
+      amount: { type: 'number' }
+    }
+  },
+  handler: async (input) => {
+    const claim = await db.claims.create({
+      contractId: input.contractId,
+      description: input.description,
+      amount: input.amount,
+      status: 'PENDING'
+    });
+    return { success: true, claim };
+  }
+});
+
+server.listen(3001);
+```
+
+---
+
+## Exposer les APIs pour l'IA
+
+### Best Practices:
+
+#### 📊 Schémas clairs
+
+#### 🔑 Authentification
+
+#### ⚠️ Limitations & Guardrails:
+
+Préparer votre backend pour l'intégration IA
+
+- Rate limiting: Max 100 requêtes/min pour IA
+- Scopes: L'IA ne peut accéder qu'aux données appropriées
+- Validation: Valider tous les inputs
+- Logs: Auditer toutes les actions IA
+
+```plaintext
+{
+  "contract": {
+    "id": "string",
+    "customerId": "string",
+    "type": "enum(AUTO|HOME|HEALTH)",
+    "premium": {
+      "type": "number",
+      "minimum": 0,
+      "unit": "EUR"
+    },
+    "status": "enum(ACTIVE|EXPIRED)",
+    "createdAt": "ISO8601"
+  }
+}
+```
+
+```plaintext
+// Utiliser des tokens d'accès limités
+const aiToken = jwt.sign(
+  {
+    sub: 'ai-assistant',
+    scopes: ['read:contracts', 
+             'create:claims']
+  },
+  SECRET,
+  { expiresIn: '1h' }
+);
+
+// Audit chaque appel IA
+app.use((req, res, next) => {
+  if (req.user?.type === 'ai') {
+    logAiAction({
+      action: req.path,
+      user: req.user.sub,
+      timestamp: new Date(),
+      result: res.statusCode
+    });
+  }
+  next();
+});
+```
+
+---
+
+## Use Cases: IA dans Assurance/Santé
+
+### Cas d'usage assurance:
+
+#### 1️⃣ Analyse automatique de sinistres
+
+#### 2️⃣ Recommandations personnalisées
+
+#### 3️⃣ Génération de documents
+
+### Cas d'usage santé:
+
+Flux: Client décrit sinistre → Claude analyse → Extraction automatique données → Création claim dans BDD → Notation de risque
+
+// Prompt exemple
+const prompt = `
+Tu es un expert en assurance automobile. 
+Analyse ce sinistre: "${claimDescription}"
+Extrais les informations dans ce format JSON:
+{
+  "type": "collision|theft|damage",
+  "severity": "low|medium|high",
+  "estimatedAmount": number,
+  "actionRequired": string[]
+}
+`;
+                        2️⃣ Recommandations personnalisées
+                        Flux: Historique client → Claude analyse → Produits recommandés → Propositions adaptées
+
+Flux: Données contrat → Claude génère → Email/PDF avec détails clause personnalisées
+
+- 📋 Diagnostic assistance: Analyse symptômes + historique → suggestions
+- 💊 Gestion médicaments: Détection interactions, contrindications
+- 📊 Rapports médicaux: Génération automatique résumés
+
+```plaintext
+// Prompt exemple
+const prompt = `
+Tu es un expert en assurance automobile. 
+Analyse ce sinistre: "${claimDescription}"
+Extrais les informations dans ce format JSON:
+{
+  "type": "collision|theft|damage",
+  "severity": "low|medium|high",
+  "estimatedAmount": number,
+  "actionRequired": string[]
+}
+`;
+```
+
+---
+
+## Sécurité & Gouvernance: IA en production
+
+### Points critiques:
+
+#### 🔒 Sécurité données
+
+#### ⚖️ Conformité légale
+
+#### Architecture sécurisée:
+
+Protéger les données et respecter la réglementation
+
+- ✅ Chiffrer données avant LLM
+- ✅ Pas d'infos sensibles en prompt
+- ✅ PII masking/tokenization
+- ✅ Utiliser des modèles privés
+
+- ✅ RGPD (droit à l'oubli)
+- ✅ HIPAA (santé US)
+- ✅ Explainabilité IA
+- ✅ Audit trail complet
+
+```plaintext
+// Vault pour secrets, chiffrement E2E
+const vault = require('@hashicorp/vault-client');
+const crypto = require('crypto');
+
+const processWithAI = async (userData) => {
+  // 1. Anonymiser les données
+  const anonymized = maskPII(userData);
+  
+  // 2. Chiffrer avant envoi
+  const encrypted = crypto
+    .createCipheriv('aes-256-gcm', key, iv)
+    .update(JSON.stringify(anonymized))
+    .final();
+  
+  // 3. Appeler LLM (données chiffrées)
+  const response = await llm.analyze(encrypted);
+  
+  // 4. Logger pour audit
+  auditLog.record({
+    action: 'ai_analysis',
+    user: userId,
+    timestamp: new Date(),
+    dataHash: hash(anonymized),
+    result: 'success'
+  });
+  
+  return response;
+};
+```
+
+---
+
+## Monitoring: IA en production
+
+#### Métriques à tracker:
+
+Surveiller la qualité et la performance des réponses IA
+
+```plaintext
+// Instrumenter les appels IA
+const aiMetrics = {
+  // Performance
+  latency: new Histogram('ai_latency_ms'),
+  tokenUsage: new Counter('ai_tokens_used'),
+  costs: new Gauge('ai_monthly_cost'),
+  
+  // Qualité
+  hallucinations: new Counter('ai_hallucinations'),
+  userRejections: new Counter('ai_responses_rejected'),
+  accuracy: new Gauge('ai_accuracy_score'),
+  
+  // Erreurs
+  rateLimitExceeded: new Counter('ai_rate_limit'),
+  timeouts: new Counter('ai_timeouts'),
+  authErrors: new Counter('ai_auth_errors')
+};
+
+// Instrumenter
+const startTime = Date.now();
+try {
+  const response = await llm.analyze(data);
+  aiMetrics.latency.observe(Date.now() - startTime);
+  aiMetrics.tokenUsage.inc(response.usage.total_tokens);
+  
+  // User feedback
+  response.on('reject', () => {
+    aiMetrics.userRejections.inc();
+  });
+} catch (error) {
+  if (error.code === 'RATE_LIMIT') {
+    aiMetrics.rateLimitExceeded.inc();
+  }
+}
+```
+
+---
+
+## Futur: Agents IA autonomes
+
+#### Exemple: Traitement sinistre automatique
+
+La prochaine génération: agents capables de décisions autonomes
+
+```plaintext
+// Agent autonome
+const claimAgent = new Agent({
+  tools: [
+    'get_contract',
+    'create_claim',
+    'estimate_damage',
+    'notify_client',
+    'schedule_inspection'
+  ]
+});
+
+const result = await claimAgent.run(
+  `Traiter ce sinistre: Description du sinistre...`
+);
+
+// Résultat: Agent a autonomement:
+// 1. ✅ Cherché le contrat
+// 2. ✅ Créé le dossier sinistre
+// 3. ✅ Estimé les dégâts
+// 4. ✅ Notifié le client
+// 5. ✅ Programmé l'inspection
+// Tout dans une seule chaîne de pensée!
+```
 
 ```mermaid
 graph TB
-                            Client["Client<br/>(Web/Mobile)"]
-                            Gateway["API Gateway"]
+                            Request["Demande client<br/>(Sinistre auto)"]
+                            Agent["Agent IA<br/>(Claude + tools)"]
+                            Plan["Planification<br/>(Étapes requises)"]
+                            Action["Actions<br/>(API calls)"]
+                            Reflect["Réflexion<br/>(Vérifier résultat)"]
+                            Done{"Objectif<br/>atteint?"}
+                            Response["Réponse finale"]
                             
-                            ServiceContract["Service Contrats<br/>(Port 3001)"]
-                            ServiceClaim["Service Sinistres<br/>(Port 3002)"]
-                            ServiceCustomer["Service Clients<br/>(Port 3003)"]
-                            ServiceNotif["Service Notifications<br/>(Port 3004)"]
+                            Request --> Agent
+                            Agent --> Plan
+                            Plan --> Action
+                            Action --> Reflect
+                            Reflect --> Done
+                            Done -->|Non| Plan
+                            Done -->|Oui| Response
                             
-                            DBContract["Base Contrats"]
-                            DBClaim["Base Sinistres"]
-                            DBCustomer["Base Clients"]
-                            
-                            Client -->|HTTP| Gateway
-                            Gateway -->|Route| ServiceContract
-                            Gateway -->|Route| ServiceClaim
-                            Gateway -->|Route| ServiceCustomer
-                            
-                            ServiceContract --> DBContract
-                            ServiceClaim --> DBClaim
-                            ServiceCustomer --> DBCustomer
-                            
-                            ServiceContract -.->|Event| ServiceNotif
-                            ServiceClaim -.->|Event| ServiceNotif
-                            
-                            style Client fill:#e8f4ff
-                            style Gateway fill:#fff9e8
-                            style ServiceContract fill:#ffe8f4
-                            style ServiceClaim fill:#e8ffe8
-                            style ServiceCustomer fill:#f4e8ff
-                            style ServiceNotif fill:#ffebe8
+                            style Agent fill:#10a37f
+                            style Plan fill:#ffd700
+                            style Action fill:#4c6ef5
+                            style Reflect fill:#ff6b6b
+                            style Response fill:#51cf66
 ```
 
 ---
 
-## Caractéristiques des Microservices
+## Récapitulatif: MCP & IA en Production
 
-### Propriétés clés:
+### Architecture complète:
 
-#### 🎯 Autonomie
+#### Backend side
 
-#### 📡 Communication
+- API: REST/GraphQL
+- MCP Server: Expose ressources
+- Auth: OAuth2/tokens
+- Audit: Logs détaillés
 
-#### 🔄 Résilience
+#### LLM side
 
-#### 📊 Observabilité
+- Model: Claude, GPT-4
+- Tools: API calls structurées
+- Agents: Loop autonome
+- Monitoring: Métriques qualité
 
-- Services indépendants
-- Déploiement indépendant
-- BD dédiée
-- Équipes autonomes
+### Roadmap 2026:
 
-- API REST / gRPC
-- Message brokers (Kafka)
-- Events asynchrones
-- Découverte de services
-
-- Circuit breaker
-- Timeout
-- Retry policy
-- Health checks
-
-- Logging distribué
-- Tracing
-- Monitoring
-- Alerting
+- ✅ Phase 1: Exposer APIs simples (GET)
+- ✅ Phase 2: Actions écrites (POST/PUT)
+- ✅ Phase 3: Agents autonomes avec guardrails
+- ✅ Phase 4: Multi-agents collaboratifs
 
 ---
-
-## API Gateway et Service Discovery
-
-### API Gateway (point d'entrée unique):
-
-- Routage: Diriger requêtes aux services corrects
-- Authentification: JWT validation
-- Rate limiting: Protection DOS
-- Caching: Réduire latence
-- Load balancing: Distribuer charge
-
-```mermaid
-graph LR
-                            Client["Client"]
-                            Gateway["API Gateway<br/>(Kong, AWS API Gateway)"]
-                            
-                            Eureka["Service Discovery<br/>(Eureka, Consul)"]
-                            
-                            Serv1["Service 1<br/>Port 3001"]
-                            Serv2["Service 2<br/>Port 3002"]
-                            Serv3["Service 3<br/>Port 3003"]
-                            
-                            Client -->|Request| Gateway
-                            Gateway -->|Query services| Eureka
-                            Eureka -->|Retourne addresses| Gateway
-                            Gateway -->|Route| Serv1
-                            Gateway -->|Route| Serv2
-                            Gateway -->|Route| Serv3
-                            
-                            Serv1 -->|Register| Eureka
-                            Serv2 -->|Register| Eureka
-                            Serv3 -->|Register| Eureka
-                            
-                            style Client fill:#e8f4ff
-                            style Gateway fill:#fff9e8
-                            style Eureka fill:#ffe8f4
-                            style Serv1 fill:#e8ffe8
-                            style Serv2 fill:#e8ffe8
-                            style Serv3 fill:#e8ffe8
-```
-
----
-
-## Communication inter-services
-
-### Approches de communication:
-
-#### 🔵 Synchrone (REST/gRPC)
-
-#### 🟣 Asynchrone (Events)
-
-```plaintext
-Service A
-   ↓ (HTTP/gRPC)
-Service B
-   ↓ (attend réponse)
-Service C
-   ↓
-Réponse retourne
-
-Avantages:
-✅ Cohérence immédiate
-✅ Facile à déboguer
-
-Inconvénients:
-❌ Couplage fort
-❌ Service lent = tout lent
-```
-
-```plaintext
-Service A
-   ↓ (Publie event)
-Kafka/RabbitMQ
-   ↓ (Message broker)
-Service B (reçoit)
-Service C (reçoit)
-
-Avantages:
-✅ Découplage complet
-✅ Haute disponibilité
-✅ Scalabilité
-
-Inconvénients:
-❌ Eventual consistency
-❌ Plus complexe
-```
-
----
-
-## Saga Pattern: Transactions distribuées
-
-#### Deux approches:
-
-Maintenir la cohérence des données sur plusieurs services
-
-- Choreography: Services écoutent les events et réagissent (loose coupling)
-- Orchestration: Service central coordonne les étapes (plus simple mais couplage)
-
-```mermaid
-graph LR
-                            User["Client crée contrat"]
-                            
-                            Saga1["Saga Step 1<br/>Service Contrats:<br/>Créer contrat"]
-                            Saga2["Saga Step 2<br/>Service Client:<br/>Vérifier client"]
-                            Saga3["Saga Step 3<br/>Service Paiement:<br/>Débiter prime"]
-                            Saga4["Saga Step 4<br/>Service Notif:<br/>Envoyer email"]
-                            
-                            Success["✅ Contrat créé"]
-                            Rollback["❌ Rollback si erreur"]
-                            
-                            User -->|Initiate| Saga1
-                            Saga1 -->|OK| Saga2
-                            Saga2 -->|OK| Saga3
-                            Saga3 -->|OK| Saga4
-                            Saga4 -->|OK| Success
-                            
-                            Saga2 -->|ERREUR| Rollback
-                            Rollback -->|Undo Saga1| Saga1
-                            
-                            style User fill:#e8f4ff
-                            style Success fill:#e8ffe8
-                            style Rollback fill:#ffe8f4
-```
 
 ---
 
@@ -4130,406 +4554,6 @@ heroku logs --tail
 - ✅ Énorme écosystème npm
 - ✅ TypeScript support natif (NestJS)
 - ✅ Courbe d'apprentissage plus douce que Java
-
----
-
----
-
-## 🎯 Prochaine Section: MCP & Intégration IA
-
-<div style="text-align: center; padding: 40px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-  <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.8em;">🤖 MCP & Intégration IA</h3>
-  <p style="color: #34495e; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
-    Explorez comment connecter vos backends avec les modèles d'IA et les agents autonomes pour créer des systèmes intelligents.
-  </p>
-  <div style="margin-top: 20px; height: 4px; background: linear-gradient(90deg, #3498db, #9b59b6); width: 100px; margin: 20px auto; border-radius: 2px;"></div>
-</div>
-
----
-
-## MCP & Intégration IA: Nouvelle ère
-
-#### Cas d'usage:
-
-Connecter les backends avec les modèles d'IA
-
-- 📋 Assurance: Analyse automatique des sinistres avec Claude
-- 🏥 Santé: Diagnostic assistance basé sur données patients
-- 📝 Génération contenu: Documents, email, rapports automatisés
-- 🔍 Recherche: Sémantique sur base de données
-
-```mermaid
-graph LR
-                            LLM["LLM (ChatGPT, Claude)"]
-                            MCP["MCP Server<br/>(Votre API)"]
-                            Backend["Backend<br/>(Node.js, Spring)"]
-                            DB["Database<br/>(PostgreSQL)"]
-                            
-                            LLM -->|Appel fonction| MCP
-                            MCP -->|Récupère données| Backend
-                            Backend -->|Query| DB
-                            DB -->|Résultat| Backend
-                            Backend -->|JSON| MCP
-                            MCP -->|Réponse structurée| LLM
-                            
-                            style LLM fill:#10a37f
-                            style MCP fill:#ffd700
-                            style Backend fill:#4c6ef5
-                            style DB fill:#868e96
-```
-
----
-
-## MCP: Model Context Protocol
-
-### Architecture MCP:
-
-#### MCP Server (côté backend):
-
-Standard ouvert pour connecter LLMs aux tools/APIs
-
-```plaintext
-// Node.js/Express avec MCP SDK
-const mcp = require('@anthropic-sdk/mcp');
-const express = require('express');
-
-const server = new mcp.MCPServer({
-  name: 'insurance-api',
-  version: '1.0.0'
-});
-
-// Enregistrer des ressources/outils
-server.resource('contract', async (id) => {
-  const contract = await db.contracts.findOne(id);
-  return {
-    type: 'contract',
-    id,
-    data: contract
-  };
-});
-
-server.tool('create_claim', {
-  description: 'Créer un sinistre',
-  inputSchema: {
-    type: 'object',
-    properties: {
-      contractId: { type: 'string' },
-      description: { type: 'string' },
-      amount: { type: 'number' }
-    }
-  },
-  handler: async (input) => {
-    const claim = await db.claims.create({
-      contractId: input.contractId,
-      description: input.description,
-      amount: input.amount,
-      status: 'PENDING'
-    });
-    return { success: true, claim };
-  }
-});
-
-server.listen(3001);
-```
-
----
-
-## Exposer les APIs pour l'IA
-
-### Best Practices:
-
-#### 📊 Schémas clairs
-
-#### 🔑 Authentification
-
-#### ⚠️ Limitations & Guardrails:
-
-Préparer votre backend pour l'intégration IA
-
-- Rate limiting: Max 100 requêtes/min pour IA
-- Scopes: L'IA ne peut accéder qu'aux données appropriées
-- Validation: Valider tous les inputs
-- Logs: Auditer toutes les actions IA
-
-```plaintext
-{
-  "contract": {
-    "id": "string",
-    "customerId": "string",
-    "type": "enum(AUTO|HOME|HEALTH)",
-    "premium": {
-      "type": "number",
-      "minimum": 0,
-      "unit": "EUR"
-    },
-    "status": "enum(ACTIVE|EXPIRED)",
-    "createdAt": "ISO8601"
-  }
-}
-```
-
-```plaintext
-// Utiliser des tokens d'accès limités
-const aiToken = jwt.sign(
-  {
-    sub: 'ai-assistant',
-    scopes: ['read:contracts', 
-             'create:claims']
-  },
-  SECRET,
-  { expiresIn: '1h' }
-);
-
-// Audit chaque appel IA
-app.use((req, res, next) => {
-  if (req.user?.type === 'ai') {
-    logAiAction({
-      action: req.path,
-      user: req.user.sub,
-      timestamp: new Date(),
-      result: res.statusCode
-    });
-  }
-  next();
-});
-```
-
----
-
-## Use Cases: IA dans Assurance/Santé
-
-### Cas d'usage assurance:
-
-#### 1️⃣ Analyse automatique de sinistres
-
-#### 2️⃣ Recommandations personnalisées
-
-#### 3️⃣ Génération de documents
-
-### Cas d'usage santé:
-
-Flux: Client décrit sinistre → Claude analyse → Extraction automatique données → Création claim dans BDD → Notation de risque
-
-// Prompt exemple
-const prompt = `
-Tu es un expert en assurance automobile. 
-Analyse ce sinistre: "${claimDescription}"
-Extrais les informations dans ce format JSON:
-{
-  "type": "collision|theft|damage",
-  "severity": "low|medium|high",
-  "estimatedAmount": number,
-  "actionRequired": string[]
-}
-`;
-                        2️⃣ Recommandations personnalisées
-                        Flux: Historique client → Claude analyse → Produits recommandés → Propositions adaptées
-
-Flux: Données contrat → Claude génère → Email/PDF avec détails clause personnalisées
-
-- 📋 Diagnostic assistance: Analyse symptômes + historique → suggestions
-- 💊 Gestion médicaments: Détection interactions, contrindications
-- 📊 Rapports médicaux: Génération automatique résumés
-
-```plaintext
-// Prompt exemple
-const prompt = `
-Tu es un expert en assurance automobile. 
-Analyse ce sinistre: "${claimDescription}"
-Extrais les informations dans ce format JSON:
-{
-  "type": "collision|theft|damage",
-  "severity": "low|medium|high",
-  "estimatedAmount": number,
-  "actionRequired": string[]
-}
-`;
-```
-
----
-
-## Sécurité & Gouvernance: IA en production
-
-### Points critiques:
-
-#### 🔒 Sécurité données
-
-#### ⚖️ Conformité légale
-
-#### Architecture sécurisée:
-
-Protéger les données et respecter la réglementation
-
-- ✅ Chiffrer données avant LLM
-- ✅ Pas d'infos sensibles en prompt
-- ✅ PII masking/tokenization
-- ✅ Utiliser des modèles privés
-
-- ✅ RGPD (droit à l'oubli)
-- ✅ HIPAA (santé US)
-- ✅ Explainabilité IA
-- ✅ Audit trail complet
-
-```plaintext
-// Vault pour secrets, chiffrement E2E
-const vault = require('@hashicorp/vault-client');
-const crypto = require('crypto');
-
-const processWithAI = async (userData) => {
-  // 1. Anonymiser les données
-  const anonymized = maskPII(userData);
-  
-  // 2. Chiffrer avant envoi
-  const encrypted = crypto
-    .createCipheriv('aes-256-gcm', key, iv)
-    .update(JSON.stringify(anonymized))
-    .final();
-  
-  // 3. Appeler LLM (données chiffrées)
-  const response = await llm.analyze(encrypted);
-  
-  // 4. Logger pour audit
-  auditLog.record({
-    action: 'ai_analysis',
-    user: userId,
-    timestamp: new Date(),
-    dataHash: hash(anonymized),
-    result: 'success'
-  });
-  
-  return response;
-};
-```
-
----
-
-## Monitoring: IA en production
-
-#### Métriques à tracker:
-
-Surveiller la qualité et la performance des réponses IA
-
-```plaintext
-// Instrumenter les appels IA
-const aiMetrics = {
-  // Performance
-  latency: new Histogram('ai_latency_ms'),
-  tokenUsage: new Counter('ai_tokens_used'),
-  costs: new Gauge('ai_monthly_cost'),
-  
-  // Qualité
-  hallucinations: new Counter('ai_hallucinations'),
-  userRejections: new Counter('ai_responses_rejected'),
-  accuracy: new Gauge('ai_accuracy_score'),
-  
-  // Erreurs
-  rateLimitExceeded: new Counter('ai_rate_limit'),
-  timeouts: new Counter('ai_timeouts'),
-  authErrors: new Counter('ai_auth_errors')
-};
-
-// Instrumenter
-const startTime = Date.now();
-try {
-  const response = await llm.analyze(data);
-  aiMetrics.latency.observe(Date.now() - startTime);
-  aiMetrics.tokenUsage.inc(response.usage.total_tokens);
-  
-  // User feedback
-  response.on('reject', () => {
-    aiMetrics.userRejections.inc();
-  });
-} catch (error) {
-  if (error.code === 'RATE_LIMIT') {
-    aiMetrics.rateLimitExceeded.inc();
-  }
-}
-```
-
----
-
-## Futur: Agents IA autonomes
-
-#### Exemple: Traitement sinistre automatique
-
-La prochaine génération: agents capables de décisions autonomes
-
-```plaintext
-// Agent autonome
-const claimAgent = new Agent({
-  tools: [
-    'get_contract',
-    'create_claim',
-    'estimate_damage',
-    'notify_client',
-    'schedule_inspection'
-  ]
-});
-
-const result = await claimAgent.run(
-  `Traiter ce sinistre: Description du sinistre...`
-);
-
-// Résultat: Agent a autonomement:
-// 1. ✅ Cherché le contrat
-// 2. ✅ Créé le dossier sinistre
-// 3. ✅ Estimé les dégâts
-// 4. ✅ Notifié le client
-// 5. ✅ Programmé l'inspection
-// Tout dans une seule chaîne de pensée!
-```
-
-```mermaid
-graph TB
-                            Request["Demande client<br/>(Sinistre auto)"]
-                            Agent["Agent IA<br/>(Claude + tools)"]
-                            Plan["Planification<br/>(Étapes requises)"]
-                            Action["Actions<br/>(API calls)"]
-                            Reflect["Réflexion<br/>(Vérifier résultat)"]
-                            Done{"Objectif<br/>atteint?"}
-                            Response["Réponse finale"]
-                            
-                            Request --> Agent
-                            Agent --> Plan
-                            Plan --> Action
-                            Action --> Reflect
-                            Reflect --> Done
-                            Done -->|Non| Plan
-                            Done -->|Oui| Response
-                            
-                            style Agent fill:#10a37f
-                            style Plan fill:#ffd700
-                            style Action fill:#4c6ef5
-                            style Reflect fill:#ff6b6b
-                            style Response fill:#51cf66
-```
-
----
-
-## Récapitulatif: MCP & IA en Production
-
-### Architecture complète:
-
-#### Backend side
-
-- API: REST/GraphQL
-- MCP Server: Expose ressources
-- Auth: OAuth2/tokens
-- Audit: Logs détaillés
-
-#### LLM side
-
-- Model: Claude, GPT-4
-- Tools: API calls structurées
-- Agents: Loop autonome
-- Monitoring: Métriques qualité
-
-### Roadmap 2026:
-
-- ✅ Phase 1: Exposer APIs simples (GET)
-- ✅ Phase 2: Actions écrites (POST/PUT)
-- ✅ Phase 3: Agents autonomes avec guardrails
-- ✅ Phase 4: Multi-agents collaboratifs
 
 ---
 
