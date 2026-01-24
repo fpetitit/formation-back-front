@@ -1970,11 +1970,12 @@ BenefitService uses
 
 ## Règle 5: Commentaires
 
-#### ❌ Commentaires inutiles
-
-#### ✅ Commentaires utiles
-
 Le code doit se commenter lui-même. Les commentaires ne doivent expliquer que le POURQUOI, pas le QUOI.
+
+<div class="grid grid-cols-2 gap-4">
+  <div>
+  
+#### ❌ Commentaires inutiles
 
 ```plaintext
 // Incrémenter i
@@ -1990,6 +1991,10 @@ if (list.size() > 0) {
     }
 }
 ```
+</div>
+<div>
+
+#### ✅ Commentaires utiles
 
 ```plaintext
 // Limite minimale définie par
@@ -2005,12 +2010,14 @@ private double
     ...
 }
 ```
+</div>
+</div>
 
 ---
 
 ## Règle 6: Formatage et style
 
-### Cohérence est clé
+### La cohérence est clé
 
 - Indentation: 2 ou 4 espaces (pas de tabs)
 - Longueur de ligne: Max 100-120 caractères
@@ -2097,18 +2104,13 @@ graph TB
 
 ---
 
-## Les 4 couches de Clean Architecture
+## Les 4 couches de Clean Architecture 1/2
 
 #### 1️⃣ Entities (Cœur métier)
 
-#### 2️⃣ Use Cases (Logique applicative)
-
-#### 3️⃣ Interface Adapters
-
-#### 4️⃣ Frameworks & Drivers
-
 Objets métiers purs, pas de frameworks
 
+```plaintext
 public class Contract {
     private String id;
     private Customer customer;
@@ -2118,8 +2120,11 @@ public class Contract {
             && customer != null;
     }
 }
-                        2️⃣ Use Cases (Logique applicative)
-                        Règles métier spécifiques à l'app
+```
+
+#### 2️⃣ Use Cases (Logique applicative)
+
+Règles métier spécifiques à l'app
 
 public class CreateContractUseCase {
     private ContractRepository repo;
@@ -2130,8 +2135,16 @@ public class CreateContractUseCase {
         repo.save(c);
     }
 }
-                        3️⃣ Interface Adapters
-                        Controllers, Gateways, Presenters
+
+---
+
+## Les 4 couches de Clean Architecture 2/2
+
+#### 3️⃣ Interface Adapters
+
+Controllers, Gateways, Presenters
+
+```plaintext
 
 @RestController
 public class ContractController {
@@ -2141,36 +2154,13 @@ public class ContractController {
         useCase.execute(req);
     }
 }
-                        4️⃣ Frameworks & Drivers
-                        Spring, Hibernate, PostgreSQL, etc.
+```
+
+#### 4️⃣ Frameworks & Drivers
+
+Spring, Hibernate, PostgreSQL, etc.
 
 Détails techniques, facilement remplaçables
-
-```plaintext
-public class Contract {
-    private String id;
-    private Customer customer;
-    private double premium;
-    
-    public boolean isValid() {
-        return premium > 0 
-            && customer != null;
-    }
-}
-```
-
-```plaintext
-public class CreateContractUseCase {
-    private ContractRepository repo;
-    
-    public void execute(
-        CreateContractRequest req) {
-        Contract c = new Contract(...);
-        validateContract(c);
-        repo.save(c);
-    }
-}
-```
 
 ```plaintext
 @RestController
@@ -2190,7 +2180,7 @@ public class ContractController {
 Règle d'or: Les dépendances pointent toujours vers l'intérieur
 
 ```mermaid
-graph TB
+graph LR
                             Frameworks["🔴 Frameworks/Drivers<br/>(Spring, Hibernate, DB)"]
                             Interface["🟠 Interface Adapters<br/>(Controllers, Presenters)"]
                             UseCase["🟡 Use Cases<br/>(Règles métier applicatives)"]
@@ -2212,6 +2202,8 @@ graph TB
 
 ## Structure de projet Clean Architecture
 
+<div class="grid grid-cols-2 gap-4">
+  <div>
 ```plaintext
 src/
 ├── main/java/com/myapp/
@@ -2238,6 +2230,11 @@ src/
 │   │
 │   └── config/
 │       └── DependencyInjectionConfig.java
+```
+</div>
+<div>
+
+```plaintext
 │
 └── test/
     └── java/com/myapp/
@@ -2245,6 +2242,8 @@ src/
         ├── application/
         └── infrastructure/
 ```
+</div>
+</div>
 
 ---
 
@@ -2254,6 +2253,8 @@ src/
 
 #### Code complet:
 
+<div class="grid grid-cols-2 gap-4">
+  <div>
 ```plaintext
 @Service
 public class CreateContractUseCase {
@@ -2270,7 +2271,11 @@ public class CreateContractUseCase {
         this.emailService = emailService;
         this.calculator = calculator;
     }
-    
+```
+</div>
+<div>
+
+```plaintext
     public ContractResponse execute(
         CreateContractRequest request) {
         // 1. Validation
@@ -2309,6 +2314,8 @@ public class CreateContractUseCase {
     }
 }
 ```
+</div>
+</div>
 
 ---
 
@@ -2318,6 +2325,8 @@ public class CreateContractUseCase {
 
 Un avantage clé de Clean Architecture: testabilité.
 
+<div class="grid grid-cols-2 gap-4">
+  <div>
 ```plaintext
 public class CreateContractUseCaseTest {
     private CreateContractUseCase useCase;
@@ -2337,7 +2346,12 @@ public class CreateContractUseCaseTest {
             mockRepo, mockEmail, mockCalc
         );
     }
+```
+
+</div>
+<div>
     
+```plaintext 
     @Test
     public void shouldCreateContractWithValidData() {
         // Given
@@ -2358,75 +2372,93 @@ public class CreateContractUseCaseTest {
     }
 }
 ```
+</div>
+</div>
+
 
 ---
 
 ## Avantages de Clean Architecture
 
+<div class="grid grid-cols-2 gap-4">
+  <div>
+
 #### ✅ Pour le développement
-
-#### ✅ Pour la maintenance
-
-#### ✅ Pour le business
-
-#### ✅ Pour l'architecture
 
 - Logique métier isolée
 - Tests unitaires simples
 - Code découplé
 - Facile à naviguer
 
+
+#### ✅ Pour la maintenance
+
 - Changements localisés
 - Moins de bugs
 - Évolution facilitée
 - Refactoring sûr
+</div>
+<div>
+
+#### ✅ Pour le business
 
 - Réduction des coûts
 - Time-to-market amélioré
 - Moins de bugs en prod
 - Équipes plus productives
 
+#### ✅ Pour l'architecture
+
 - Framework agnostique
 - Technologie replaceable
 - Scalabilité intégrée
 - Future-proof
-
+</div>
+</div>
 ---
 
 ## Pièges à éviter
 
+<div class="grid grid-cols-2 gap-4">
+  <div>
+
+
 #### ❌ Over-engineering
-
-#### ❌ Entities contaminées
-
-#### ❌ DTOs oubliés
-
-#### ❌ Tests négligés
-
-Conseil: Adapter la complexité aux besoins
-
-Conseil: Entities = POJO purs
-
-Conseil: Toujours utiliser des DTOs
-
-Conseil: 70%+ du code couvert
 
 - Trop de couches
 - Abstractions inutiles
 - Code complexe pour du simple
 
+Conseil: Adapter la complexité aux besoins
+
+#### ❌ Entities contaminées
+
 - Annotations JPA/Spring
 - Logique métier dispersée
 - Dépendances externes
+
+Conseil: Entities = POJO purs
+</div>
+<div>
+
+#### ❌ DTOs oubliés
 
 - Entities retournées au client
 - Leaks d'implémentation
 - Couplage fort
 
+Conseil: Toujours utiliser des DTOs
+
+#### ❌ Tests négligés
+
+
 - Tests intégration lents
 - Pas de tests unitaires
 - Coverage faible
 
+Conseil: 70%+ du code couvert
+</div>
+</div>
 ---
 
 ## Comparaison: Approches d'architecture
@@ -2441,25 +2473,6 @@ Conseil: 70%+ du code couvert
 | Productivité équipe | Diminue avec la taille | Stable et prévisible |
 | Idéal pour | Prototypes, POC | Projets long terme |
 
----
-
-## Récapitulatif: Clean Code & Architecture
-
-#### 🎨 Clean Code
-
-#### 🏛️ Clean Architecture
-
-### Impact combiné:
-
-7 règles:
-
-4 couches:
-
-- ✅ Code facile à lire et comprendre
-- ✅ Logique métier isolée et testable
-- ✅ Dépendances contrôlées
-- ✅ Évolution sans refonte majeure
-- ✅ Équipes productives et heureuses
 
 ---
 
@@ -2482,8 +2495,6 @@ Conseil: 70%+ du code couvert
 
 ### Principes clés:
 
-#### Exemple d'endpoints REST:
-
 REST: Representational State Transfer
 
 - Client-Server: Séparation des préoccupations
@@ -2491,6 +2502,8 @@ REST: Representational State Transfer
 - Cacheable: Réponses peuvent être mises en cache
 - Uniform Interface: Ressources identifiables par URI
 - Méthodes HTTP standards: GET, POST, PUT, DELETE, PATCH
+
+#### Exemple d'endpoints REST:
 
 ```plaintext
 GET    /api/v1/contracts              # Récupérer tous les contrats
@@ -2511,17 +2524,13 @@ GET    /api/v1/contracts/123/claims   # Sous-ressources
 
 #### 🔐 Sécurité
 
-#### 📝 Versioning
-
-#### 📚 Documentation
-
-#### ⚠️ Erreurs
-
 - OAuth2: Authentification
 - JWT: Token sans état
 - HTTPS: Chiffrement
 - Rate limiting: Protection DOS
 - CORS: Contrôle d'accès
+
+#### 📝 Versioning
 
 - URL versioning: /v1/, /v2/
 - Header versioning: X-API-Version
@@ -2529,11 +2538,15 @@ GET    /api/v1/contracts/123/claims   # Sous-ressources
 - Backward compatibility
 - Deprecation warning
 
+#### 📚 Documentation
+
 - Swagger/OpenAPI
 - Postman
 - Réducers
 - Exemples de requêtes
 - Codes d'erreur
+
+#### ⚠️ Erreurs
 
 - Codes HTTP corrects
 - Réponses d'erreur cohérentes
@@ -2581,10 +2594,6 @@ GET    /api/v1/contracts/123/claims   # Sous-ressources
 
 #### ❌ REST (over-fetching)
 
-#### ✅ GraphQL (seulement ce qu'il faut)
-
-GraphQL: Query language pour APIs
-
 ```plaintext
 GET /api/v1/contracts/123
 
@@ -2602,6 +2611,10 @@ GET /api/v1/contracts/123
 Données non utilisées = 
 bande passante gaspillée
 ```
+
+#### ✅ GraphQL (seulement ce qu'il faut)
+
+GraphQL: Query language pour APIs
 
 ```plaintext
 query {
@@ -2682,10 +2695,6 @@ type Mutation {
 
 ### Query simple:
 
-### Query avec filtrage et pagination:
-
-### Query avec relations imbriquées:
-
 ```plaintext
 query GetContract {
   contract(id: "123") {
@@ -2699,6 +2708,8 @@ query GetContract {
   }
 }
 ```
+
+### Query avec filtrage et pagination:
 
 ```plaintext
 query GetContracts {
@@ -2714,6 +2725,8 @@ query GetContracts {
   }
 }
 ```
+
+### Query avec relations imbriquées:
 
 ```plaintext
 query GetCustomerWithContracts {
@@ -2798,65 +2811,6 @@ Réponse:
 
 ---
 
-## Implémentation GraphQL: Apollo Server
-
-#### Installation et setup:
-
-#### Code serveur GraphQL (Node.js):
-
-```plaintext
-npm install apollo-server-express
-npm install graphql
-```
-
-```plaintext
-const { ApolloServer, gql } = require('apollo-server-express');
-const express = require('express');
-
-// Schéma
-const typeDefs = gql`
-  type Contract {
-    id: ID!
-    premium: Float!
-    type: String!
-  }
-  
-  type Query {
-    contract(id: ID!): Contract
-  }
-  
-  type Mutation {
-    createContract(premium: Float!, type: String!): Contract!
-  }
-`;
-
-// Résolveurs
-const resolvers = {
-  Query: {
-    contract: (_, { id }) => {
-      return { id, premium: 1200, type: 'AUTO' };
-    }
-  },
-  Mutation: {
-    createContract: (_, { premium, type }) => {
-      return { id: 'new-id', premium, type };
-    }
-  }
-};
-
-// Serveur
-const server = new ApolloServer({ typeDefs, resolvers });
-const app = express();
-server.start().then(() => {
-  server.applyMiddleware({ app });
-  app.listen(4000, () => {
-    console.log('GraphQL: http://localhost:4000/graphql');
-  });
-});
-```
-
----
-
 ## Quand utiliser REST vs GraphQL?
 
 | Scénario | REST | GraphQL | Recommandation |
@@ -2876,39 +2830,18 @@ server.start().then(() => {
 
 #### 🔐 OAuth2
 
+Protocole d’autorisation qui permet à une application tierce d’accéder à des ressources protégées (API, données) au nom d’un utilisateur, sans lui transmettre son mot de passe
+
 #### 🔑 JWT (JSON Web Tokens)
 
-#### Flux d'authentification JWT:
+Standard ouvert pour transmettre des informations sécurisées sous forme d'objet JSON signé numériquement.
 
-Protocole d'authentification/autorisation
+#### 🔐 OpenID Connect
 
-Token stateless, auto-contenu
+Protocole d'authentification basé sur OAuth 2.0 qui vérifie l'identité des utilisateurs via un ID Token (JWT).
+Il ajoute à OAuth une couche d'identité standardisée (openid scope) pour SSO et informations utilisateur sécurisées.
 
-- Authorization Code: Apps web
-- Client Credentials: Services
-- Implicit: Apps single-page
-- Refresh Token: Session longue
 
-- Header: Type et algorithme
-- Payload: Données (user_id)
-- Signature: Vérification intégrité
-- Expiration: Courte durée
-
-```plaintext
-1. Client envoie login/password
-   → POST /api/login { "email": "user@test.com", "password": "..." }
-
-2. Serveur valide et crée JWT
-   → Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-
-3. Client stocke le token (localStorage/sessionStorage)
-
-4. Client envoie token dans chaque requête
-   → Authorization: Bearer eyJhbGciOi...
-
-5. Serveur valide la signature et l'expiration
-   → ✅ Accès autorisé ou ❌ Token invalide
-```
 
 ---
 
@@ -2977,10 +2910,6 @@ components:
 
 #### 🔢 URL Versioning
 
-#### 📋 Header Versioning
-
-#### Bonnes pratiques:
-
 Maintenir la compatibilité avec les clients existants
 
 - Semantic Versioning: MAJOR.MINOR.PATCH (1.2.3)
@@ -3002,6 +2931,8 @@ Inconvénients:
 ❌ Maintenance double
 ```
 
+#### 📋 Header Versioning
+
 ```plaintext
 GET /api/contracts
 X-API-Version: 2
@@ -3021,10 +2952,6 @@ Inconvénients:
 
 #### 🌐 REST API
 
-#### 📊 GraphQL
-
-### Points clés:
-
 - Standard HTTP (GET, POST, PUT, DELETE)
 - Endpoints fixes par ressource
 - Facile à cacher
@@ -3032,12 +2959,16 @@ Inconvénients:
 - Idéal pour ressources simples
 - Courbe apprentissage faible
 
+#### 📊 GraphQL
+
 - Query language typé
 - Requêtes flexibles
 - Pas over/under-fetching
 - Pas de versioning
 - Idéal pour relations complexes
 - Courbe apprentissage modérée
+
+### Points clés:
 
 - ✅ Sécurité: OAuth2 + JWT
 - ✅ Documentation: Swagger/OpenAPI
@@ -3146,175 +3077,6 @@ server.listen(3001);
 
 ---
 
-## Exposer les APIs pour l'IA
-
-### Best Practices:
-
-#### 📊 Schémas clairs
-
-#### 🔑 Authentification
-
-#### ⚠️ Limitations & Guardrails:
-
-Préparer votre backend pour l'intégration IA
-
-- Rate limiting: Max 100 requêtes/min pour IA
-- Scopes: L'IA ne peut accéder qu'aux données appropriées
-- Validation: Valider tous les inputs
-- Logs: Auditer toutes les actions IA
-
-```plaintext
-{
-  "contract": {
-    "id": "string",
-    "customerId": "string",
-    "type": "enum(AUTO|HOME|HEALTH)",
-    "premium": {
-      "type": "number",
-      "minimum": 0,
-      "unit": "EUR"
-    },
-    "status": "enum(ACTIVE|EXPIRED)",
-    "createdAt": "ISO8601"
-  }
-}
-```
-
-```plaintext
-// Utiliser des tokens d'accès limités
-const aiToken = jwt.sign(
-  {
-    sub: 'ai-assistant',
-    scopes: ['read:contracts', 
-             'create:claims']
-  },
-  SECRET,
-  { expiresIn: '1h' }
-);
-
-// Audit chaque appel IA
-app.use((req, res, next) => {
-  if (req.user?.type === 'ai') {
-    logAiAction({
-      action: req.path,
-      user: req.user.sub,
-      timestamp: new Date(),
-      result: res.statusCode
-    });
-  }
-  next();
-});
-```
-
----
-
-## Use Cases: IA dans Assurance/Santé
-
-### Cas d'usage assurance:
-
-#### 1️⃣ Analyse automatique de sinistres
-
-#### 2️⃣ Recommandations personnalisées
-
-#### 3️⃣ Génération de documents
-
-### Cas d'usage santé:
-
-Flux: Client décrit sinistre → Claude analyse → Extraction automatique données → Création claim dans BDD → Notation de risque
-
-// Prompt exemple
-const prompt = `
-Tu es un expert en assurance automobile. 
-Analyse ce sinistre: "${claimDescription}"
-Extrais les informations dans ce format JSON:
-{
-  "type": "collision|theft|damage",
-  "severity": "low|medium|high",
-  "estimatedAmount": number,
-  "actionRequired": string[]
-}
-`;
-                        2️⃣ Recommandations personnalisées
-                        Flux: Historique client → Claude analyse → Produits recommandés → Propositions adaptées
-
-Flux: Données contrat → Claude génère → Email/PDF avec détails clause personnalisées
-
-- 📋 Diagnostic assistance: Analyse symptômes + historique → suggestions
-- 💊 Gestion médicaments: Détection interactions, contrindications
-- 📊 Rapports médicaux: Génération automatique résumés
-
-```plaintext
-// Prompt exemple
-const prompt = `
-Tu es un expert en assurance automobile. 
-Analyse ce sinistre: "${claimDescription}"
-Extrais les informations dans ce format JSON:
-{
-  "type": "collision|theft|damage",
-  "severity": "low|medium|high",
-  "estimatedAmount": number,
-  "actionRequired": string[]
-}
-`;
-```
-
----
-
-## Sécurité & Gouvernance: IA en production
-
-### Points critiques:
-
-#### 🔒 Sécurité données
-
-#### ⚖️ Conformité légale
-
-#### Architecture sécurisée:
-
-Protéger les données et respecter la réglementation
-
-- ✅ Chiffrer données avant LLM
-- ✅ Pas d'infos sensibles en prompt
-- ✅ PII masking/tokenization
-- ✅ Utiliser des modèles privés
-
-- ✅ RGPD (droit à l'oubli)
-- ✅ HIPAA (santé US)
-- ✅ Explainabilité IA
-- ✅ Audit trail complet
-
-```plaintext
-// Vault pour secrets, chiffrement E2E
-const vault = require('@hashicorp/vault-client');
-const crypto = require('crypto');
-
-const processWithAI = async (userData) => {
-  // 1. Anonymiser les données
-  const anonymized = maskPII(userData);
-  
-  // 2. Chiffrer avant envoi
-  const encrypted = crypto
-    .createCipheriv('aes-256-gcm', key, iv)
-    .update(JSON.stringify(anonymized))
-    .final();
-  
-  // 3. Appeler LLM (données chiffrées)
-  const response = await llm.analyze(encrypted);
-  
-  // 4. Logger pour audit
-  auditLog.record({
-    action: 'ai_analysis',
-    user: userId,
-    timestamp: new Date(),
-    dataHash: hash(anonymized),
-    result: 'success'
-  });
-  
-  return response;
-};
-```
-
----
-
 ## Monitoring: IA en production
 
 #### Métriques à tracker:
@@ -3415,1153 +3177,6 @@ graph TB
                             style Reflect fill:#ff6b6b
                             style Response fill:#51cf66
 ```
-
----
-
-## Récapitulatif: MCP & IA en Production
-
-### Architecture complète:
-
-#### Backend side
-
-- API: REST/GraphQL
-- MCP Server: Expose ressources
-- Auth: OAuth2/tokens
-- Audit: Logs détaillés
-
-#### LLM side
-
-- Model: Claude, GPT-4
-- Tools: API calls structurées
-- Agents: Loop autonome
-- Monitoring: Métriques qualité
-
-### Roadmap 2026:
-
-- ✅ Phase 1: Exposer APIs simples (GET)
-- ✅ Phase 2: Actions écrites (POST/PUT)
-- ✅ Phase 3: Agents autonomes avec guardrails
-- ✅ Phase 4: Multi-agents collaboratifs
-
----
-
----
-
-## Spring Boot: Introduction
-
-### Caractéristiques clés:
-
-#### Créer un projet Spring Boot:
-
-Framework Java pour construire des microservices robustes
-
-- Auto-configuration: Configuration intelligente par défaut
-- Starters: Dépendances pré-configurées (spring-boot-starter-web)
-- Embedded server: Pas besoin de Tomcat externe
-- Production-ready: Monitoring, logging, health checks
-- Actuator: Endpoints de monitoring (/health, /metrics)
-
-```plaintext
-# Via Spring Boot CLI
-spring boot new my-api --from=web
-
-# Via Maven
-mvn archetype:generate \
-  -DgroupId=com.myapp \
-  -DartifactId=my-api \
-  -DarchetypeArtifactId=maven-archetype-quickstart
-
-# Via Spring Initializr
-# https://start.spring.io
-```
-
----
-
-## Architecture Spring Boot
-
-### Structure standard:
-
-### application.properties:
-
-```plaintext
-src/main/java/com/myapp/
-├── Application.java           # Entry point @SpringBootApplication
-├── controller/
-│   └── ContractController.java # REST endpoints
-├── service/
-│   └── ContractService.java    # Logique métier
-├── repository/
-│   └── ContractRepository.java # Accès données
-├── entity/
-│   └── Contract.java           # JPA entity
-└── config/
-    └── SecurityConfig.java     # Configuration
-
-src/main/resources/
-├── application.properties      # Configuration (port, BD, etc)
-└── schema.sql                  # DDL
-```
-
-```plaintext
-# Serveur
-server.port=8080
-server.servlet.context-path=/api
-
-# Base de données
-spring.datasource.url=jdbc:postgresql://localhost/myapp
-spring.datasource.username=admin
-spring.datasource.password=secret
-spring.jpa.hibernate.ddl-auto=update
-
-# Logging
-logging.level.root=INFO
-logging.level.com.myapp=DEBUG
-
-# Actuator
-management.endpoints.web.exposure.include=health,metrics
-```
-
----
-
-## Contrôleurs REST Spring Boot
-
-#### Exemple complet de contrôleur:
-
-```plaintext
-@RestController
-@RequestMapping("/api/contracts")
-@Slf4j // Lombok logging
-public class ContractController {
-    
-    private final ContractService service;
-    
-    @Autowired
-    public ContractController(ContractService service) {
-        this.service = service;
-    }
-    
-    // GET /api/contracts?limit=10&offset=0
-    @GetMapping
-    public ResponseEntity&lt;List&lt;ContractDTO&gt;&gt; listContracts(
-            @RequestParam(defaultValue = "10") int limit,
-            @RequestParam(defaultValue = "0") int offset) {
-        List&lt;ContractDTO&gt; contracts = service.list(limit, offset);
-        return ResponseEntity.ok(contracts);
-    }
-    
-    // GET /api/contracts/{id}
-    @GetMapping("/{id}")
-    public ResponseEntity&lt;ContractDTO&gt; getById(
-            @PathVariable String id) {
-        return service.findById(id)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
-    }
-    
-    // POST /api/contracts
-    @PostMapping
-    public ResponseEntity&lt;ContractDTO&gt; create(
-            @Valid @RequestBody CreateContractRequest request) {
-        ContractDTO created = service.create(request);
-        return ResponseEntity
-            .status(HttpStatus.CREATED)
-            .body(created);
-    }
-    
-    // PUT /api/contracts/{id}
-    @PutMapping("/{id}")
-    public ResponseEntity&lt;ContractDTO&gt; update(
-            @PathVariable String id,
-            @Valid @RequestBody UpdateContractRequest request) {
-        ContractDTO updated = service.update(id, request);
-        return ResponseEntity.ok(updated);
-    }
-    
-    // DELETE /api/contracts/{id}
-    @DeleteMapping("/{id}")
-    public ResponseEntity&lt;Void&gt; delete(@PathVariable String id) {
-        service.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-    
-    // Exception handling
-    @ExceptionHandler(InvalidContractException.class)
-    public ResponseEntity&lt;ErrorResponse&gt; handleInvalid(
-            InvalidContractException e) {
-        log.error("Invalid contract: {}", e.getMessage());
-        return ResponseEntity.badRequest().body(
-            new ErrorResponse("INVALID_CONTRACT", e.getMessage())
-        );
-    }
-}
-```
-
----
-
-## Services et Repository Pattern
-
-#### Service (Logique métier):
-
-```plaintext
-@Service
-@Slf4j
-public class ContractService {
-    
-    private final ContractRepository repo;
-    private final PremiumCalculator calculator;
-    private final EmailService emailService;
-    
-    @Autowired
-    public ContractService(ContractRepository repo,
-                          PremiumCalculator calculator,
-                          EmailService emailService) {
-        this.repo = repo;
-        this.calculator = calculator;
-        this.emailService = emailService;
-    }
-    
-    @Transactional
-    public ContractDTO create(CreateContractRequest req) {
-        // Validation
-        if (req.getCustomerId() == null)
-            throw new InvalidContractException("Customer required");
-        
-        // Créer entité
-        Contract contract = new Contract();
-        contract.setCustomerId(req.getCustomerId());
-        contract.setType(req.getType());
-        
-        // Calcul de prime
-        double premium = calculator.calculate(contract);
-        contract.setPremium(premium);
-        
-        // Sauvegarde
-        Contract saved = repo.save(contract);
-        log.info("Contract created: {}", saved.getId());
-        
-        // Notification async
-        emailService.sendAsync(saved);
-        
-        return toDTO(saved);
-    }
-    
-    public Optional&lt;ContractDTO&gt; findById(String id) {
-        return repo.findById(id).map(this::toDTO);
-    }
-    
-    @Transactional
-    public void delete(String id) {
-        repo.deleteById(id);
-        log.info("Contract deleted: {}", id);
-    }
-    
-    private ContractDTO toDTO(Contract contract) {
-        return new ContractDTO(contract.getId(), 
-                              contract.getPremium(),
-                              contract.getType());
-    }
-}
-```
-
----
-
-## Spring Data JPA: Accès aux données
-
-#### Repository interface:
-
-```plaintext
-@Repository
-public interface ContractRepository 
-    extends JpaRepository&lt;Contract, String&gt; {
-    
-    // Méthodes générées automatiquement:
-    // save(T), delete(T), findById(ID), findAll(), etc.
-    
-    // Requêtes personnalisées (query methods)
-    List&lt;Contract&gt; findByCustomerId(String customerId);
-    
-    List&lt;Contract&gt; findByType(String type);
-    
-    List&lt;Contract&gt; findByStatusAndCustomerId(
-        String status, String customerId);
-    
-    // Requêtes JPQL/SQL natives
-    @Query("SELECT c FROM Contract c WHERE c.premium > ?1")
-    List&lt;Contract&gt; findHighPremium(double amount);
-    
-    @Query(value = "SELECT * FROM contracts WHERE active = true",
-           nativeQuery = true)
-    List&lt;Contract&gt; findAllActive();
-    
-    // Pagination et tri
-    Page&lt;Contract&gt; findAll(Pageable pageable);
-}
-
-// Utilisation:
-Pageable page = PageRequest.of(0, 10, 
-    Sort.by("premium").descending());
-Page&lt;Contract&gt; result = repo.findAll(page);
-```
-
----
-
-## Spring Cloud: Microservices distribuées
-
-### Composants clés:
-
-#### 🔍 Service Discovery
-
-#### 🚪 API Gateway
-
-#### ⚡ Circuit Breaker
-
-#### 📊 Distributed Tracing
-
-Framework pour construire des systèmes distribués
-
-- Eureka: Service registry
-- Consul: Service mesh
-- Auto-registration et detection
-
-- Spring Cloud Gateway
-- Routing intelligent
-- Load balancing
-
-- Resilience4j, Hystrix
-- Gestion des défaillances
-- Fallback strategies
-
-- Spring Cloud Sleuth
-- Jaeger, Zipkin
-- Correlation IDs
-
----
-
-## Spring Cloud Config: Configuration centralisée
-
-#### Fichiers de config (application.yml):
-
-Gérer la configuration des microservices depuis un endroit central
-
-```plaintext
-# config-repo/application.yml
-server:
-  port: 8080
-  
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost/myapp
-    username: admin
-  jpa:
-    hibernate:
-      ddl-auto: update
-
-# config-repo/application-prod.yml  
-server:
-  port: 8080
-  
-spring:
-  datasource:
-    url: jdbc:postgresql://prod-db:5432/myapp
-    username: prod-admin
-    password: ${DB_PASSWORD} # Variable d'environnement
-```
-
-```mermaid
-graph LR
-                            Git["Git Repository<br/>(config files)"]
-                            ConfigServer["Spring Cloud<br/>Config Server"]
-                            Service1["Service 1"]
-                            Service2["Service 2"]
-                            Service3["Service 3"]
-                            
-                            Git -->|Lecture| ConfigServer
-                            ConfigServer -->|API REST| Service1
-                            ConfigServer -->|API REST| Service2
-                            ConfigServer -->|API REST| Service3
-                            
-                            Service1 -->|Refresh| ConfigServer
-                            Service2 -->|Refresh| ConfigServer
-                            Service3 -->|Refresh| ConfigServer
-                            
-                            style Git fill:#e8f4ff
-                            style ConfigServer fill:#fff9e8
-                            style Service1 fill:#ffe8f4
-                            style Service2 fill:#e8ffe8
-                            style Service3 fill:#f4e8ff
-```
-
----
-
-## Testing Spring Boot Applications
-
-#### Tests unitaires:
-
-#### Tests d'intégration:
-
-```plaintext
-@ExtendWith(MockitoExtension.class)
-public class ContractServiceTest {
-    
-    @Mock
-    private ContractRepository mockRepo;
-    
-    @InjectMocks
-    private ContractService service;
-    
-    @Test
-    public void shouldCreateContract() {
-        // Given
-        CreateContractRequest req = new CreateContractRequest(...);
-        when(mockRepo.save(any()))
-            .thenReturn(new Contract("123", 1200));
-        
-        // When
-        ContractDTO result = service.create(req);
-        
-        // Then
-        assertNotNull(result);
-        assertEquals("123", result.getId());
-        verify(mockRepo).save(any());
-    }
-}
-```
-
-```plaintext
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
-public class ContractControllerIntegrationTest {
-    
-    @Autowired
-    private MockMvc mockMvc;
-    
-    @Test
-    public void shouldCreateContractViaAPI() throws Exception {
-        mockMvc.perform(post("/api/contracts")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content("{\"customerId\":\"c1\",\"type\":\"AUTO\"}"))
-            .andExpect(status().isCreated())
-            .andExpect(jsonPath("$.id").exists());
-    }
-}
-```
-
----
-
-## Spring Security: Authentification & Autorisation
-
-#### Configuration Spring Security avec JWT:
-
-Framework pour sécuriser les applications Spring
-
-```plaintext
-@Configuration
-@EnableWebSecurity
-public class SecurityConfig {
-    
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) 
-            throws Exception {
-        http
-            .csrf().disable()
-            .authorizeRequests()
-                .antMatchers("/api/login", "/api/register")
-                    .permitAll()
-                .antMatchers("/api/admin/**")
-                    .hasRole("ADMIN")
-                .anyRequest()
-                    .authenticated()
-            .and()
-            .addFilterBefore(
-                new JwtAuthenticationFilter(),
-                UsernamePasswordAuthenticationFilter.class
-            );
-        return http.build();
-    }
-    
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-}
-
-// JWT Filter
-@Component
-public class JwtAuthenticationFilter 
-        extends OncePerRequestFilter {
-    
-    @Override
-    protected void doFilterInternal(HttpServletRequest req,
-            HttpServletResponse res,
-            FilterChain chain) throws IOException, ServletException {
-        
-        String token = extractToken(req);
-        if (token != null && isTokenValid(token)) {
-            String userId = extractUserId(token);
-            var auth = new UsernamePasswordAuthenticationToken(
-                userId, null, getAuthorities(token)
-            );
-            SecurityContextHolder.getContext()
-                .setAuthentication(auth);
-        }
-        chain.doFilter(req, res);
-    }
-}
-```
-
----
-
-## Monitoring: Spring Boot Actuator
-
-#### application.properties:
-
-### Endpoints disponibles:
-
-Endpoints pour monitorer la santé et les performances
-
-```plaintext
-# Activer Actuator
-management.endpoints.web.exposure.include=*
-management.endpoint.health.show-details=always
-
-# Ou limiter à certains endpoints
-management.endpoints.web.exposure.include=health,metrics,info
-```
-
-| Endpoint | Description |
-| --- | --- |
-| /actuator/health | Santé générale (UP/DOWN) |
-| /actuator/metrics | Métriques (CPU, mémoire, requêtes) |
-| /actuator/prometheus | Format Prometheus (pour Grafana) |
-| /actuator/loggers | Niveau de logging (modifiable) |
-| /actuator/env | Variables d'environnement |
-| /actuator/threaddump | Dump des threads (debugging) |
-
----
-
-## Déploiement Spring Boot
-
-### Compilation et packaging:
-
-### Avec Docker:
-
-```plaintext
-# Compiler et créer JAR
-mvn clean package -DskipTests
-
-# JAR créé: target/my-api-1.0.0.jar
-# Exécutable standalone (embarque Tomcat)
-
-# Lancer l'application
-java -jar target/my-api-1.0.0.jar
-
-# Avec variables d'environnement
-java -Dspring.profiles.active=prod \
-     -Dserver.port=8080 \
-     -jar target/my-api-1.0.0.jar
-```
-
-```plaintext
-FROM openjdk:11-jre-slim
-
-WORKDIR /app
-
-COPY target/my-api-1.0.0.jar app.jar
-
-EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
-```
-
-```plaintext
-# Build image
-docker build -t my-api:1.0.0 .
-
-# Run container
-docker run -p 8080:8080 \
-    -e SPRING_PROFILES_ACTIVE=prod \
-    my-api:1.0.0
-```
-
----
-
-## Récapitulatif: Écosystème Spring Boot
-
-### Stack complet:
-
-#### Core
-
-#### Operations
-
-### Avantages:
-
-- Spring Boot (app)
-- Spring Data JPA (BD)
-- Spring Security (auth)
-- Spring Cloud (microservices)
-
-- Actuator (monitoring)
-- Logging (SLF4J)
-- Docker (containerization)
-- Kubernetes (orchestration)
-
-- ✅ Configuration intelligente (convention over configuration)
-- ✅ Rich ecosystem (Spring Cloud, Data, Security, etc.)
-- ✅ Production-ready (monitoring, health checks, etc.)
-- ✅ Communauté large et mature
-- ✅ Scalabilité éprouvée
-
----
-
-## Node.js: Introduction
-
-### Caractéristiques clés:
-
-#### Installer Node.js:
-
-JavaScript côté serveur - Runtime built on Chrome's V8 engine
-
-- Event-driven: Basé sur les événements asynchrones
-- Non-blocking I/O: N'attend pas les opérations disque/réseau
-- Single-threaded: Un seul thread principal (avec worker threads)
-- npm: Package manager avec millions de modules
-- Cross-platform: Linux, macOS, Windows
-
-```plaintext
-# Via package manager (Linux)
-sudo apt install nodejs npm
-
-# Via Homebrew (macOS)
-brew install node
-
-# Via nvm (Node Version Manager - recommandé)
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-nvm install 18.17.0
-nvm use 18.17.0
-
-# Vérifier
-node --version
-npm --version
-```
-
----
-
-## npm: Gestion des dépendances
-
-#### Commandes essentielles:
-
-#### package.json structure:
-
-Node Package Manager - Gérer les modules et dépendances
-
-```plaintext
-# Initialiser un projet
-npm init -y
-
-# Installer une dépendance
-npm install express
-npm i express            # Alias court
-
-# Installer en développement (dev)
-npm install --save-dev typescript
-npm i -D typescript
-
-# Installer une version spécifique
-npm install express@4.18.2
-
-# Installer toutes les dépendances (package.json)
-npm install
-
-# Mettre à jour les dépendances
-npm update
-npm outdated              # Voir les versions disponibles
-
-# Désinstaller
-npm uninstall express
-
-# Lister les versions globales
-npm list -g
-```
-
-```plaintext
-{
-  "name": "my-api",
-  "version": "1.0.0",
-  "description": "Insurance API",
-  "main": "index.js",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "jest"
-  },
-  "dependencies": {
-    "express": "^4.18.0",
-    "postgresql": "^14.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.20",
-    "jest": "^29.0.0"
-  }
-}
-```
-
----
-
-## Express.js: Framework Web minimaliste
-
-#### Application Express basique:
-
-Framework léger pour construire des APIs et applications web
-
-```plaintext
-const express = require('express');
-const app = express();
-
-// Middleware
-app.use(express.json());
-app.use(express.static('public'));
-
-// Routes
-app.get('/', (req, res) => {
-  res.json({ message: 'Hello World!' });
-});
-
-// CRUD routes
-app.get('/api/contracts', (req, res) => {
-  res.json({ contracts: [] });
-});
-
-app.post('/api/contracts', (req, res) => {
-  const { customerId, type } = req.body;
-  res.status(201).json({ id: '123', customerId, type });
-});
-
-app.get('/api/contracts/:id', (req, res) => {
-  const { id } = req.params;
-  res.json({ id, premium: 1200 });
-});
-
-app.put('/api/contracts/:id', (req, res) => {
-  const { id } = req.params;
-  res.json({ id, updated: true });
-});
-
-app.delete('/api/contracts/:id', (req, res) => {
-  res.status(204).send();
-});
-
-// Error handling
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: 'Something went wrong' });
-});
-
-// Démarrer serveur
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-```
-
----
-
-## NestJS: Framework pour Microservices
-
-### Caractéristiques:
-
-#### Créer un projet NestJS:
-
-Framework TypeScript avec architecture modulaire (inspiré par Angular)
-
-- ✅ TypeScript natif (type-safe)
-- ✅ Architecture modulaire (modules, controllers, services)
-- ✅ Dependency Injection (intégré)
-- ✅ Décorateurs (@Controller, @Get, @Post)
-- ✅ Middleware et Guards (authentification)
-- ✅ Testing intégré (Jest)
-
-```plaintext
-# Installer CLI
-npm install -g @nestjs/cli
-
-# Créer nouveau projet
-nest new my-api
-
-# Générer ressources
-nest generate controller contracts
-nest generate service contracts
-nest generate module contracts
-```
-
----
-
-## Architecture NestJS
-
-### Structure standard:
-
-#### Module NestJS complet:
-
-```plaintext
-src/
-├── contracts/
-│   ├── contracts.module.ts       # Module (groupement)
-│   ├── contracts.controller.ts   # Routes REST
-│   ├── contracts.service.ts      # Logique métier
-│   ├── contracts.entity.ts       # Entity (TypeORM)
-│   └── dto/
-│       ├── create-contract.dto.ts
-│       └── update-contract.dto.ts
-├── app.module.ts                 # Root module
-├── main.ts                        # Entry point
-└── common/
-    ├── guards/
-    ├── interceptors/
-    └── decorators/
-```
-
-```plaintext
-// contracts.module.ts
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ContractsController } from './contracts.controller';
-import { ContractsService } from './contracts.service';
-import { Contract } from './contracts.entity';
-
-@Module({
-  imports: [TypeOrmModule.forFeature([Contract])],
-  controllers: [ContractsController],
-  providers: [ContractsService],
-})
-export class ContractsModule {}
-
-// contracts.controller.ts
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
-import { ContractsService } from './contracts.service';
-import { CreateContractDto } from './dto/create-contract.dto';
-
-@Controller('contracts')
-export class ContractsController {
-  constructor(private readonly service: ContractsService) {}
-
-  @Get()
-  findAll() {
-    return this.service.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.service.findOne(id);
-  }
-
-  @Post()
-  create(@Body() createDto: CreateContractDto) {
-    return this.service.create(createDto);
-  }
-}
-
-// contracts.service.ts
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Contract } from './contracts.entity';
-import { CreateContractDto } from './dto/create-contract.dto';
-
-@Injectable()
-export class ContractsService {
-  constructor(
-    @InjectRepository(Contract)
-    private repo: Repository&lt;Contract&gt;,
-  ) {}
-
-  findAll() {
-    return this.repo.find();
-  }
-
-  findOne(id: string) {
-    return this.repo.findOne({ where: { id } });
-  }
-
-  create(dto: CreateContractDto) {
-    return this.repo.save(dto);
-  }
-}
-```
-
----
-
-## NestJS: Middleware, Guards & Interceptors
-
-#### Guard: Authentification avec JWT
-
-Pipeline de traitement des requêtes
-
-```plaintext
-@Injectable()
-export class JwtAuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
-
-  canActivate(context: ExecutionContext): boolean {
-    const request = context.switchToHttp().getRequest();
-    const authHeader = request.headers.authorization;
-    
-    if (!authHeader) return false;
-    
-    const token = authHeader.replace('Bearer ', '');
-    try {
-      const payload = this.jwtService.verify(token);
-      request.user = payload;
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-}
-
-// Utilisation
-@Get()
-@UseGuards(JwtAuthGuard)
-findAll(@Request() req) {
-  return this.service.findAll(req.user.id);
-}
-```
-
-```mermaid
-graph LR
-                            Request["🔵 Requête HTTP"]
-                            Middleware["⚙️ Middleware<br/>(logging, CORS)"]
-                            Guard["🔐 Guard<br/>(authentification)"]
-                            Interceptor1["🔄 Interceptor Before<br/>(transformer requête)"]
-                            Controller["📨 Controller<br/>(route handler)"]
-                            Interceptor2["🔄 Interceptor After<br/>(transformer réponse)"]
-                            Response["🟢 Réponse HTTP"]
-                            
-                            Request --> Middleware
-                            Middleware --> Guard
-                            Guard --> Interceptor1
-                            Interceptor1 --> Controller
-                            Controller --> Interceptor2
-                            Interceptor2 --> Response
-                            
-                            style Request fill:#e8f4ff
-                            style Middleware fill:#fff9e8
-                            style Guard fill:#ffe8f4
-                            style Interceptor1 fill:#e8ffe8
-                            style Controller fill:#f4e8ff
-                            style Interceptor2 fill:#e8ffe8
-                            style Response fill:#ccffcc
-```
-
----
-
-## TypeORM: ORM pour Node.js
-
-#### Entity TypeORM:
-
-Object-Relational Mapping pour TypeScript
-
-```plaintext
-import { Entity, Column, PrimaryGeneratedColumn, 
-         OneToMany, CreateDateColumn } from 'typeorm';
-
-@Entity('contracts')
-export class Contract {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column()
-  customerId: string;
-
-  @Column({ type: 'varchar', length: 50 })
-  type: string;
-
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
-  premium: number;
-
-  @Column({ default: 'ACTIVE' })
-  status: string;
-
-  @OneToMany(() => Claim, claim => claim.contract)
-  claims: Claim[];
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @Column({ type: 'timestamp', onUpdate: 'CURRENT_TIMESTAMP' })
-  updatedAt: Date;
-}
-
-// Relation
-@Entity('claims')
-export class Claim {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @ManyToOne(() => Contract, contract => contract.claims)
-  contract: Contract;
-
-  @Column()
-  contractId: string;
-
-  @Column()
-  description: string;
-}
-```
-
----
-
-## Testing avec Jest
-
-#### Test unitaire NestJS:
-
-Framework de test pour Node.js et NestJS
-
-```plaintext
-import { Test, TestingModule } from '@nestjs/testing';
-import { ContractsService } from './contracts.service';
-import { ContractsController } from './contracts.controller';
-import { getRepositoryToken } from '@nestjs/typeorm';
-import { Contract } from './contracts.entity';
-
-describe('ContractsService', () => {
-  let service: ContractsService;
-  let mockRepo: any;
-
-  beforeEach(async () => {
-    // Mock repository
-    mockRepo = {
-      find: jest.fn().mockResolvedValue([
-        { id: '1', premium: 1200 }
-      ]),
-      findOne: jest.fn().mockResolvedValue(
-        { id: '1', premium: 1200 }
-      ),
-      save: jest.fn().mockResolvedValue(
-        { id: '1', premium: 1200 }
-      ),
-    };
-
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [
-        ContractsService,
-        {
-          provide: getRepositoryToken(Contract),
-          useValue: mockRepo,
-        },
-      ],
-    }).compile();
-
-    service = module.get&lt;ContractsService&gt;(ContractsService);
-  });
-
-  it('should return all contracts', async () => {
-    const result = await service.findAll();
-    expect(result).toEqual([{ id: '1', premium: 1200 }]);
-    expect(mockRepo.find).toHaveBeenCalled();
-  });
-
-  it('should create a contract', async () => {
-    const dto = { customerId: 'c1', type: 'AUTO' };
-    const result = await service.create(dto);
-    expect(result).toBeDefined();
-    expect(mockRepo.save).toHaveBeenCalledWith(dto);
-  });
-});
-```
-
----
-
-## Déploiement Node.js
-
-### PM2 (Process Manager):
-
-### Docker:
-
-### Heroku:
-
-```plaintext
-# Installer PM2
-npm install -g pm2
-
-# Lancer application
-pm2 start app.js
-
-# Lancer en cluster mode (utiliser tous les cores)
-pm2 start app.js -i max
-
-# Monitorage
-pm2 monit
-
-# Logs
-pm2 logs
-
-# Persister après reboot
-pm2 startup
-pm2 save
-```
-
-```plaintext
-FROM node:18-alpine
-
-WORKDIR /app
-
-# Copier package files
-COPY package*.json ./
-
-# Installer dépendances
-RUN npm ci --only=production
-
-# Copier code
-COPY . .
-
-# Build si TypeScript
-RUN npm run build
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
-```
-
-```plaintext
-# Login
-heroku login
-
-# Créer app
-heroku create my-api
-
-# Déployer
-git push heroku main
-
-# Logs
-heroku logs --tail
-```
-
----
-
-## Récapitulatif: Écosystème Node.js
-
-### Stack Node.js complet:
-
-#### Frameworks
-
-#### Écosystème
-
-### Avantages:
-
-- Express: Minimaliste, flexible
-- NestJS: Modulaire, TypeScript
-- Fastify: Haute performance
-- Koa: Middleware elegance
-
-- npm: Package manager
-- TypeORM: ORM
-- Jest: Testing
-- PM2: Process management
-
-- ✅ JavaScript partout (frontend + backend)
-- ✅ Non-blocking I/O (haute performance)
-- ✅ Énorme écosystème npm
-- ✅ TypeScript support natif (NestJS)
-- ✅ Courbe d'apprentissage plus douce que Java
 
 ---
 
