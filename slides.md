@@ -1546,6 +1546,10 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 
 ---
 
+<img src="https://docs.spring.io/spring-framework/docs/4.0.x/spring-framework-reference/html/images/spring-overview.png" />
+  
+---
+
 ## NestJS (Node.js/TypeScript)
 
 <div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
