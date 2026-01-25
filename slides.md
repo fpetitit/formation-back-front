@@ -636,7 +636,7 @@ graph LR
 ### Caractéristiques clés
 
 ```mermaid
-graph TD
+graph LR
     A["📦 Code"] --> B["🚀 Déploiement"]
     B --> C["🌐 Exécution"]
     C --> D["⏱️ Facturation"]
@@ -714,7 +714,7 @@ graph TD
 Architectures distribuées basées sur des services indépendants.
 
 ```mermaid
-graph TB
+graph LR
                             Client["Client<br/>(Web/Mobile)"]
                             Gateway["API Gateway"]
                             
@@ -755,26 +755,26 @@ graph TB
 
 #### 🎯 Autonomie
 
-#### 📡 Communication
-
-#### 🔄 Résilience
-
-#### 📊 Observabilité
-
 - Services indépendants
 - Déploiement indépendant
 - BD dédiée
 - Équipes autonomes
+
+#### 📡 Communication
 
 - API REST / gRPC
 - Message brokers (Kafka)
 - Events asynchrones
 - Découverte de services
 
+#### 🔄 Résilience
+
 - Circuit breaker
 - Timeout
 - Retry policy
 - Health checks
+
+#### 📊 Observabilité
 
 - Logging distribué
 - Tracing
@@ -831,8 +831,6 @@ graph LR
 
 #### 🔵 Synchrone (REST/gRPC)
 
-#### 🟣 Asynchrone (Events)
-
 ```plaintext
 Service A
    ↓ (HTTP/gRPC)
@@ -850,6 +848,8 @@ Inconvénients:
 ❌ Couplage fort
 ❌ Service lent = tout lent
 ```
+
+#### 🟣 Asynchrone (Events)
 
 ```plaintext
 Service A
@@ -1221,96 +1221,6 @@ export class ContractService {
 
 ---
 
-# 🔒 Sécurité Avancée
-
----
-
-## Zero Trust Architecture
-
-### Principes Fondamentaux
-
-```mermaid
-graph TD
-    A["🛡️ Never Trust"] --> B["🔍 Always Verify"]
-    B --> C["🔒 Least Privilege"]
-    C --> D["📡 Micro-Segmentation"]
-
-    style A fill:#ff6b6b
-    style B fill:#ffe8f4
-    style C fill:#fff9e8
-    style D fill:#e8ffe8
-```
-
-### Piliers du Zero Trust
-
-1. **Identité**: Vérification continue
-2. **Appareil**: Posture de sécurité
-3. **Réseau**: Micro-segmentation
-4. **Application**: Accès granulaire
-5. **Données**: Chiffrement et classification
-
----
-
-## Service-to-Service Authentication
-
-### Mutual TLS (mTLS)
-
-```mermaid
-graph LR
-    A["Service A"] -->|🔐 Certificat| B["Service B"]
-    B -->|🔐 Certificat| A
-    A -->|🔒 Communication| B
-    B -->|🔒 Communication| A
-
-    style A fill:#e8f4ff
-    style B fill:#fff9e8
-```
-
-### OAuth2 pour les Services
-
-```mermaid
-sequenceDiagram
-    participant ServiceA
-    participant AuthServer
-    participant ServiceB
-
-    ServiceA->>AuthServer: Demande token
-    AuthServer->>ServiceA: Token JWT
-    ServiceA->>ServiceB: Requête + Token
-    ServiceB->>AuthServer: Valide token
-    AuthServer->>ServiceB: Validation
-    ServiceB->>ServiceA: Réponse
-```
-
----
-
-## Secret Management
-
-### HashiCorp Vault
-
-```mermaid
-graph TD
-    A["🔑 Applications"] --> B["🗄️ Vault"]
-    B --> C["🔐 Secrets"]
-    B --> D["📝 Certificats"]
-    B --> E["🔑 Clés API"]
-
-    style A fill:#e8f4ff
-    style B fill:#ffd700
-    style C fill:#fff9e8
-    style D fill:#ffe8f4
-    style E fill:#e8ffe8
-```
-
-### Best Practices
-
-- **Rotation automatique**: Changement régulier des secrets
-- **Accès temporaire**: Tokens à durée limitée
-- **Audit complet**: Logging de tous les accès
-- **Chiffrement**: Secrets toujours chiffrés
-
----
-
 # 🚀 Caching Avancé
 
 ---
@@ -1405,7 +1315,7 @@ graph LR
 ### Sharding Horizontal
 
 ```mermaid
-graph TD
+graph LR
     A["📊 Données"] --> B["🔪 Partitionnement"]
     B --> C["Shard 1"]
     B --> D["Shard 2"]
@@ -1421,7 +1331,7 @@ graph TD
 ### Partitioning Vertical
 
 ```mermaid
-graph TD
+graph LR
     A["📊 Table"] --> B["🔪 Séparation"]
     B --> C["Colonnes A-B"]
     B --> D["Colonnes C-D"]
@@ -1470,7 +1380,7 @@ graph LR
 ### PostgreSQL avec Citus
 
 ```mermaid
-graph TD
+graph LR
     A["📱 Application"] --> B["🔄 Coordinateur"]
     B --> C["🗄️ Worker 1"]
     B --> D["🗄️ Worker 2"]
@@ -1486,7 +1396,7 @@ graph TD
 ### MongoDB Sharding
 
 ```mermaid
-graph TD
+graph LR
     A["📱 Client"] --> B["🎯 Mongos"]
     B --> C["🗄️ Config Servers"]
     B --> D["📊 Shard 1"]
@@ -1704,40 +1614,17 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 
 ---
 
-## Ruby on Rails (Ruby)
-
-### Caractéristiques
-- **Framework**: Rails (Convention over Configuration)
-- **Langages**: Ruby (syntaxe élégante)
-- **Popularité**: ⭐⭐⭐ Moins nouveau, mais très efficace
-- **Apprentissage**: Très facile - excellent pour débutants
-
-### Points forts
-- Rapidité de développement exceptionnelle
-- Convention plutôt que configuration
-- Excellente pour prototypes et MVPs
-- Communauté très active et bienveillante
-- Gestion de bases de données élégante
-
-### Use cases
-- Startups et MVPs
-- Applications web complètes
-- Prototypage rapide
-- Content management systems
-
----
-
 ## Comparaison Synthétique
 
-| Critère | Spring Boot | NestJS | Python | .NET | Rails |
-|---------|-------------|--------|--------|------|-------|
-| **Vitesse dev** | Moyen | Rapide | Très rapide | Moyen | Très rapide |
-| **Performance** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
-| **Scalabilité** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
-| **Courbe apprentissage** | Moyenne | Facile | Facile | Moyenne | Très facile |
-| **Écosystème** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
-| **Entreprise** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
-| **Startup/Agile** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Critère | Spring Boot | NestJS | Python | .NET | 
+|---------|-------------|--------|--------|------|
+| **Vitesse dev** | Moyen | Rapide | Très rapide | Moyen |
+| **Performance** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Scalabilité** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Courbe apprentissage** | Moyenne | Facile | Facile | Moyenne |
+| **Écosystème** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Entreprise** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Startup/Agile** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ |
 
 ---
 
@@ -1746,7 +1633,7 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 ### Spring Boot 👉
 - Vous avez une équipe Java expérimentée
 - Vous développez un système critique d'entreprise
-- Vous besoin d'une scalabilité extrême
+- Vous avez besoin d'une scalabilité extrême
 
 ### NestJS 👉
 - Vous voulez une pile moderne et unifiée (Front/Back en TypeScript)
@@ -1847,11 +1734,9 @@ PremiumRate determinePremiumRate(
 
 ## Règle 2: Fonctions courtes (SRP)
 
-### Fonction trop grosse (mauvais):
-
-### Fonctions courtes et focalisées (bon):
-
 Single Responsibility Principle: Une fonction = une seule raison de changer
+
+### Fonction trop grosse (mauvais):
 
 ```plaintext
 public void processContract(Contract c) {
@@ -1871,6 +1756,7 @@ public void processContract(Contract c) {
     logger.info("Contrat traité: " + c.getId());
 }
 ```
+### Fonctions courtes et focalisées (bon):
 
 ```plaintext
 public void processContract(Contract c) {
@@ -1894,8 +1780,6 @@ private void notifyCustomer(Contract c, double p) { ... }
 
 #### ❌ Code de retour
 
-#### ✅ Exception
-
 ```plaintext
 int status = 
     contractService.save(c);
@@ -1906,6 +1790,8 @@ if (status == 0) {
     System.out.println("Saved");
 }
 ```
+
+#### ✅ Exception
 
 ```plaintext
 try {
@@ -1924,11 +1810,9 @@ try {
 
 ## Règle 4: DRY (Don't Repeat Yourself)
 
-#### ❌ Code répété
-
-#### ✅ Extraction en méthode
-
 Éliminer les répétitions de code.
+
+#### ❌ Code répété
 
 ```plaintext
 // ContractService
@@ -1946,6 +1830,8 @@ double benefit = salary * 0.1;
 if (benefit < 100) benefit = 100;
 return benefit;
 ```
+
+#### ✅ Extraction en méthode
 
 ```plaintext
 // PricingCalculator
@@ -1974,7 +1860,7 @@ Le code doit se commenter lui-même. Les commentaires ne doivent expliquer que l
 
 <div class="grid grid-cols-2 gap-4">
   <div>
-  
+
 #### ❌ Commentaires inutiles
 
 ```plaintext
