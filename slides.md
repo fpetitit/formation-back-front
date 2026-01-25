@@ -1515,6 +1515,9 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 
 ## Spring Boot (Java)
 
+<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
+<div>
+
 ### Caractéristiques
 - **Framework**: Spring Framework avec Spring Boot pour démarrage rapide
 - **TypeScript/Langages**: Java (JVM ecosystem)
@@ -1534,9 +1537,19 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 - Microservices à grande échelle
 - Systèmes financiers
 
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;max-width: 100%">
+  <img src="https://logos-marques.com/wp-content/uploads/2021/03/Java-Logo.png" alt="Java" style="height: 100px;" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Spring_Framework_Logo_2018.svg/1280px-Spring_Framework_Logo_2018.svg.png" alt="Spring Framework" style="height: 60px;" />
+</div>
+</div>
+
 ---
 
 ## NestJS (Node.js/TypeScript)
+
+<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
+<div>
 
 ### Caractéristiques
 - **Framework**: Node.js moderne avec TypeScript par défaut
@@ -1557,9 +1570,19 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 - Microservices légers
 - Projets startup et agiles
 
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1280px-Node.js_logo.svg.png" alt="Node.js" style="height: 100px;" />
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbaFE1Vzg5PH7mKv6NmVEmXMzSThQe-FLbmw&s" alt="NestJS" style="height: 100px;" />
+</div>
+</div>
+
 ---
 
 ## Python (FastAPI & Django)
+
+<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
+<div>
 
 ### FastAPI
 - **Caractéristiques**: Framework ultra-moderne et performant
@@ -1576,9 +1599,20 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 - Apprentissage: Facile - syntaxe simple et claire
 - Productivité: Très haute
 
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Python_logo_and_wordmark.svg" alt="Python" style="height: 100px;" />
+  <img src="https://www.djangoproject.com/m/img/logos/django-logo-negative.png" alt="Django" style="height: 100px;" />
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA4OKx8IMFA3NH3DDwdbVfS-mP9BboGcRD3g&s" alt="FastAPI" style="height: 80px;" />
+</div>
+</div>
+
 ---
 
 ## .NET / ASP.NET Core (C#)
+
+<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
+<div>
 
 ### Caractéristiques
 - **Framework**: ASP.NET Core (cross-platform)
@@ -1598,6 +1632,12 @@ Les principaux écosystèmes pour développer des applications backend robustes 
 - Systèmes critiques
 - Solutions sur Azure
 - Applications Windows Desktop + Backend
+
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+  <img src="https://upload.wikimedia.org/wikipedia/fr/9/99/Logo_microsoft_net.png" alt=".NET" style="height: 100px;" />
+</div>
+</div>
 
 ---
 
