@@ -15,103 +15,40 @@ Back-ends et API pour le Web, le Mobile et l'IA
 
 # 📋 Sommaire
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px">
 
-<div>
+<div style="display: grid; row-gap: 30px">
 
 ## 🔧 Fondamentaux & Introduction
 
-- Introduction à l'architecture logicielle
-- Définitions clés
-- Principes d'architecture applicative
-- Principes SOLID
-- Défis de l'architecture moderne
-
 ## 🏗️ Patterns d'Architecture
-
-- MVC, MVVM
-- CQRS
-- Event-Sourcing
-- Event-Driven Architecture
-- Hexagonal Architecture
-- Dependency Injection
-- Repository Pattern
 
 ## 🚀 Architectures Avancées
 
-- Monolithe vs Microservices vs Serverless
-- Architecture Serverless
-- Microservices Patterns
-- Domain-Driven Design
-- Saga Pattern
-- Sécurité avancée
-- Caching avancé
-- Database Sharding
-
 </div>
 
-<div>
+<div style="display: grid; row-gap: 30px">
 
 ## 🎨 Écosystèmes Technologiques
 
-- Spring Boot (Java)
-- NestJS (Node.js/TypeScript)
-- Python (FastAPI & Django)
-- .NET / ASP.NET Core
-- Ruby on Rails
-- Comparaison des frameworks
-
 ## ✨ Développement Propre
-
-- Clean Code principles
-- Clean Architecture
-- Best practices
-- Testing strategies
 
 ## 🌐 APIs & Communication
 
-- REST vs GraphQL
-- Bonnes pratiques REST
-- GraphQL implementation
-- Sécurité des APIs
-- Documentation API
-- Versioning
-
-## 🤖 Intégration IA & Futur
-
-- MCP & Intégration IA
-- Cas d'usage assurance/santé
-- Sécurité & gouvernance IA
-- Agents autonomes
-
-## 🛠️ Outils & Déploiement
-
-- Implémentation Spring Boot
-- Implémentation Node.js/NestJS
-- Sécurité, monitoring & déploiement
-- Outils DevOps (Docker, PM2)
+## 🤖 Intégration IA
 
 </div>
-
-</div>
-
-<div style="margin-top: 30px; padding: 20px; background: #f0f0f0; border-radius: 8px;">
-
-**Organisation thématique** - Regroupement logique des concepts pour une progression pédagogique optimale
 
 </div>
 
 ---
 
-
----
-
-## 🎯 Prochaine Section: Introduction
+## 🎯 Introduction
 
 <div style="text-align: center; padding: 40px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
   <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.8em;">📚 Introduction</h3>
   <p style="color: #34495e; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
-    Découvrez les fondamentaux de l'architecture logicielle et comprenez pourquoi elle est cruciale pour le développement moderne.
+    Les fondamentaux de l'architecture logicielle
   </p>
   <div style="margin-top: 20px; height: 4px; background: linear-gradient(90deg, #3498db, #9b59b6); width: 100px; margin: 20px auto; border-radius: 2px;"></div>
 </div>
@@ -136,26 +73,6 @@ Back-ends et API pour le Web, le Mobile et l'IA
 - Performance et sécurité des applications
 - Adaptation aux besoins métiers (ex: assurance, santé)
 - Réduction des coûts de développement à long terme
-
----
-
-## Évolution des architectures
-
-```mermaid
-graph LR
-                            A["<b>Monolithique</b><br/>(2000s)"] -->|Complexité croissante| B["<b>Microservices</b><br/>(2010s)"]
-                            B -->|Optimisation| C["<b>Serverless</b><br/>(2020s)"]
-                            
-                            style A fill:#e8f4f8
-                            style B fill:#fff4e8
-                            style C fill:#e8f8e8
-```
-
-| Architecture | Avantages | Inconvénients |
-| --- | --- | --- |
-| Monolithe | Simple, facile à déployer | Diffcile à scaler, couplage fort |
-| Microservices | Scalable, indépendant | Complexité opérationnelle |
-| Serverless | Pas de gestion infra | Coûts imprévisibles, latence |
 
 ---
 
@@ -184,41 +101,25 @@ graph LR
 
 ---
 
-## Panorama des technologies
+## Évolution des architectures
+
+```mermaid
+graph LR
+                            A["<b>Monolithique</b><br/>(2000s)"] -->|Complexité croissante| B["<b>Microservices</b><br/>(2010s)"]
+                            B -->|Optimisation| C["<b>Serverless</b><br/>(2020s)"]
+                            
+                            style A fill:#e8f4f8
+                            style B fill:#fff4e8
+                            style C fill:#e8f8e8
+```
+
+| Architecture | Avantages | Inconvénients |
+| --- | --- | --- |
+| Monolithe | Simple, facile à déployer | Difficile à scaler, couplage fort |
+| Microservices | Scalable, indépendant | Complexité opérationnelle |
+| Serverless | Pas de gestion infra | Coûts imprévisibles, latence |
 
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
-
-<div>
-
-#### 🔧 Back-end
-
-- Java: Spring Boot, Spring Cloud
-- Node.js: Express, NestJS
-- Python: Django, FastAPI
-- Go: Gin, Echo
-#### 🎨 Front-end
-
-- React: Composants, Hooks
-- Vue.js: Réactif, simple
-- Angular: Complet, TypeScript
-- Next.js: SSR, SSG, SSG
-
-</div>
-<div>
-
-#### 📱 Mobile
-
-- React Native: Code réutilisable
-- Flutter: Widgets natifs
-- Swift/Kotlin: Natif
-
-#### 🧠 Infrastructure & BD
-- Docker: Conteneurisation
-- Kubernetes: Orchestration
-- PostgreSQL, MongoDB
-</div>
-</div>
 ---
 
 ## Principes d'architecture applicative
@@ -253,6 +154,9 @@ Infrastructure (Serveurs, BD)
 
 ## Défis de l'architecture moderne
 
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
+
 #### 🚀 Performance
 
 
@@ -267,6 +171,9 @@ Infrastructure (Serveurs, BD)
 - HTTPS, TLS
 - Validation des données
 
+</div>
+<div>
+
 #### 📊 Scalabilité
 
 
@@ -279,20 +186,7 @@ Infrastructure (Serveurs, BD)
 - Documentation
 - Tests automatisés
 - CI/CD pipeline
-
----
-
-
----
-
-## 🎯 Prochaine Section: Patterns d'Architecture
-
-<div style="text-align: center; padding: 40px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-  <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.8em;">🏗️ Patterns d'Architecture</h3>
-  <p style="color: #34495e; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
-    Explorez les solutions éprouvées pour structurer vos applications et résoudre des problèmes récurrents.
-  </p>
-  <div style="margin-top: 20px; height: 4px; background: linear-gradient(90deg, #3498db, #9b59b6); width: 100px; margin: 20px auto; border-radius: 2px;"></div>
+</div>
 </div>
 
 ---
@@ -372,8 +266,19 @@ graph LR
 
 ### Concept clé
 
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
 Séparer les modèles de lecture et écriture pour optimiser chacun indépendamment.
 
+### Avantages
+
+- ✅ **Optimisation indépendante**: Chaque modèle optimisé pour son usage
+- ✅ **Scalabilité**: Lectures et écritures peuvent être déployées séparément
+- ✅ **Performance**: Read DB peut être dénormalisée (cache, index spécifiques)
+- ✅ **Clarté**: Séparation claire des responsabilités
+
+</div>
+<div>
 ```mermaid
 graph LR
     subgraph Commands["📝 CÔTÉ ÉCRITURE (Commands)"]
@@ -406,14 +311,8 @@ graph LR
     style ReadDB fill:#e8ffe8
     style EventBus fill:#f4e8ff
 ```
-
-### Avantages
-
-- ✅ **Optimisation indépendante**: Chaque modèle optimisé pour son usage
-- ✅ **Scalabilité**: Lectures et écritures peuvent être déployées séparément
-- ✅ **Performance**: Read DB peut être dénormalisée (cache, index spécifiques)
-- ✅ **Clarté**: Séparation claire des responsabilités
-
+</div>
+</div>
 ---
 
 ## Architecture Event-Sourcing
@@ -442,6 +341,8 @@ graph LR
 - **Reconstruction d'état**: L'état actuel est reconstruit en replayant les événements
 - **Projections**: Vues optimisées pour différents cas d'usage
 - **Audit trail**: Historique complet de toutes les modifications
+
+---
 
 ### Cas d'usage
 
@@ -499,14 +400,19 @@ graph LR
 
 ### Bénéfices:
 
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
 Isoler le cœur métier des détails techniques.
 
 - Cœur métier indépendant des frameworks
 - Adaptation facile aux changements technologiques
 - Tests unitaires sans dépendances externes
 
+</div>
+<div>
+
 ```mermaid
-graph LR
+graph TB
                             UI["UI / API"]
                             DB["Base de données"]
                             MAIL["Service email"]
@@ -533,6 +439,8 @@ graph LR
                             style MAIL fill:#e8ffe8
                             style API3 fill:#ffe8f4
 ```
+</div>
+</div>
 
 ---
 
@@ -613,21 +521,7 @@ graph LR
 
 ---
 
----
-
-## 🎯 Prochaine Section: Architecture Serverless
-
-<div style="text-align: center; padding: 40px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-  <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.8em;">🏗️ Architecture Serverless</h3>
-  <p style="color: #34495e; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
-    Découvrez les principes du serverless et comment optimiser vos fonctions cloud pour une scalabilité automatique.
-  </p>
-  <div style="margin-top: 20px; height: 4px; background: linear-gradient(90deg, #3498db, #9b59b6); width: 100px; margin: 20px auto; border-radius: 2px;"></div>
-</div>
-
----
-
-# 🏗️ Architecture Serverless Avancée
+# 🏗️ Architecture Serverless
 
 ---
 
@@ -666,6 +560,9 @@ graph LR
 
 ## Patterns Serverless Avancés
 
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
+
 ### 1. Cold Start Optimization
 
 ```mermaid
@@ -679,6 +576,9 @@ graph LR
     style C fill:#e8ffe8
     style D fill:#f4e8ff
 ```
+
+</div>
+<div>
 
 ### 2. Composition de Fonctions
 
@@ -695,6 +595,9 @@ graph TD
     style D fill:#e8ffe8
     style E fill:#f4e8ff
 ```
+
+</div>
+</div>
 
 ---
 
@@ -753,6 +656,9 @@ graph LR
 
 ### Propriétés clés:
 
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
+
 #### 🎯 Autonomie
 
 - Services indépendants
@@ -767,6 +673,9 @@ graph LR
 - Events asynchrones
 - Découverte de services
 
+</div>
+<div>
+
 #### 🔄 Résilience
 
 - Circuit breaker
@@ -780,6 +689,9 @@ graph LR
 - Tracing
 - Monitoring
 - Alerting
+
+</div>
+</div>
 
 ---
 
