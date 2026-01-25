@@ -55,12 +55,6 @@ Back-ends et API pour le Web, le Mobile et l'IA
 
 ---
 
-# 📚 Introduction
-
-*Fondamentaux de l'architecture logicielle*
-
----
-
 ## Pourquoi l'architecture logicielle est cruciale ?
 
 > "When you model using only the semantics that the business expert cares about, you get a model that the business expert understands." — **Eric Evans**, Domain-Driven Design
@@ -521,9 +515,19 @@ graph LR
 
 ---
 
-# 🏗️ Architecture Serverless
+## 🎯 Serverless
+
+<div style="text-align: center; padding: 40px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.8em;">🏗️ Architecture Serverless
+</h3>
+  <p style="color: #34495e; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
+
+  </p>
+  <div style="margin-top: 20px; height: 4px; background: linear-gradient(90deg, #3498db, #9b59b6); width: 100px; margin: 20px auto; border-radius: 2px;"></div>
+</div>
 
 ---
+
 
 ## Principes du Serverless
 
@@ -697,6 +701,9 @@ graph LR
 
 ## API Gateway et Service Discovery
 
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
+
 ### API Gateway (point d'entrée unique):
 
 - Routage: Diriger requêtes aux services corrects
@@ -705,8 +712,11 @@ graph LR
 - Caching: Réduire latence
 - Load balancing: Distribuer charge
 
+</div>
+<div>
+
 ```mermaid
-graph LR
+graph TB
                             Client["Client"]
                             Gateway["API Gateway<br/>(Kong, AWS API Gateway)"]
                             
@@ -734,12 +744,17 @@ graph LR
                             style Serv2 fill:#e8ffe8
                             style Serv3 fill:#e8ffe8
 ```
+</div>
+</div>
 
 ---
 
 ## Communication inter-services
 
 ### Approches de communication:
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
 
 #### 🔵 Synchrone (REST/gRPC)
 
@@ -761,6 +776,9 @@ Inconvénients:
 ❌ Service lent = tout lent
 ```
 
+</div>
+<div>
+
 #### 🟣 Asynchrone (Events)
 
 ```plaintext
@@ -780,6 +798,8 @@ Inconvénients:
 ❌ Eventual consistency
 ❌ Plus complexe
 ```
+</div>
+</div>
 
 ---
 
@@ -880,6 +900,9 @@ graph TD
 
 ## Implémentation Pratique
 
+
+<div style="display: grid; grid-template-columns: .5fr 1fr; gap: 30px; margin-top: 0px;">
+
 ### Choreography avec Kafka
 
 ```mermaid
@@ -896,6 +919,11 @@ sequenceDiagram
     Kafka->>ServiceA: Consomme résultat
     ServiceA->>Client: Réponse finale
 ```
+</div>
+
+---
+
+<div style="display: grid; grid-template-columns: .5fr 1fr; gap: 30px; margin-top: 0px;">
 
 ### Orchestration avec Zeebe
 
@@ -913,6 +941,7 @@ sequenceDiagram
     ServiceB->>Orchestrateur: Réponse
     Orchestrateur->>Client: Résultat final
 ```
+</div>
 
 ---
 
@@ -974,10 +1003,10 @@ Scénario: Achat d'assurance avec paiement
 ## 2-Phase Commit (2PC)
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
-<div>
-Fonctionnement schématique :
-</div>
-<div>
+
+### Fonctionnement schématique :
+
+<div style="margin-top: -40px">
 ```mermaid
 sequenceDiagram
     participant Client as 🧑 Client
@@ -1062,7 +1091,6 @@ sequenceDiagram
 @Service
 @Transactional  // ← Gère les transactions automatiquement
 public class ContractService {
-    
     @Transactional(propagation = Propagation.REQUIRED,
                    isolation = Isolation.REPEATABLE_READ)
     public void createContractWithPayment(Contract c, Payment p) {
@@ -1073,8 +1101,7 @@ public class ContractService {
     }
 }
 
-// Gestion d'erreur
-@Transactional
+@Transactional  // Gestion d'erreur
 public void transfer(Account from, Account to, double amount) {
     try {
         from.withdraw(amount);   // -500
@@ -1087,6 +1114,8 @@ public void transfer(Account from, Account to, double amount) {
     }
 }
 ```
+
+---
 
 ### NestJS (Node.js/TypeScript)
 
@@ -1139,6 +1168,10 @@ export class ContractService {
 
 ## Patterns de Cache
 
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+
+<div>
+
 ### Cache-Aside (Lazy Loading)
 
 ```mermaid
@@ -1156,6 +1189,8 @@ sequenceDiagram
         Cache->>Client: Retourne donnée
     end
 ```
+</div>
+<div>
 
 ### Write-Through
 
@@ -1170,23 +1205,8 @@ sequenceDiagram
     Database->>Cache: Confirmation
     Cache->>Client: Confirmation
 ```
-
----
-
-## Comparaison Redis vs Memcached
-
-| Critère | Redis | Memcached |
-|---|---|---|
-| **Persistance** | ✅ Oui | ❌ Non |
-| **Structures** | ✅ Riches | ❌ Clé-valeur |
-| **Réplication** | ✅ Master-Slave | ❌ Basique |
-| **Performance** | ⚠️ Très élevée | ✅ Extrême |
-| **Utilisation** | Cache + BD | Cache pur |
-
-### Cas d'usage
-
-- **Redis**: Sessions, leaderboards, pub/sub
-- **Memcached**: Cache simple, performances pures
+</div>
+</div>
 
 ---
 
@@ -1218,16 +1238,36 @@ graph LR
 
 ---
 
+## Comparaison Redis vs Memcached
+
+| Critère | Redis | Memcached |
+|---|---|---|
+| **Persistance** | ✅ Oui | ❌ Non |
+| **Structures** | ✅ Riches | ❌ Clé-valeur |
+| **Réplication** | ✅ Master-Slave | ❌ Basique |
+| **Performance** | ⚠️ Très élevée | ✅ Extrême |
+| **Utilisation** | Cache + BD | Cache pur |
+
+### Cas d'usage
+
+- **Redis**: Sessions, leaderboards, pub/sub
+- **Memcached**: Cache simple, performances pures
+
+---
+
 # 🗃️ Database Sharding et Partitioning
 
 ---
 
 ## Définitions
 
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
+
 ### Sharding Horizontal
 
 ```mermaid
-graph LR
+graph TB
     A["📊 Données"] --> B["🔪 Partitionnement"]
     B --> C["Shard 1"]
     B --> D["Shard 2"]
@@ -1240,10 +1280,13 @@ graph LR
     style E fill:#e8ffe8
 ```
 
+</div>
+<div>
+
 ### Partitioning Vertical
 
 ```mermaid
-graph LR
+graph TB
     A["📊 Table"] --> B["🔪 Séparation"]
     B --> C["Colonnes A-B"]
     B --> D["Colonnes C-D"]
@@ -1255,6 +1298,8 @@ graph LR
     style D fill:#ffe8f4
     style E fill:#e8ffe8
 ```
+</div>
+</div>
 
 ---
 
@@ -1289,6 +1334,9 @@ graph LR
 
 ## Implémentation Pratique
 
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
+
 ### PostgreSQL avec Citus
 
 ```mermaid
@@ -1304,6 +1352,8 @@ graph LR
     style D fill:#ffe8f4
     style E fill:#e8ffe8
 ```
+</div>
+<div>
 
 ### MongoDB Sharding
 
@@ -1321,13 +1371,19 @@ graph LR
     style E fill:#e8ffe8
 ```
 
+</div>
+</div>
+
 ---
 
-# 🎯 Domain-Driven Design Approfondi
+# 🎯 Domain-Driven Design
 
 ---
 
 ## Strategic vs Tactical DDD
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+<div>
 
 ### Niveaux de DDD
 
@@ -1341,6 +1397,9 @@ graph TD
     style C fill:#fff9e8
 ```
 
+</div>
+<div>
+
 ### Strategic DDD
 
 - **Bounded Contexts**: Frontières claires
@@ -1353,6 +1412,8 @@ graph TD
 - **Domain Events**: Communication asynchrone
 - **Entities vs Value Objects**: Modélisation fine
 
+</div>
+</div>
 ---
 
 ## Bounded Contexts et Context Mapping
@@ -1384,6 +1445,9 @@ graph LR
 
 ## Event Storming
 
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
+<div>
+
 ### Processus Collaboratif
 
 ```mermaid
@@ -1399,6 +1463,8 @@ graph TD
     style D fill:#ffe8f4
     style E fill:#e8ffe8
 ```
+</div>
+<div>
 
 ### Étapes Clés
 
@@ -1406,6 +1472,15 @@ graph TD
 2. **Commandes**: Actions déclenchantes
 3. **Aggregates**: Groupes cohérents
 4. **Bounded Contexts**: Frontières logiques
+
+</div>
+</div>
+
+---
+
+## Exemple (source : https://draft.io/fr/example/eventstorming)
+
+![Exemple d'Event Storming](https://draft.io/assets/site/examples/light/fr/2400/example-eventstorming-362441cc6869cb7a6a6b5ccf05096c93.webp)
 
 ---
 
