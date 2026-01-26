@@ -1,50 +1,78 @@
-<p align="center">
-  <a href="https://revealjs.com">
-  <img src="https://hakim-static.s3.amazonaws.com/reveal-js/logo/v1/reveal-black-text-sticker.png" alt="reveal.js" width="500">
-  </a>
-  <br><br>
-  <a href="https://github.com/hakimel/reveal.js/actions"><img src="https://github.com/hakimel/reveal.js/workflows/tests/badge.svg"></a>
-  <a href="https://slides.com/"><img src="https://s3.amazonaws.com/static.slid.es/images/slides-github-banner-320x40.png?1" alt="Slides" width="160" height="20"></a>
-</p>
+# Slidev Project - Architectures Back-end & Front-end
 
-reveal.js is an open source HTML presentation framework. It enables anyone with a web browser to create beautiful presentations for free. Check out the live demo at [revealjs.com](https://revealjs.com/).
+This is a Slidev presentation about back-end development.
 
-The framework comes with a powerful feature set including [nested slides](https://revealjs.com/vertical-slides/), [Markdown support](https://revealjs.com/markdown/), [Auto-Animate](https://revealjs.com/auto-animate/), [PDF export](https://revealjs.com/pdf-export/), [speaker notes](https://revealjs.com/speaker-view/), [LaTeX typesetting](https://revealjs.com/math/), [syntax highlighted code](https://revealjs.com/code/) and an [extensive API](https://revealjs.com/api/).
+## Installation & Setup
 
----
+### Prerequisites
+- Node.js 14+ and npm/yarn
 
-Want to create reveal.js presentation in a graphical editor? Try <https://slides.com>. It's made by the same people behind reveal.js.
+### Installation
 
----
+```bash
+npm install
+```
 
-### Sponsors
-Hakim's open source work is supported by <a href="https://github.com/sponsors/hakimel">GitHub sponsors</a>. Special thanks to:
-<div align="center">
-  <table>
-    <td align="center">
-      <a href="https://workos.com/?utm_campaign=github_repo&utm_medium=referral&utm_content=revealjs&utm_source=github">
-        <div>
-          <img src="https://user-images.githubusercontent.com/629429/151508669-efb4c3b3-8fe3-45eb-8e47-e9510b5f0af1.svg" width="290" alt="WorkOS">
-        </div>
-        <b>Your app, enterprise-ready.</b>
-        <div>
-          <sub>Start selling to enterprise customers with just a few lines of code. Add Single Sign-On (and more) in minutes instead of months.</sup>
-        </div>
-      </a>
-    </td>
-  </table>
-</div>
+### Development
 
----
+Start the development server with:
 
-### Getting started
-- 🚀 [Install reveal.js](https://revealjs.com/installation)
-- 👀 [View the demo presentation](https://revealjs.com/demo)
-- 📖 [Read the documentation](https://revealjs.com/markup/)
-- 🖌 [Try the visual editor for reveal.js at Slides.com](https://slides.com/)
-- 🎬 [Watch the reveal.js video course (paid)](https://revealjs.com/course)
+```bash
+npm run dev
+```
 
---- 
-<div align="center">
-  MIT licensed | Copyright © 2011-2023 Hakim El Hattab, https://hakim.se
-</div>
+The presentation will be available at `http://localhost:3030`
+
+### Building
+
+To build the static site:
+
+```bash
+npm run build
+```
+
+### Export to PDF
+
+To export the presentation as PDF:
+
+```bash
+npm run export
+```
+
+## Project Structure
+
+- `slides.md` - Main Slidev presentation file with all 135 slides
+- `package.json` - Project dependencies
+- `README.md` - This file
+
+## Presentation Content
+
+**Title:** Architectures Back-end & Front-end : Web, Mobile et IA
+
+**Duration:** 6 hours
+
+**Target Audience:** Developers, Architects, Project Managers
+
+### Content Overview
+
+1. **Introduction (10 slides)** - Fundamentals and importance of software architecture
+2. **Architectural Patterns (20 slides)** - MVC, MVVM, CQRS, Event-Driven, Hexagonal, DI, Repository, Strategy patterns
+3. **Clean Code (20 slides)** - Principles and practices for writing maintainable code
+4. **Architecture in Practice** - Real-world case studies in insurance and healthcare sectors
+
+## Keyboard Shortcuts
+
+- **Space** or **→** - Next slide
+- **←** - Previous slide
+- **F** - Fullscreen
+- **ESC** - Overview
+- **S** - Speaker notes
+- **B** - Black slide
+
+## Original Source
+
+This presentation was converted from an HTML-based Reveal.js presentation to Slidev Markdown format for better maintainability and modern tooling support.
+
+## License
+
+See LICENSE file for details.
