@@ -5,6 +5,7 @@ subtitle: Web, Mobile et IA
 date: 2026-01-17
 layout: cover
 download: true
+logoHeader: 'https://s2.qwant.com/thumbr/474x248/6/1/af7e04834307a6e98c63ca1e9e06f6a30e6a1da544329d0879a35f520e5b4a/OIP.-GR5tY0qTW9kY_XXgyW3EwHaD4.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%2Fid%2FOIP.-GR5tY0qTW9kY_XXgyW3EwHaD4%3Fcb%3Ddefcachec2%26pid%3DApi&q=0&b=1&p=0&a=0'
 ---
 
 # Architectures Back-end
@@ -12,35 +13,22 @@ download: true
 Back-ends et API pour le Web, le Mobile et l'IA
 
 ---
+layout: table-contents
+gradientColors: ['#8EC5FC', '#E0C3FC']
+---
 
 # 📋 Sommaire
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px">
+- 🔧 Fondamentaux & Introduction
+- 🏗️ Patterns d'Architecture
+- 🚀 Architectures Avancées
+- 🎨 Écosystèmes Technologiques
+- ✨ Développement Propre
+- 🌐 APIs & Communication
+- 🤖 Intégration IA
 
-<div style="display: grid; row-gap: 30px">
-
-## 🔧 Fondamentaux & Introduction
-
-## 🏗️ Patterns d'Architecture
-
-## 🚀 Architectures Avancées
-
-</div>
-
-<div style="display: grid; row-gap: 30px">
-
-## 🎨 Écosystèmes Technologiques
-
-## ✨ Développement Propre
-
-## 🌐 APIs & Communication
-
-## 🤖 Intégration IA
-
-</div>
-
-</div>
-
+---
+layout: new-section
 ---
 
 ## 🎯 Introduction
@@ -148,8 +136,8 @@ Infrastructure (Serveurs, BD)
 
 ## Défis de l'architecture moderne
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 0px;">
-<div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">
+<div style="display: grid; grid-template-columns: 1fr; gap: 30px; ">
 
 #### 🚀 Performance
 
@@ -166,7 +154,7 @@ Infrastructure (Serveurs, BD)
 - Validation des données
 
 </div>
-<div>
+<div style="display: grid; grid-template-columns: 1fr; gap: 30px; ">
 
 #### 📊 Scalabilité
 
@@ -204,6 +192,38 @@ Infrastructure (Serveurs, BD)
 - Collaboration: Facilite la communication entre développeurs
 - Réduction des risques: Évite les pièges courants
 - Maintenabilité: Code plus prévisible et compréhensible
+
+---
+
+## Pattern Dependency Injection (DI)
+Injecter les dépendances plutôt que les créer soi-même.
+
+### Sans Dependency Injection (couplage fort):
+
+
+```plaintext
+public class ContractService {
+    private DatabaseService db = new DatabaseService(); // Couplage fort
+    
+    public void createContract(Contract c) {
+        db.save(c);
+    }
+}
+```
+
+### Avec Dependency Injection (découplage):
+
+
+```plaintext
+public class ContractService {
+    private DatabaseService db; // Interface
+    
+    @Inject // Spring
+    public ContractService(DatabaseService db) {
+        this.db = db;
+    }
+}
+```
 
 ---
 
@@ -435,39 +455,6 @@ graph TB
 ```
 </div>
 </div>
-
----
-
-## Pattern Dependency Injection (DI)
-Injecter les dépendances plutôt que les créer soi-même.
-
-### Sans Dependency Injection (couplage fort):
-
-
-```plaintext
-public class ContractService {
-    private DatabaseService db = new DatabaseService(); // Couplage fort
-    
-    public void createContract(Contract c) {
-        db.save(c);
-    }
-}
-```
-
-### Avec Dependency Injection (découplage):
-
-
-```plaintext
-public class ContractService {
-    private DatabaseService db; // Interface
-    
-    @Inject // Spring/Guice injecte la dépendance
-    public ContractService(DatabaseService db) {
-        this.db = db;
-    }
-}
-```
-
 ---
 
 ## Pattern Repository
@@ -3140,5 +3127,3 @@ Pas de question bête - cette partie est pour VOUS
 ## Merci! 🙏
 
 ---
-
-

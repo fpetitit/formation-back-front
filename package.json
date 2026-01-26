@@ -23,6 +23,7 @@
     "playwright-chromium": "^1.57.0"
   },
   "dependencies": {
+    "slidev-theme-purplin": "^1.2.0",
     "slidev-theme-unicorn": "^1.1.2"
   }
 }
