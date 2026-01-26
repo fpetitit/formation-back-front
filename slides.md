@@ -83,6 +83,188 @@ graph LR
 
 ---
 
+# 🔧 Écosystèmes Backend
+
+*Découvrez les principaux frameworks et technologies*
+
+---
+
+## Vue d'ensemble
+
+Les principaux écosystèmes pour développer des applications backend robustes et scalables.
+
+---
+
+## Spring Boot (Java)
+
+<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
+<div>
+
+### Caractéristiques
+- **Framework**: Spring Framework avec Spring Boot pour démarrage rapide
+- **TypeScript/Langages**: Java (JVM ecosystem)
+- **Popularité**: ⭐⭐⭐⭐⭐ Très populaire en entreprise
+- **Apprentissage**: Moyen - courbe importante
+
+### Points forts
+- Écosystème très riche et mature
+- Excellente scalabilité
+- Performance élevée
+- Nombreuses intégrations
+- Transactions ACID robustes
+
+### Use cases
+- Systèmes d'entreprise complexes
+- Applications haute disponibilité
+- Microservices à grande échelle
+- Systèmes financiers
+
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;max-width: 100%">
+  <img src="https://logos-marques.com/wp-content/uploads/2021/03/Java-Logo.png" alt="Java" style="height: 100px;" />
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Spring_Framework_Logo_2018.svg/1280px-Spring_Framework_Logo_2018.svg.png" alt="Spring Framework" style="height: 60px;" />
+</div>
+</div>
+
+---
+
+<img src="https://docs.spring.io/spring-framework/docs/4.0.x/spring-framework-reference/html/images/spring-overview.png" />
+  
+---
+
+## NestJS (Node.js/TypeScript)
+
+<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
+<div>
+
+### Caractéristiques
+- **Framework**: Node.js moderne avec TypeScript par défaut
+- **Langages**: TypeScript/JavaScript
+- **Popularité**: ⭐⭐⭐⭐ En croissance rapide
+- **Apprentissage**: Facile - syntaxe proche de Angular
+
+### Points forts
+- Très rapide à développer
+- Partage du code Frontend/Backend (JavaScript/TS)
+- Développement agile
+- Excellent pour API REST et GraphQL
+- Écosystème npm très riche
+
+### Use cases
+- APIs modernes et scalables
+- Applications temps réel (WebSocket)
+- Microservices légers
+- Projets startup et agiles
+
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1280px-Node.js_logo.svg.png" alt="Node.js" style="height: 100px;" />
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbaFE1Vzg5PH7mKv6NmVEmXMzSThQe-FLbmw&s" alt="NestJS" style="height: 100px;" />
+</div>
+</div>
+
+---
+
+## Python (FastAPI & Django)
+
+<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
+<div>
+
+### FastAPI
+- **Caractéristiques**: Framework ultra-moderne et performant
+- **Avantages**: Très rapide à développer, auto-documentation API
+- **Use cases**: APIs légères, Machine Learning, Data Science
+
+### Django
+- **Caractéristiques**: Framework complet "batteries included"
+- **Avantages**: ORM puissant, admin panel généré, sécurité native
+- **Use cases**: Applications web complètes, startups, prototypage rapide
+
+### Points communs
+- Popularité: ⭐⭐⭐⭐ Excellente pour l'IA/ML
+- Apprentissage: Facile - syntaxe simple et claire
+- Productivité: Très haute
+
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Python_logo_and_wordmark.svg" alt="Python" style="height: 100px;" />
+  <img src="https://www.djangoproject.com/m/img/logos/django-logo-negative.png" alt="Django" style="height: 100px;" />
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA4OKx8IMFA3NH3DDwdbVfS-mP9BboGcRD3g&s" alt="FastAPI" style="height: 80px;" />
+</div>
+</div>
+
+---
+
+## .NET / ASP.NET Core (C#)
+
+<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
+<div>
+
+### Caractéristiques
+- **Framework**: ASP.NET Core (cross-platform)
+- **Langages**: C# (langage moderne et puissant)
+- **Popularité**: ⭐⭐⭐⭐ Très utilisé en entreprise
+- **Apprentissage**: Moyen - C# plus complexe que Python
+
+### Points forts
+- Performance exceptionnelle
+- Typage fort et sécurité
+- Excellent écosystème Microsoft
+- Cross-platform (Windows, Linux, Mac)
+- Intégration Azure native
+
+### Use cases
+- Applications d'entreprise Windows
+- Systèmes critiques
+- Solutions sur Azure
+- Applications Windows Desktop + Backend
+
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
+  <img src="https://upload.wikimedia.org/wikipedia/fr/9/99/Logo_microsoft_net.png" alt=".NET" style="height: 100px;" />
+</div>
+</div>
+
+---
+
+## Comparaison Synthétique
+
+| Critère | Spring Boot | NestJS | Python | .NET | 
+|---------|-------------|--------|--------|------|
+| **Vitesse dev** | Moyen | Rapide | Très rapide | Moyen |
+| **Performance** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Scalabilité** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Courbe apprentissage** | Moyenne | Facile | Facile | Moyenne |
+| **Écosystème** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Entreprise** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Startup/Agile** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ |
+
+---
+
+## Quelle pile choisir?
+
+### Spring Boot 👉
+- Vous avez une équipe Java expérimentée
+- Vous développez un système critique d'entreprise
+- Vous avez besoin d'une scalabilité extrême
+
+### NestJS 👉
+- Vous voulez une pile moderne et unifiée (Front/Back en TypeScript)
+- Vous développez des microservices
+- Vous cherchez un bon équilibre productivité/performance
+
+### Python 👉
+- Vous découvrez la programmation backend
+- Vous travaillez avec l'IA/ML
+- Vous voulez développer très rapidement
+
+### .NET 👉
+- Vous êtes dans un environnement Microsoft/Azure
+- Vous avez besoin de performance extrême
+- Vous développez pour Windows et le web
+
+---
+
 ## Évolution des architectures
 
 ```mermaid
@@ -1485,188 +1667,6 @@ graph TD
 - **Big Ball of Mud**: Tout dans un contexte
 - **Anemic Domain Model**: Logique dans les services
 - **Over-Engineering**: Complexité inutile
-
----
-
-# 🔧 Écosystèmes Backend
-
-*Découvrez les principaux frameworks et technologies*
-
----
-
-## Vue d'ensemble
-
-Les principaux écosystèmes pour développer des applications backend robustes et scalables.
-
----
-
-## Spring Boot (Java)
-
-<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
-<div>
-
-### Caractéristiques
-- **Framework**: Spring Framework avec Spring Boot pour démarrage rapide
-- **TypeScript/Langages**: Java (JVM ecosystem)
-- **Popularité**: ⭐⭐⭐⭐⭐ Très populaire en entreprise
-- **Apprentissage**: Moyen - courbe importante
-
-### Points forts
-- Écosystème très riche et mature
-- Excellente scalabilité
-- Performance élevée
-- Nombreuses intégrations
-- Transactions ACID robustes
-
-### Use cases
-- Systèmes d'entreprise complexes
-- Applications haute disponibilité
-- Microservices à grande échelle
-- Systèmes financiers
-
-</div>
-<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;max-width: 100%">
-  <img src="https://logos-marques.com/wp-content/uploads/2021/03/Java-Logo.png" alt="Java" style="height: 100px;" />
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Spring_Framework_Logo_2018.svg/1280px-Spring_Framework_Logo_2018.svg.png" alt="Spring Framework" style="height: 60px;" />
-</div>
-</div>
-
----
-
-<img src="https://docs.spring.io/spring-framework/docs/4.0.x/spring-framework-reference/html/images/spring-overview.png" />
-  
----
-
-## NestJS (Node.js/TypeScript)
-
-<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
-<div>
-
-### Caractéristiques
-- **Framework**: Node.js moderne avec TypeScript par défaut
-- **Langages**: TypeScript/JavaScript
-- **Popularité**: ⭐⭐⭐⭐ En croissance rapide
-- **Apprentissage**: Facile - syntaxe proche de Angular
-
-### Points forts
-- Très rapide à développer
-- Partage du code Frontend/Backend (JavaScript/TS)
-- Développement agile
-- Excellent pour API REST et GraphQL
-- Écosystème npm très riche
-
-### Use cases
-- APIs modernes et scalables
-- Applications temps réel (WebSocket)
-- Microservices légers
-- Projets startup et agiles
-
-</div>
-<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/1280px-Node.js_logo.svg.png" alt="Node.js" style="height: 100px;" />
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbaFE1Vzg5PH7mKv6NmVEmXMzSThQe-FLbmw&s" alt="NestJS" style="height: 100px;" />
-</div>
-</div>
-
----
-
-## Python (FastAPI & Django)
-
-<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
-<div>
-
-### FastAPI
-- **Caractéristiques**: Framework ultra-moderne et performant
-- **Avantages**: Très rapide à développer, auto-documentation API
-- **Use cases**: APIs légères, Machine Learning, Data Science
-
-### Django
-- **Caractéristiques**: Framework complet "batteries included"
-- **Avantages**: ORM puissant, admin panel généré, sécurité native
-- **Use cases**: Applications web complètes, startups, prototypage rapide
-
-### Points communs
-- Popularité: ⭐⭐⭐⭐ Excellente pour l'IA/ML
-- Apprentissage: Facile - syntaxe simple et claire
-- Productivité: Très haute
-
-</div>
-<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Python_logo_and_wordmark.svg" alt="Python" style="height: 100px;" />
-  <img src="https://www.djangoproject.com/m/img/logos/django-logo-negative.png" alt="Django" style="height: 100px;" />
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA4OKx8IMFA3NH3DDwdbVfS-mP9BboGcRD3g&s" alt="FastAPI" style="height: 80px;" />
-</div>
-</div>
-
----
-
-## .NET / ASP.NET Core (C#)
-
-<div style="display: grid; grid-template-columns: 1fr 0.6fr; gap: 24px; align-items: center;">
-<div>
-
-### Caractéristiques
-- **Framework**: ASP.NET Core (cross-platform)
-- **Langages**: C# (langage moderne et puissant)
-- **Popularité**: ⭐⭐⭐⭐ Très utilisé en entreprise
-- **Apprentissage**: Moyen - C# plus complexe que Python
-
-### Points forts
-- Performance exceptionnelle
-- Typage fort et sécurité
-- Excellent écosystème Microsoft
-- Cross-platform (Windows, Linux, Mac)
-- Intégration Azure native
-
-### Use cases
-- Applications d'entreprise Windows
-- Systèmes critiques
-- Solutions sur Azure
-- Applications Windows Desktop + Backend
-
-</div>
-<div style="display: flex; flex-direction: column; gap: 20px; align-items: center;">
-  <img src="https://upload.wikimedia.org/wikipedia/fr/9/99/Logo_microsoft_net.png" alt=".NET" style="height: 100px;" />
-</div>
-</div>
-
----
-
-## Comparaison Synthétique
-
-| Critère | Spring Boot | NestJS | Python | .NET | 
-|---------|-------------|--------|--------|------|
-| **Vitesse dev** | Moyen | Rapide | Très rapide | Moyen |
-| **Performance** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Scalabilité** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Courbe apprentissage** | Moyenne | Facile | Facile | Moyenne |
-| **Écosystème** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Entreprise** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **Startup/Agile** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐ |
-
----
-
-## Quelle pile choisir?
-
-### Spring Boot 👉
-- Vous avez une équipe Java expérimentée
-- Vous développez un système critique d'entreprise
-- Vous avez besoin d'une scalabilité extrême
-
-### NestJS 👉
-- Vous voulez une pile moderne et unifiée (Front/Back en TypeScript)
-- Vous développez des microservices
-- Vous cherchez un bon équilibre productivité/performance
-
-### Python 👉
-- Vous découvrez la programmation backend
-- Vous travaillez avec l'IA/ML
-- Vous voulez développer très rapidement
-
-### .NET 👉
-- Vous êtes dans un environnement Microsoft/Azure
-- Vous avez besoin de performance extrême
-- Vous développez pour Windows et le web
 
 ---
 
