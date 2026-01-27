@@ -25,10 +25,11 @@ gradientColors: ['#8EC5FC', '#E0C3FC']
 - 🎨 Écosystèmes Technologiques
 - ✨ Développement Propre
 - 🌐 APIs & Communication
+- � Messaging Asynchrone
 - 🔒 Sécurité Avancée
+- ⚡ Benchmarks de Performance
+- 🔢 Nombres Clés
 - 🤖 Intégration IA
- - ⚡ Benchmarks de Performance
- - 🔢 Nombres Clés
 
 ---
 layout: new-section
@@ -184,6 +185,11 @@ src: ./pages/transactions.md
 ---
 src: ./pages/microservices.md
 ---
+
+---
+src: ./pages/async-messaging.md
+---
+
 ---
 src: ./pages/serverless.md
 ---
