@@ -25,6 +25,7 @@ gradientColors: ['#8EC5FC', '#E0C3FC']
 - 🎨 Écosystèmes Technologiques
 - ✨ Développement Propre
 - 🌐 APIs & Communication
+- 🔒 Sécurité Avancée
 - 🤖 Intégration IA
 
 ---
@@ -317,6 +318,10 @@ src: ./pages/clean-code.md
 
 ---
 src: ./pages/api.md
+---
+
+---
+src: ./pages/security-advanced.md
 ---
 
 ---
