@@ -27,6 +27,8 @@ gradientColors: ['#8EC5FC', '#E0C3FC']
 - 🌐 APIs & Communication
 - 🔒 Sécurité Avancée
 - 🤖 Intégration IA
+ - ⚡ Benchmarks de Performance
+ - 🔢 Nombres Clés
 
 ---
 layout: new-section
@@ -307,7 +309,14 @@ graph LR
 
 </div>
 </div>
+---
 
+---
+src: ./pages/performance-benchmarks.md
+---
+
+---
+src: ./pages/key-metrics.md
 ---
 src: ./pages/ddd.md
 ---
