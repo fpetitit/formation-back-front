@@ -43,6 +43,8 @@ graph LR
 ```
 
 ---
+layout: two-cols
+---
 
 ## MCP: Model Context Protocol
 
@@ -53,92 +55,53 @@ graph LR
 Standard ouvert pour connecter LLMs aux tools/APIs
 
 ```plaintext
-// Node.js/Express avec MCP SDK
-const mcp = require('@anthropic-sdk/mcp');
-const express = require('express');
+# server.py
+from fastmcp import FastMCP
+from pydantic import BaseModel
+from typing import Dict, Any, List
+import logging
 
-const server = new mcp.MCPServer({
-  name: 'insurance-api',
-  version: '1.0.0'
-});
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-// Enregistrer des ressources/outils
-server.resource('contract', async (id) => {
-  const contract = await db.contracts.findOne(id);
-  return {
-    type: 'contract',
-    id,
-    data: contract
-  };
-});
+# Modèle pour l'utilisateur
+class UserProfile(BaseModel):
+    name: str
+    role: str
+    department: str = "Engineering"
+    years_experience: int = 0
 
-server.tool('create_claim', {
-  description: 'Créer un sinistre',
-  inputSchema: {
-    type: 'object',
-    properties: {
-      contractId: { type: 'string' },
-      description: { type: 'string' },
-      amount: { type: 'number' }
-    }
-  },
-  handler: async (input) => {
-    const claim = await db.claims.create({
-      contractId: input.contractId,
-      description: input.description,
-      amount: input.amount,
-      status: 'PENDING'
-    });
-    return { success: true, claim };
-  }
-});
-
-server.listen(3001);
+mcp = FastMCP(
+    name="user-db-server",
+    version="1.0.0",
+    description="Serveur MCP pour gestion users"
+)
 ```
 
----
+::right::
 
-## Monitoring: IA en production
+```
+# Ressource : liste statique d'utilisateurs
+@mcp.resource("user_profiles")
+def fetch_users() -> List[Dict[str, Any]]:
+    """Retourne la liste des profils utilisateurs."""
+    return [
+        {"name": "Alice", "role": "Dev", "department": "Engineering", "years_experience": 5},
+        {"name": "Bob", "role": "PM", "department": "Product", "years_experience": 3}
+    ]
 
-#### Métriques à tracker:
+# Outil : créer un utilisateur
+@mcp.tool()
+def create_user(name: str, role: str, department: str = "Engineering", years_experience: int = 0) -> str:
+    """Crée un nouveau profil utilisateur."""
+    user = UserProfile(name=name, role=role, department=department, years_experience=years_experience)
+    logger.info(f"User créé : {user}")
+    return f"User {user.name} créé avec succès !"
 
-Surveiller la qualité et la performance des réponses IA
+if __name__ == "__main__":
+    logger.info("Démarrage serveur MCP...")
+    mcp.run(transport="stdio")  # Ou "http://localhost:8000"
 
-```plaintext
-// Instrumenter les appels IA
-const aiMetrics = {
-  // Performance
-  latency: new Histogram('ai_latency_ms'),
-  tokenUsage: new Counter('ai_tokens_used'),
-  costs: new Gauge('ai_monthly_cost'),
-  
-  // Qualité
-  hallucinations: new Counter('ai_hallucinations'),
-  userRejections: new Counter('ai_responses_rejected'),
-  accuracy: new Gauge('ai_accuracy_score'),
-  
-  // Erreurs
-  rateLimitExceeded: new Counter('ai_rate_limit'),
-  timeouts: new Counter('ai_timeouts'),
-  authErrors: new Counter('ai_auth_errors')
-};
-
-// Instrumenter
-const startTime = Date.now();
-try {
-  const response = await llm.analyze(data);
-  aiMetrics.latency.observe(Date.now() - startTime);
-  aiMetrics.tokenUsage.inc(response.usage.total_tokens);
-  
-  // User feedback
-  response.on('reject', () => {
-    aiMetrics.userRejections.inc();
-  });
-} catch (error) {
-  if (error.code === 'RATE_LIMIT') {
-    aiMetrics.rateLimitExceeded.inc();
-  }
-}
 ```
 
 ---
@@ -150,22 +113,17 @@ try {
 La prochaine génération: agents capables de décisions autonomes
 
 ```plaintext
-// Agent autonome
 const claimAgent = new Agent({
-  tools: [
-    'get_contract',
-    'create_claim',
-    'estimate_damage',
-    'notify_client',
-    'schedule_inspection'
-  ]
+  tools: ['get_contract','create_claim','estimate_damage','notify_client','schedule_inspection']
 });
 
 const result = await claimAgent.run(
   `Traiter ce sinistre: Description du sinistre...`
 );
+```
 
-// Résultat: Agent a autonomement:
+```
+// Résultat: Agent a de façon autonome:
 // 1. ✅ Cherché le contrat
 // 2. ✅ Créé le dossier sinistre
 // 3. ✅ Estimé les dégâts
@@ -174,13 +132,14 @@ const result = await claimAgent.run(
 // Tout dans une seule chaîne de pensée!
 ```
 
+
 ```mermaid
-graph TB
-                            Request["Demande client<br/>(Sinistre auto)"]
-                            Agent["Agent IA<br/>(Claude + tools)"]
-                            Plan["Planification<br/>(Étapes requises)"]
+graph LR
+                            Request["Demande client"]
+                            Agent["Agent IA"]
+                            Plan["Planification"]
                             Action["Actions<br/>(API calls)"]
-                            Reflect["Réflexion<br/>(Vérifier résultat)"]
+                            Reflect["Vérification"]
                             Done{"Objectif<br/>atteint?"}
                             Response["Réponse finale"]
                             
