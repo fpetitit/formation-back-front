@@ -60,36 +60,6 @@ graph LR
 
 ---
 
-## Principes d'architecture applicative
-
----
-
-### Séparation des préoccupations
-
-Chaque couche a une responsabilité unique et bien définie.
-
-```plaintext
-Présentation (UI)
-      ↓
-Logique métier (Règles de gestion)
-      ↓
-Accès aux données (Persistance)
-      ↓
-Infrastructure (Serveurs, BD)
-```
-
----
-
-## Principes SOLID
-
-- Single Responsibility Principle: Une classe = une responsabilité
-- Open/Closed Principle: Ouvert à l'extension, fermé à la modification
-- Liskov Substitution: Les sous-types peuvent remplacer le type parent
-- Interface Segregation: Plusieurs interfaces spécifiques > une grosse interface
-- Dependency Inversion: Dépendre des abstractions, pas des implémentations
-
----
-
 ## Défis de l'architecture moderne
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px;">

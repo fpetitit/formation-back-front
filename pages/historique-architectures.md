@@ -205,6 +205,8 @@ graph TB
 🔍 **ELK** - Logging centralisé
 
 ---
+layout: two-cols
+---
 
 ## ⚡ Paradigmes Récents (2020+)
 
@@ -233,6 +235,8 @@ graph TB
     style F fill:#ffd700,color:#000
     style G fill:#326ce5,color:#fff
 ```
+
+::right::
 
 **Caractéristiques**
 - ✅ Pas de gestion d'infrastructure

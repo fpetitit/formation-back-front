@@ -21,6 +21,35 @@
 - Maintenabilité: Code plus prévisible et compréhensible
 
 ---
+layout: two-cols
+---
+
+### Séparation des préoccupations
+
+🇬🇧 Separation of concerns
+
+Chaque couche a une responsabilité unique et bien définie.
+
+Ce principe, introduit par Edsger Dijkstra en 1974, isole les "préoccupations" (comme la logique métier, l'interface utilisateur ou la persistance des données) pour réduire la complexité et les interdépendances. Cela permet de modifier une partie sans impacter les autres.
+
+Avantages pratiques :
+- Maintenabilité : Les changements sont localisés, facilitant la maintenance et le débogage.
+- Réutilisabilité : Les modules isolés peuvent être réemployés ailleurs.
+- Testabilité : Chaque composant se teste indépendamment, avec moins de cas à couvrir.
+
+::right::
+
+```plaintext
+Présentation (UI)
+      ↓
+Logique métier (Règles de gestion)
+      ↓
+Accès aux données (Persistance)
+      ↓
+Infrastructure (Serveurs, BD)
+```
+
+---
 
 ## Pattern Dependency Injection (DI)
 Injecter les dépendances plutôt que les créer soi-même.
