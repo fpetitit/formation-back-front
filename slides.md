@@ -139,16 +139,17 @@ src: ./pages/ia-mcp.md
 ---
 
 ---
+layout: new-section
+---
+
+## 📚 Conclusion : ressources et références 
+
+
+---
 
 ## Ressources & Références
 
 #### Ouvrages de Référence
-
-**Clean Code** - Robert C. Martin
-> "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
-
-**Clean Architecture** - Robert C. Martin
-> "A software architect is a programmer who has stopped programming and has started thinking about programs."
 
 **Design Patterns** - Gang of Four (Gamma, Helm, Johnson, Vlissides)
 > "The purpose of design patterns is to give a name and a context to design problems and their solutions."
@@ -159,11 +160,15 @@ src: ./pages/ia-mcp.md
 **Domain-Driven Design** - Eric Evans
 > "When you model using only the semantics that the business expert cares about, you get a model that the business expert understands."
 
-**The Pragmatic Programmer** - Hunt & Thomas
-> "Leave the campground cleaner than you found it. Leave the code better than you found it."
-
 **Refactoring: Improving the Design of Existing Code** - Martin Fowler
 > "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+
+**Clean Code** - Robert C. Martin
+> "Any fool can write code that a computer can understand. Good programmers write code that humans can understand."
+
+**Clean Architecture** - Robert C. Martin
+> "A software architect is a programmer who has stopped programming and has started thinking about programs."
+
 
 ---
 
@@ -172,7 +177,9 @@ src: ./pages/ia-mcp.md
 ### Qu'avez-vous envie de discuter?
 
 ✋ Levez la main pour poser vos questions
+
 💬 Débat sur technologies, architecture...
+
 🤔 Cas d'usage spécifiques à votre contexte
 
 
