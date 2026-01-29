@@ -123,21 +123,11 @@ src: ./pages/db-sharding.md
 ---
 
 ---
-src: ./pages/performance-benchmarks.md
----
-
----
-src: ./pages/key-metrics.md
----
 src: ./pages/ddd.md
 ---
 
 ---
 src: ./pages/clean-code.md
----
-
----
-src: ./pages/api.md
 ---
 
 ---

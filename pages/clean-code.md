@@ -287,7 +287,7 @@ public void testCalculatePremiumForYoungDriver() {
 
 ---
 
-## Récapitulatif: Les 7 règles du Clean Code
+## Récapitulatif: quelques règles du Clean Code
 
 | # | Règle | Bénéfice |
 | --- | --- | --- |
@@ -705,4 +705,4 @@ Conseil: 70%+ du code couvert
 | Scalabilité | Limitée | Excellente |
 | Changement technologie | Coûteux (réécriture) | Simple (adaptateurs) |
 | Productivité équipe | Diminue avec la taille | Stable et prévisible |
-| Idéal pour | Prototypes, POC | Projets long terme |
+| Idéal pour | Projet simples ou courts termes | Projets stratégiques long terme |

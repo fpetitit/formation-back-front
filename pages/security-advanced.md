@@ -497,22 +497,3 @@ spring:
 
 </div>
 </div>
-
----
-
-## Checklist de sécurité pour la production
-
-- [ ] Toutes les dépendances à jour (pas de CVE)
-- [ ] HTTPS/TLS avec certificat valide
-- [ ] Authentication & Authorization implémentées
-- [ ] Rate limiting actif
-- [ ] Secrets en variables d'environnement (jamais en dur)
-- [ ] Validation d'entrées exhaustive
-- [ ] CORS/CSRF protégés
-- [ ] Logging sécurisé (pas de PII)
-- [ ] Tests de sécurité (OWASP)
-- [ ] WAF/DDoS protection
-- [ ] Backups réguliers & testés
-- [ ] Plan d'incident de sécurité
-
----

@@ -100,10 +100,11 @@ sequenceDiagram
 
 ---
 
-## Résumé pédagogique
+## Résumé
+
 - Mesurez toujours dans votre infra.  
 - Choisissez Redis pour features, Memcached pour simplicité.  
-- Protobuf pour internal RPC haute performance.  
+- Protobuf pour des appels internes haute performance.  
 - Serverless: évaluez cold starts selon runtime et besoins.
 
 **Liens utiles**: TechEmpower Benchmarks, Redis Labs, Percona, Cockroach Labs, AWS Serverless blog.

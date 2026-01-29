@@ -2,6 +2,21 @@
 # 🎯 Domain-Driven Design
 
 ---
+layout: two-cols
+---
+
+## Pourquoi le DDD ?
+
+![Eric Evans - DDD](https://m.media-amazon.com/images/I/81ykBjVaUjL._AC_UF1000,1000_QL80_.jpg)
+
+::right::
+
+<div style="margin: 40px">
+Au début des années 2000, les projets logiciels complexes souffraient souvent d'un fossé entre besoins métier et implémentations techniques, malgré l'essor de l'orienté objet.
+
+Eric Evans synthétise ses expériences pour proposer un cadre structuré centré sur le domaine métier, langage ubiquitaire et modélisation collaborative, influencé par l'agilité naissante (XP) et visant à rendre les gros systèmes maintenables.
+</div>
+---
 
 ## Strategic vs Tactical DDD
 
@@ -56,13 +71,12 @@ graph LR
 ```
 
 ### Types de Relations
+- Shared Kernel : Deux équipes partagent un petit morceau de code métier commun (ex. : définition d'un "Client").
+- Customer/Supplier : Un module utilise l'API d'un autre (le "fournisseur"), en acceptant ses règles.
+- Partnership : Collaboration étroite bidirectionnelle entre deux modules égaux.
+- Conformist : Un module s'adapte complètement aux règles d'un dominant.
+- Anticorruption Layer : Une "barrière" traduit un modèle externe vers le vôtre, sans pollution.
 
-| Relation | Description | Exemple |
-|---|---|---|
-| **Partnership** | Collaboration étroite | Commandes ↔ Livraisons |
-| **Customer-Supplier** | Client-fournisseur | Commandes → Paiements |
-| **Conformist** | Adaptation | Livraisons → Logistique |
-| **Anti-Corruption Layer** | Isolation | Legacy → Nouveau |
 
 ---
 
@@ -111,13 +125,7 @@ graph TD
 
 ### Avantages
 
-- **Alignement métier**: Langage commun
+- **Alignement métier / tech**: Langage commun
 - **Modularité**: Contextes indépendants
 - **Maintenabilité**: Modèle clair
 - **Évolutivité**: Adaptation facile
-
-### Anti-Patterns à Éviter
-
-- **Big Ball of Mud**: Tout dans un contexte
-- **Anemic Domain Model**: Logique dans les services
-- **Over-Engineering**: Complexité inutile
