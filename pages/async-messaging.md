@@ -36,17 +36,21 @@ graph LR
 ### Concepts
 
 **Point-to-Point (Queues)**
+
 ```
 Producteur → [Queue] → Consommateur 1
-                    ↘ (Un seul reçoit)
+                     (Un seul reçoit)
 ```
 
 **Publish/Subscribe (Topics)**
+
 ```
 Producteur → [Topic] → Consommateur 1
                     → Consommateur 2
                     → Consommateur N (tous reçoivent)
 ```
+
+---
 
 ### Exemple Spring: Envoi & Réception
 
@@ -249,74 +253,6 @@ graph TB
 
 ---
 
-## Patterns Essentiels
-
-### Dead-Letter Queue (DLQ)
-
-```java
-// RabbitMQ config
-@Bean
-public Queue dlq() {
-    return new Queue("order.dlq");
-}
-
-@Bean
-public DirectExchange dlxExchange() {
-    return new DirectExchange("order.dlx");
-}
-
-// Consommateur avec retry
-@RabbitListener(queues = "order.queue")
-public void handleOrder(Order order) throws Exception {
-    try {
-        processOrder(order);
-    } catch (Exception e) {
-        // RabbitMQ rejetera et enverra en DLQ après retries
-        throw new AmqpRejectAndDontRequeueException("Processing failed", e);
-    }
-}
-```
-
-### Idempotence (crucial pour retries)
-
-```java
-@Component
-public class IdempotentOrderConsumer {
-    @Autowired
-    private OrderRepository orderRepository;
-    
-    @RabbitListener(queues = "order.queue")
-    public void handleOrder(Order order) {
-        // Vérifier si déjà traité
-        if (orderRepository.exists(order.getId())) {
-            return;  // Idempotent: pas de double traitement
-        }
-        
-        // Traiter et sauvegarder
-        orderRepository.save(order);
-    }
-}
-```
-
-### Monitoring & Alertes
-
-```yaml
-# application.yml
-spring:
-  rabbitmq:
-    listener:
-      simple:
-        prefetch: 10  # Nombre messages à prefetch
-        max-concurrency: 5  # Parallélisation
-        
-  kafka:
-    consumer:
-      max-poll-records: 500  # Batch size
-      session-timeout-ms: 30000  # Timeout détection consumer down
-```
-
----
-
 ## Recommandations
 
 | Scénario | Choix | Raison |
@@ -332,10 +268,9 @@ spring:
 ## Bonnes pratiques
 
 - ✅ **Idempotence**: Consommateur doit gérer duplicates
-- ✅ **DLQ**: Gérer messages non-traités
+- ✅ **Dead Letter Queue**: Gérer messages non-traités
 - ✅ **Monitoring**: Lag de queues, consumer lag (Kafka)
 - ✅ **Sérialisation**: JSON ou Avro (schéma évolutif)
 - ✅ **Timeouts**: Configurer selon latence réseau
 - ✅ **Partitionnement** (Kafka): Clé = stable pour ordre
 
-**Sources**: Spring Docs, RabbitMQ docs, Confluent/Kafka docs.

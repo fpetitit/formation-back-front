@@ -41,6 +41,8 @@ sequenceDiagram
     Database->>Cache: Confirmation
     Cache->>Client: Confirmation
 ```
+
+-> le cache est toujours à jour
 </div>
 </div>
 

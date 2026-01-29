@@ -16,7 +16,7 @@ Une transaction est une **séquence d'opérations** qui doit s'exécuter en tota
 | Propriété | Signification | Assurance |
 |-----------|---------------|-----------|
 | **A**tomicité | Tout ou rien | Pas de paiement partiel |
-| **C**ohérence | État valide avant/après | Soldes corrects toujours |
+| **C**ohérence | État valide avant/après | Soldes toujours corrects |
 | **I**solation | Transactions indépendantes | Pas de lecture sale |
 | **D**urabilité | Persistance garantie | Pas de perte de données |
 
@@ -120,9 +120,9 @@ sequenceDiagram
 
 ## Niveaux d'Isolation
 
-### Lecture avec problèmes potentiels
+### 4 niveaux d'isolation SQL standardisés (ANSI SQL) :
 
-| Niveau | Lecture Dirty | Non-Répétable | Fantôme |
+| Niveau | Lecture sale | Non-Répétable | Fantôme |
 |--------|---------------|---------------|---------|
 | **READ UNCOMMITTED** | ❌ Oui | ❌ Oui | ❌ Oui |
 | **READ COMMITTED** | ✅ Non | ❌ Oui | ❌ Oui |
@@ -131,9 +131,11 @@ sequenceDiagram
 
 ### Définitions
 
-- **Lecture Dirty**: Lire une donnée non commitée (peut être annulée)
+- **Lecture sale**: Lire une donnée non commitée (peut être annulée)
 - **Non-Répétable**: Deux lectures différentes de la même donnée
 - **Fantôme**: Lignes qui apparaissent/disparaissent entre lectures
+
+PostgreSQL par exemple supporte les quatre niveaux, et utilise Read Committed par défaut pour éviter les lectures sales sans trop de verrouillages.
 
 ---
 
