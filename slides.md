@@ -18,17 +18,20 @@ gradientColors: ['#8EC5FC', '#E0C3FC']
 
 # 📋 Sommaire
 
-- 🔧 Fondamentaux & Introduction
+- 📜 Historique des architectures de SI
+- 🔧 Ecosystèmes de développement
 - 🏗️ Patterns d'Architecture
-- 🚀 Architectures Avancées
-- 🎨 Écosystèmes Technologiques
-- ✨ Développement Propre
-- 🌐 APIs & Communication
-- � Messaging Asynchrone
+- 💾 Transactions
+- 🚀 Microservices
+- 📨 Messaging Asynchrone
+- 🎯 Serverless
+- 🚀 Caching Avancé
+- 🗃️ Database Sharding et Partitioning
+- 🎯 Domain-Driven Design
+- ✨ Clean Code & Architecture
 - 🔒 Sécurité Avancée
-- ⚡ Benchmarks de Performance
-- 🔢 Nombres Clés
-- 🤖 Intégration IA
+- 🤖 MCP & Intégration IA
+- 📚 Conclusion 
 
 ---
 src: ./pages/historique-architectures.md
