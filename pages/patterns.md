@@ -1,8 +1,9 @@
 ---
+layout: new-section
+sectionImage: 'https://centralesupelec.venture.fr/wp-content/uploads/2023/06/cropped-Logo-CentraleSupelecVenture-VBk.png'
+---
 
 # 🏗️ Patterns d'Architecture
-
-*Solutions éprouvées pour structurer vos applications*
 
 ---
 

@@ -1,3 +1,12 @@
+---
+layout: new-section
+sectionImage: 'https://centralesupelec.venture.fr/wp-content/uploads/2023/06/cropped-Logo-CentraleSupelecVenture-VBk.png'
+---
+
+Les API : REST vs GraphQL
+
+---
+
 ## REST vs GraphQL
 
 ### Comparaison des approches

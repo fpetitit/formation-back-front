@@ -1,10 +1,10 @@
 ---
 layout: new-section
+sectionImage: 'https://centralesupelec.venture.fr/wp-content/uploads/2023/06/cropped-Logo-CentraleSupelecVenture-VBk.png'
 ---
 
-# 📨 Messaging Asynchrone
 
-Découplage, scalabilité et résilience via protocoles de messages
+# 📨 Messaging Asynchrone
 
 ---
 

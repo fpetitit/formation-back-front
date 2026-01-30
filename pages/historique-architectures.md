@@ -1,15 +1,9 @@
 ---
 layout: new-section
+sectionImage: 'https://centralesupelec.venture.fr/wp-content/uploads/2023/06/cropped-Logo-CentraleSupelecVenture-VBk.png'
 ---
 
-## 📜 Historique de l'Architecture Informatique
-
-<div style="text-align: center; padding: 40px 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-  <h3 style="color: #ffffff; margin-bottom: 20px; font-size: 1.8em;">🕐 Evolution des Paradigmes</h3>
-  <p style="color: #e0e0e0; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
-    De la centralisation aux systèmes distribués et au cloud
-  </p>
-</div>
+## 📜 Historique des architectures de SI
 
 ---
 layout: two-cols

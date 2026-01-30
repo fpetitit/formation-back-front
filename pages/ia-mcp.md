@@ -1,13 +1,9 @@
+---
+layout: new-section
+sectionImage: 'https://centralesupelec.venture.fr/wp-content/uploads/2023/06/cropped-Logo-CentraleSupelecVenture-VBk.png'
+---
 
-## 🎯 Prochaine Section: MCP & Intégration IA
-
-<div style="text-align: center; padding: 40px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; margin: 30px 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-  <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.8em;">🤖 MCP & Intégration IA</h3>
-  <p style="color: #34495e; font-size: 1.1em; max-width: 800px; margin: 0 auto;">
-    Explorez comment connecter vos backends avec les modèles d'IA et les agents autonomes pour créer des systèmes intelligents.
-  </p>
-  <div style="margin-top: 20px; height: 4px; background: linear-gradient(90deg, #3498db, #9b59b6); width: 100px; margin: 20px auto; border-radius: 2px;"></div>
-</div>
+# 🎯 MCP & Intégration IA
 
 ---
 
