@@ -4,7 +4,6 @@ title: Architectures Back-end
 subtitle: Web, Mobile et IA
 date: 2026-01-17
 layout: cover
-download: true
 logoHeader: 'https://s2.qwant.com/thumbr/474x248/6/1/af7e04834307a6e98c63ca1e9e06f6a30e6a1da544329d0879a35f520e5b4a/OIP.-GR5tY0qTW9kY_XXgyW3EwHaD4.jpg?u=https%3A%2F%2Ftse.mm.bing.net%2Fth%2Fid%2FOIP.-GR5tY0qTW9kY_XXgyW3EwHaD4%3Fcb%3Ddefcachec2%26pid%3DApi&q=0&b=1&p=0&a=0'
 ---
 
