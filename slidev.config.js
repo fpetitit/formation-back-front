@@ -28,7 +28,8 @@ export default defineConfig({
   
   // Markdown options
   markdown: {
-    lineNumbers: true
+    lineNumbers: true,
+    mermaid: true
   },
   
   // Export options

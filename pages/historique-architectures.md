@@ -25,20 +25,35 @@ layout: two-cols
 
 ::right::
 
-```
-┌─────────────────────┐
-│   MAINFRAME CPU     │ ← Toute la puissance
-├─────────────────────┤
-│   Base de données   │
-├─────────────────────┤
-│   Logique métier    │
-├─────────────────────┤
-│   Présentation      │
-└─────────────────────┘
-     ↑ ↑ ↑
-  Terminaux
+```mermaid
+graph TB
+  %% Mainframe centralisé
+  MF["Mainframe<br/>Transaction Monitor"]
+  DB[(Base de données<br/>centrale)]
+  BATCH[Batch / Traitements nocturnes]
+  PRINT[Spooler / Imprimante]
+
+  %% Réseau & terminaux
+  NET["Reseau / Lignes dediees"]
+  T_DUMB["Terminal ecran vert"]
+  T_THIN["Thin client / emulateur"]
+  T_REMOTE["Succursale / teletravail"]
+
+  %% Flux
+  T_DUMB --> NET --> MF
+  T_THIN --> NET --> MF
+  T_REMOTE --> NET --> MF
+
+  MF --> DB
+  MF --> BATCH
+  BATCH --> DB
+  MF --> PRINT
+
+  classDef gray fill:#f3f4f6,stroke:#bbb;
+  class MF,DB,BATCH,PRINT,AUTH,NET gray
 ```
 
+https://www.lacommunauteducobol.com/histoire-du-mainframe/
 
 ---
 layout: two-cols
@@ -62,16 +77,42 @@ layout: two-cols
 
 ### Architecture Émergente
 
-```
-┌──────────────┐     ┌──────────────┐
-│   PC Client  │     │   PC Client  │
-│  + Calcul    │────→│  + Calcul    │
-└──────────────┘     └──────────────┘
-        ↓                    ↓
-    ┌───────────────────────────┐
-    │  Serveur d'application    │
-    │  + Base de données        │
-    └───────────────────────────┘
+```mermaid
+graph TB
+  %% Clients
+  subgraph CLIENTS [Clients 1980s-1990s]
+    direction TB
+    PC[PC Client lourd<br/>GUI, logique metier locale]
+  end
+
+  %% Réseau
+  LAN[Ethernet / Token Ring / LAN]
+  PC -->|SMB / NFS fichiers| LAN
+
+  %% Serveurs
+  subgraph SERVEURS [Serveurs]
+    direction TB
+    FILE[File Server<br/>Novell NetWare / NFS]
+    APP[Application Server Unix  VAX]
+    DB[Database Server<br/>Oracle / Informix / SQL]
+    BATCH[Batch / Job Scheduler]
+    PRINT[Print Server]
+  end
+
+  LAN --> FILE
+  LAN --> APP
+  LAN --> DB
+  LAN --> PRINT
+
+  %% Protocoles & middleware
+  APP -->|RPC / SunRPC / DCE| APP
+  PC -->|RPC / Remote Calls| APP
+  APP -->|SQL queries| DB
+  APP -->|submit jobs| BATCH
+  PC -->|impression| PRINT
+
+  classDef era fill:#f7fafc,stroke:#cbd5e1;
+  class CLIENTS,SERVEURS,LAN,MAIN era
 ```
 
 
